@@ -1,0 +1,13 @@
+ext {
+    // 构建
+    build = [
+            "compileSdkVersion"                            : 26,
+            "targetSdkVersion"                             : 26,
+            "minSdkVersion"                                : 16,
+            "buildTools"                                   : "26.0.2"
+    ]
+
+    dependencies = [
+            "appcompat-v7"                                 : "com.android.support:appcompat-v7:26.1.0"
+    ]
+}
