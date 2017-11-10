@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/register_phone_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/register_captcha_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_phone_edt"
+        android:layout_alignParentRight="true"
+        android:text="@string/register_obtain_capche" />
+    <EditText
+        android:id="@+id/register_captcha_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_phone_edt"
+        android:layout_toLeftOf="@id/register_captcha_txv"/>
+    <EditText
+        android:id="@+id/register_password_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_captcha_edt"/>
+    <Button
+        android:id="@+id/register_do_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_password_edt"
+        android:text="@string/register_do"/>
+</RelativeLayout>

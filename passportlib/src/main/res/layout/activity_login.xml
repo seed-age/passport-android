@@ -2,10 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/alert_light_frame"/>
     <EditText
         android:id="@+id/login_phone_edt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_logo"/>
     <EditText
         android:id="@+id/login_password_edt"
         android:layout_width="match_parent"
@@ -17,4 +25,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_password_edt"
         android:text="@string/login_forget_password"/>
+    <TextView
+        android:id="@+id/login_register_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_password_edt"
+        android:layout_alignParentRight="true"
+        android:text="@string/login_register"/>
+    <Button
+        android:id="@+id/login_do_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_forget_password_txv"
+        android:text="@string/login_do"/>
 </RelativeLayout>
