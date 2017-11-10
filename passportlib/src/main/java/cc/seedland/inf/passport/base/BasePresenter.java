@@ -8,11 +8,15 @@ package cc.seedland.inf.passport.base;
  * Created by xuchunlei on 2017/11/9.
  */
 
-public abstract class BasePresenter<V> {
+public abstract class BasePresenter<V extends IBaseView> {
 
-    private V view;
+    protected V view;
 
     public void attach(V view) {
         this.view = view;
+    }
+
+    public void detach() {
+        view = null;
     }
 }

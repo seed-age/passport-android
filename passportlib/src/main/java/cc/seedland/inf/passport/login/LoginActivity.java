@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
-import cc.seedland.inf.passport.base.BasePresenter;
 
 /**
  * Created by xuchunlei on 2017/11/8.

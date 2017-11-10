@@ -8,6 +8,12 @@ package cc.seedland.inf.passport.register;
 public interface IRegisterPresenter {
 
     /**
+     * 执行获取验证码接口
+     * @param phone
+     */
+    void performCaptcha(String phone);
+
+    /**
      * 执行注册接口
      * @param phone
      * @param captcha

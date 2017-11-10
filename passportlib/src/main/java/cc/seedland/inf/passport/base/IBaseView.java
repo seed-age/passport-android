@@ -15,4 +15,9 @@ public interface IBaseView {
      * @param errMsg
      */
     void showError(String errMsg);
+
+    /**
+     * 显示等待对话框
+     */
+    void showLoading();
 }
