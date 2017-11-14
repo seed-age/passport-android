@@ -12,9 +12,13 @@ android {
     }
     buildTypes {
         debug {
-            resValue "string", "channel", "G0YVngfS4yP3TmRd"         // 渠道号
+            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
+            resValue "string", "passport_key", "test"             // PassportSDK的开发者Key
         }
         release {
+            resValue "string", "passport_channel", "hachi"         // PassportSDK的渠道号
+            resValue "string", "passport_key", "G0YVngfS4yP3TmRd"  // PassportSDK的开发者Key
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

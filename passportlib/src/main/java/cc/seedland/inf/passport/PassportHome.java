@@ -1,13 +1,8 @@
 package cc.seedland.inf.passport;
 
 import android.app.Application;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.text.format.Formatter;
-import android.util.Log;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -15,15 +10,13 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import cc.seedland.inf.passport.login.LoginActivity;
+import cc.seedland.inf.passport.network.ApiFactory;
 import cc.seedland.inf.passport.register.RegisterActivity;
-import cc.seedland.inf.passport.util.DeviceUtil;
+import cc.seedland.inf.passport.util.Constant;
 import okhttp3.OkHttpClient;
 
 /**
@@ -40,9 +33,16 @@ public final class PassportHome {
 
     /**
      * 初始化方法
-     * @param app
+     * <p>
+     *     初始化PassportSDK开发环境
+     * </p>
+     * @param app Application实例
+     * @param channel 渠道号
+     * @param key 开发者key
      */
-    public void init(Application app, String channel) {
+    public void init(Application app, String channel, String key) {
+
+        Constant.APP_CONTEXT = app.getApplicationContext();
 
         // 初始化OkGo
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -58,16 +58,17 @@ public final class PassportHome {
                .connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
 
         HttpHeaders headers = new HttpHeaders();
-        headers.put("channel", channel);
-        headers.put("device_type", Build.PRODUCT);
-        headers.put("device_mac", DeviceUtil.getMacAddress());
-//        headers.put("device_imei", DeviceUtil.getImei(app));
+        // TODO: 2017/11/13 增加若干参数到header 
+        
         OkGo.getInstance().init(app)
                           .setOkHttpClient(builder.build())
                           .setCacheMode(CacheMode.NO_CACHE)
                           .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
                           .setRetryCount(3)
                           .addCommonHeaders(headers);
+
+        // 初始化ApiUtil
+        ApiFactory.init(channel, key, app.getString(R.string.sit_http_host));
     }
 
     public final static PassportHome getInstance() {

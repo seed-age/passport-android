@@ -17,7 +17,12 @@ public interface IBaseView {
     void showError(String errMsg);
 
     /**
-     * 显示等待对话框
+     * 显示加载对话框
      */
     void showLoading();
+
+    /**
+     * 隐藏加载对话框
+     */
+    void hideLoading();
 }

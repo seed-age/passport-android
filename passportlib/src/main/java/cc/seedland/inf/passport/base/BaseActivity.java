@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import cc.seedland.inf.passport.widget.LoadingDialog;
+
 /**
  * 活动基类
  * Created by xuchunlei on 2017/11/8.
@@ -13,6 +15,8 @@ import android.widget.Toast;
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IBaseView{
 
     protected P presenter;
+
+    private LoadingDialog loadingDlg;
 
     /**
      * 创建Presenter实例
@@ -43,6 +47,16 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public void showLoading() {
+        hideLoading(); // 关闭已经打开的对话框
+        loadingDlg = new LoadingDialog(this);
+        loadingDlg.show();
+    }
 
+    @Override
+    public void hideLoading() {
+        if(loadingDlg != null && loadingDlg.isShowing()) {
+            loadingDlg.dismiss();
+            loadingDlg = null;
+        }
     }
 }

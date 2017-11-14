@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 通用 -->
+    <string name="error_lack_of_phone">请输入手机号码</string>
+    
     <!-- 注册界面 -->
     <string name="register_do">完成</string>
     <string name="register_obtain_capche">获取验证码</string>
