@@ -1,32 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:divider="@color/default_gray"
+    android:showDividers="middle"
+    android:padding="@dimen/size_common_15">
     <EditText
         android:id="@+id/register_phone_edt"
+        style="@style/PassportEdit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/register_captcha_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/register_phone_edt"
-        android:layout_alignParentRight="true"
-        android:text="@string/register_obtain_capche" />
-    <EditText
-        android:id="@+id/register_captcha_edt"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="@dimen/size_common_10"
+        android:inputType="phone"
+        android:maxLength="20"
+        android:hint="@string/hint_phone"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/register_phone_edt"
-        android:layout_toLeftOf="@id/register_captcha_txv"/>
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/register_captcha_edt"
+            style="@style/PassportEdit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_captcha"
+            android:drawablePadding="@dimen/size_common_10"
+            android:inputType="number"
+            android:maxLength="10"
+            android:hint="@string/hint_captcha"/>
+        <cc.seedland.inf.passport.widget.CountDownButton
+            android:id="@+id/register_captcha_txv"
+            style="@style/PerformBorderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/size_common_5"
+            android:padding="@dimen/size_common_5"
+            android:text="@string/register_obtain_captcha"
+            app:countingText="@string/hint_captcha_counting"
+            app:countingTextColor="@color/default_gray"
+            app:endText="@string/text_captcha_retrieve"/>
+    </LinearLayout>
+
     <EditText
         android:id="@+id/register_password_edt"
+        style="@style/PassportEdit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/register_captcha_edt"/>
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="@dimen/size_common_10"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:hint="@string/hint_password"/>
+    <EditText
+        android:id="@+id/register_password_confirm_edt"
+        style="@style/PassportEdit"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="@dimen/size_common_10"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:hint="@string/hint_password_confirm"/>
     <Button
-        android:id="@+id/register_do_btn"
+        android:id="@+id/register_perform_btn"
+        style="@style/PerformBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/register_password_edt"
+        android:layout_marginTop="@dimen/size_common_30"
         android:text="@string/register_do"/>
-</RelativeLayout>
+</LinearLayout>

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="size_common_5">5dp</dimen>
+    <dimen name="size_common_10">10dp</dimen>
+    <dimen name="size_common_15">15dp</dimen>
+    <dimen name="size_common_20">20dp</dimen>
+    <dimen name="size_common_30">30dp</dimen>
+
+    <dimen name="radius_size_small">2dp</dimen>
+    <dimen name="radius_size_normal">5dp</dimen>
+
+    <dimen name="border_width_normal">1dp</dimen>
+    
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_big">18sp</dimen>
+    <dimen name="text_size_large">21sp</dimen>
 
     <dimen name="dialog_loading_size">50dp</dimen>
 </resources>

@@ -3,20 +3,28 @@ package cc.seedland.inf.passport.network;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cc.seedland.inf.passport.common.TokenBean;
+import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.DeviceUtil;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 构造API请求时使用
  * Created by xuchunlei on 2017/11/13.
  */
 
-public class ApiFactory {
+public class ApiUtil {
 
     // API使用的Host
     private static String HOST;
@@ -26,9 +34,14 @@ public class ApiFactory {
     // 用于Api请求参数，可视为常量
     private static String CHANNEL;
     // MD5算法生成字符串时补位使用
-    public static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    /**
+     * post请求支持utf-8
+     */
+    private static final MediaType FORM_CONTENT_TYPE
+            = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
 
-    private ApiFactory(){
+    private ApiUtil(){
 
     }
 
@@ -44,7 +57,14 @@ public class ApiFactory {
         AUTH_KEY = key;
         HOST = host;
 
+        refreshToken(new JsonCallback<TokenBean>(TokenBean.class) {
+            @Override
+            public void onSuccess(Response<TokenBean> response) {
+
+            }
+        });
     }
+
 
     /**
      * 生成Post请求地址
@@ -52,7 +72,29 @@ public class ApiFactory {
      * @return
      */
     public static String generateUrlForPost(String path) {
-        return gererateUrl(path) + signApi(getCommonParams());
+        return generateUrl(path) + signApi(getCommonParams());
+    }
+
+    /**
+     * 生成Get请求地址
+     * @param path
+     * @param params
+     * @return
+     */
+    public static String generalUrlForGet(String path, Map<String, String> params) {
+        Map<String, String> rawParams = getCommonParams();
+        rawParams.putAll(params);
+        return generateUrl(path) + signApi(rawParams);
+    }
+
+    /**
+     * 生成Post请求体
+     * @param params
+     * @return
+     */
+    public static RequestBody generateParamsBodyForPost(Map<String, String> params) {
+
+        return RequestBody.create(FORM_CONTENT_TYPE, generateQueryString(params, true));
     }
 
     /**
@@ -60,8 +102,8 @@ public class ApiFactory {
      * @param path
      * @return
      */
-    public static String gererateUrl(String path) {
-        return HOST + PARENT_PATH + path;
+    private static String generateUrl(String path) {
+        return HOST + PARENT_PATH + path + "?";
     }
 
     /**
@@ -71,11 +113,16 @@ public class ApiFactory {
     private static Map<String, String> getCommonParams() {
         Map<String, String> params = new TreeMap<>();
         params.put("channel", CHANNEL);
-        params.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        params.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
         params.put("client_ip", DeviceUtil.getLocalIpAddress());
         params.put("device_type", Build.MANUFACTURER + "-" + Build.MODEL);
         params.put("device_mac", DeviceUtil.getMacAddress());
         params.put("device_imei", DeviceUtil.getDeviceId());
+
+
+//        params.put("channel", "haqi");
+//        params.put("timestamp", "1508415634");
+//        params.put("client_ip", String.valueOf("123.25.1.23"));
         return params;
     }
 
@@ -90,7 +137,7 @@ public class ApiFactory {
         String baseQuery = generateQueryString(params, true);
 
         // 生成签名
-        params.put("key", AUTH_KEY);
+//        params.put("key", AUTH_KEY);
         String signQuery = generateQueryString(params, false);
         signQuery = signQuery + "&" + AUTH_KEY;
 
@@ -103,7 +150,7 @@ public class ApiFactory {
      * @return
      */
     private static String generateQueryString(Map<String, String> params, boolean encodeFlag) {
-        StringBuilder paramSb = new StringBuilder("?");
+        StringBuilder paramSb = new StringBuilder();
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
@@ -153,6 +200,18 @@ public class ApiFactory {
             e.printStackTrace();
             return null;
         }
+    }
+
+    // 刷新Token
+    private static void refreshToken(JsonCallback<TokenBean> callback) {
+        String cachedToken = RuntimeCache.getToken();
+        if(!TextUtils.isEmpty(cachedToken)) { // 缓存过Token，则进行刷新
+            Map<String, String> params = new HashMap<>();
+            params.put("sso_tk", RuntimeCache.getToken());
+            OkGo.<TokenBean>get(generalUrlForGet(Constant.API_URL_TOKEN, params))
+                    .execute(callback);
+        }
+
     }
 
 }

@@ -9,6 +9,7 @@ ext {
 
     dependencies = [
             "appcompat-v7"                                 : "com.android.support:appcompat-v7:26.1.0",
-            "okgo"                                         : "com.lzy.net:okgo:3.0.4"
+            "okgo"                                         : "com.lzy.net:okgo:3.0.4",
+            "gson"                                         : "com.google.code.gson:gson:2.8.2"
     ]
 }

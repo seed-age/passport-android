@@ -11,6 +11,6 @@
         <activity android:name=".login.LoginActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".register.RegisterActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

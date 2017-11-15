@@ -7,4 +7,6 @@ import cc.seedland.inf.passport.base.IBaseView;
  */
 
 public interface IRegisterView extends IBaseView{
+
+    void startWaitingCaptcha();
 }

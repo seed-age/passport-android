@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import cc.seedland.inf.passport.login.LoginActivity;
-import cc.seedland.inf.passport.network.ApiFactory;
+import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.util.Constant;
 import okhttp3.OkHttpClient;
@@ -68,7 +68,7 @@ public final class PassportHome {
                           .addCommonHeaders(headers);
 
         // 初始化ApiUtil
-        ApiFactory.init(channel, key, app.getString(R.string.sit_http_host));
+        ApiUtil.init(channel, key, app.getString(R.string.sit_http_host));
     }
 
     public final static PassportHome getInstance() {
