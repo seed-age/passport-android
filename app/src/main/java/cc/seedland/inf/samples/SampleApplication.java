@@ -1,6 +1,8 @@
 package cc.seedland.inf.samples;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
 
 import cc.seedland.inf.passport.PassportHome;
 
@@ -15,4 +17,5 @@ public class SampleApplication extends Application {
         super.onCreate();
         PassportHome.getInstance().init(this, getString(R.string.passport_channel), getString(R.string.passport_key));
     }
+
 }

@@ -20,4 +20,5 @@ public interface IRegisterPresenter {
      * @param password
      */
     void performRegister(String phone, String captcha, String password, String confirmPassword);
+
 }

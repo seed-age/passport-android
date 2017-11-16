@@ -6,13 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/register_toolbar"
+        android:id="@+id/login_captcha_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/actionBarSize"
         app:contentInsetStart="0dp">
         <TextView
-            android:id="@+id/register_title_txv"
+            android:id="@+id/login_captcha_title_txv"
             style="@style/PassportTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:showDividers="middle"
         android:padding="@dimen/size_common_15">
         <EditText
-            android:id="@+id/register_phone_edt"
+            android:id="@+id/login_captcha_phone_edt"
             style="@style/PassportEdit"
             android:layout_width="match_parent"
             android:drawableLeft="@drawable/ic_phone"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:id="@+id/register_captcha_edt"
+                android:id="@+id/login_captcha_captcha_edt"
                 style="@style/PassportEdit"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:maxLength="10"
                 android:hint="@string/hint_captcha"/>
             <cc.seedland.inf.passport.widget.CountDownButton
-                android:id="@+id/register_captcha_txv"
+                android:id="@+id/login_captcha_gain_txv"
                 style="@style/PerformBorderBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,39 +65,9 @@
                 app:countingTextColor="@color/default_gray"
                 app:endText="@string/text_captcha_retrieve"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/register_password_edt"
-                style="@style/PassportEdit"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_password"
-                android:drawablePadding="@dimen/size_common_10"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:hint="@string/hint_password"/>
-            <CheckBox
-                android:id="@+id/register_password_show_chb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/size_common_5"
-                android:button="@drawable/password_show_selector"/>
-        </LinearLayout>
-        <EditText
-            android:id="@+id/register_password_confirm_edt"
-            style="@style/PassportEdit"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_password"
-            android:drawablePadding="@dimen/size_common_10"
-            android:inputType="textPassword"
-            android:maxLength="16"
-            android:hint="@string/hint_password_confirm"/>
+
         <Button
-            android:id="@+id/register_perform_btn"
+            android:id="@+id/login_captcha_perform_btn"
             style="@style/PerformBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

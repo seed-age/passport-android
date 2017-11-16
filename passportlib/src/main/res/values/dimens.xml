@@ -10,8 +10,9 @@
     <dimen name="radius_size_small">2dp</dimen>
     <dimen name="radius_size_normal">5dp</dimen>
 
+    <dimen name="border_width_small">1px</dimen>
     <dimen name="border_width_normal">1dp</dimen>
-    
+
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_normal">15sp</dimen>
     <dimen name="text_size_big">18sp</dimen>

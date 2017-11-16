@@ -17,18 +17,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.main_login).setOnClickListener(this);
-        findViewById(R.id.main_register).setOnClickListener(this);
+        findViewById(R.id.main_password).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.main_register:
-                Log.e("xuchunlei", "manufacturer:" + Build.MANUFACTURER + "***Model:" + Build.MODEL);
-                PassportHome.getInstance().startRegister(this);
+            case R.id.main_password:
+                PassportHome.getInstance().startModifyPassword(this);
                 break;
             case R.id.main_login:
-                PassportHome.getInstance().startLogin(this);
+                PassportHome.getInstance().startLoginByPassword(this);
                 break;
         }
     }

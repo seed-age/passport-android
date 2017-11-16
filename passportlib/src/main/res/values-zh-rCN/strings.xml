@@ -14,12 +14,26 @@
     <string name="text_captcha_retrieve">重新获取</string>
     
     <!-- 注册界面 -->
+    <string name="register_title">用户注册</string>
     <string name="register_do">完成</string>
     <string name="register_obtain_captcha">获取验证码</string>
 
-    <!-- 登录界面 -->
+    <!-- 密码登录界面 -->
     <string name="login_forget_password">忘记密码</string>
     <string name="login_register">新用户注册</string>
     <string name="login_do">登录</string>
+    <string name="login_hint_password">请输入密码</string>
+    <string name="login_captcha_entry">使用验证码登录</string>
+
+    <!-- 验证码登录界面 -->
+    <string name="login_captcha_title">验证码登录</string>
+
+    <!-- 重置密码 -->
+    <string name="reset_password_title">重置密码</string>
+    <string name="reset_password_tip">重置密码将同时更改实地集团下平台的密码，如：哈奇APP、家有健康APP等，请注意使用新密码登录</string>
+
+    <!-- 修改密码 -->
+    <string name="password_modify_title">修改密码</string>
+    <string name="password_modify_hint_origin">请输入原密码</string>
 
 </resources>

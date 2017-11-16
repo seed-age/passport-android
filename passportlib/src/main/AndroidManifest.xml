@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cc.seedland.inf.passport" >
+    package="cc.seedland.inf.passport">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -8,9 +8,20 @@
     <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
 
     <application>
-        <activity android:name=".login.LoginActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".login.LoginPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SeedLandTheme"/>
+        <activity android:name=".login.LoginCaptchaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SeedLandTheme"/>
         <activity android:name=".register.RegisterActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/SeedLandTheme" />
+        <activity android:name=".password.reset.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SeedLandTheme" />
+        <activity android:name=".password.modify.ModifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SeedLandTheme" />
     </application>
 </manifest>

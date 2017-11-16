@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SeedLandTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/default_blue</item>
+        <item name="colorPrimaryDark">@color/default_blue</item>
+        <item name="colorAccent">@color/default_blue</item>
+        <item name="colorControlNormal">@color/default_gray</item>
+        <item name="colorControlActivated">@color/default_gray</item>
+    </style>
+</resources>

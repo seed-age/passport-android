@@ -3,6 +3,7 @@ package cc.seedland.inf.passport;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -13,8 +14,11 @@ import com.lzy.okgo.model.HttpHeaders;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-import cc.seedland.inf.passport.login.LoginActivity;
+import cc.seedland.inf.passport.login.LoginCaptchaActivity;
+import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
+import cc.seedland.inf.passport.password.modify.ModifyPasswordActivity;
+import cc.seedland.inf.passport.password.reset.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.util.Constant;
 import okhttp3.OkHttpClient;
@@ -69,6 +73,8 @@ public final class PassportHome {
 
         // 初始化ApiUtil
         ApiUtil.init(channel, key, app.getString(R.string.sit_http_host));
+
+        app.registerActivityLifecycleCallbacks(new PassportLifecycleCallbacks());
     }
 
     public final static PassportHome getInstance() {
@@ -85,12 +91,38 @@ public final class PassportHome {
     }
 
     /**
-     * 打开登录界面
+     * 打开密码登录界面
      * @param context
      */
-    public void startLogin(Context context) {
-        Intent i = new Intent(context, LoginActivity.class);
+    public void startLoginByPassword(Context context) {
+        Intent i = new Intent(context, LoginPasswordActivity.class);
         context.startActivity(i);
     }
 
+    /**
+     * 打开验证码登录界面
+     * @param context
+     */
+    public void startLoginByCaptcha(Context context) {
+        Intent i = new Intent(context, LoginCaptchaActivity.class);
+        context.startActivity(i);
+    }
+
+    /**
+     * 打开重置密码界面
+     * @param context
+     */
+    public void startResetPassword(Context context) {
+        Intent i = new Intent(context, ResetPasswordActivity.class);
+        context.startActivity(i);
+    }
+
+    /**
+     * 打开修改密码界面
+     * @param context
+     */
+    public void startModifyPassword(Context context) {
+        Intent i = new Intent(context, ModifyPasswordActivity.class);
+        context.startActivity(i);
+    }
 }

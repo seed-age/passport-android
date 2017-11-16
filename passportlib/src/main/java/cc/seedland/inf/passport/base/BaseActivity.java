@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.widget.LoadingDialog;
 
 /**
@@ -27,11 +28,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         presenter = createPresenter();
         if(presenter == null) {
             throw new NullPointerException("Presenter should not be null, please create an instance first!");
         }
         presenter.attach(this);
+
     }
 
     @Override
