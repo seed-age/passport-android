@@ -14,19 +14,21 @@ import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
+import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.widget.CountDownButton;
+import cc.seedland.inf.passport.widget.PasswordEditText;
 
 /**
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implements IRegisterView, View.OnClickListener{
+public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implements ICaptchaView, View.OnClickListener{
 
     private EditText phoneEdt;
     private CountDownButton captchaBtn;
     private EditText captchaEdt;
-    private EditText passwordEdt;
-    private EditText passwordConfirmEdt;
+    private PasswordEditText passwordEdt;
+    private PasswordEditText passwordConfirmEdt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,18 +53,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implem
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        final CheckBox passwordChb = findViewById(R.id.register_password_show_chb);
-        passwordChb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    passwordEdt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
-                    passwordEdt.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
             }
         });
     }

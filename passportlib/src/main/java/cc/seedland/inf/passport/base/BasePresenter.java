@@ -1,5 +1,7 @@
 package cc.seedland.inf.passport.base;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Presenter基类
  * <p>
@@ -10,13 +12,9 @@ package cc.seedland.inf.passport.base;
 
 public abstract class BasePresenter<V extends IBaseView> {
 
-    protected V view;
+    public WeakReference<V> view;
 
     public void attach(V view) {
-        this.view = view;
-    }
-
-    public void detach() {
-        view = null;
+        this.view = new WeakReference<>(view);
     }
 }

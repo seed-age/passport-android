@@ -1,16 +1,14 @@
 package cc.seedland.inf.passport.register;
 
-import android.support.annotation.StringRes;
-
 import com.lzy.okgo.OkGo;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.common.CaptchaBean;
 import cc.seedland.inf.passport.network.ApiUtil;
-import cc.seedland.inf.passport.network.JsonCallback;
 
 /**
  * 注册模型类
@@ -24,12 +22,12 @@ public class RegisterModel {
      * @param phone
      * @param callback
      */
-    public void getCaptcha(String phone, JsonCallback<CaptchaBean> callback) {
+    public void getCaptcha(String phone, BizCallback<BaseBean> callback) {
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
         params.put("action", "reg");
-        OkGo.<CaptchaBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
+        OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
                 .execute(callback);
 
@@ -42,7 +40,7 @@ public class RegisterModel {
      * @param captcha
      * @param callback
      */
-    public void performPhone(String phone, String password, String captcha, JsonCallback<RegisterBean> callback) {
+    public void performPhone(String phone, String password, String captcha, BizCallback<RegisterBean> callback) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
         params.put("password", password);

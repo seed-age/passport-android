@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- CountDownButton倒计时按钮属性-begin -->
+    <!-- CountDownButton倒计时按钮属性 -->
     <declare-styleable name="CountDownButton" >
         <!-- 时间计数，默认为60，单位秒 -->
         <attr name="timeCount" format="integer" />
@@ -19,5 +19,13 @@
             <!-- 点击时触发 -->
             <flag name="show" value="1" />
         </attr>
+    </declare-styleable>
+
+    <!-- PasswordEditText属性 -->
+    <declare-styleable name="PasswordEditText">
+        <!-- 提示文本内容 -->
+        <attr name="hint" format="string" />
+        <!-- 密码可视开关图标 -->
+        <attr name="button" format="reference" />
     </declare-styleable>
 </resources>

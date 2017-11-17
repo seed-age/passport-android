@@ -1,5 +1,7 @@
 package cc.seedland.inf.passport.common;
 
+import com.google.gson.annotations.SerializedName;
+
 import cc.seedland.inf.passport.base.BaseBean;
 
 /**
@@ -7,4 +9,6 @@ import cc.seedland.inf.passport.base.BaseBean;
  */
 
 public class TokenBean extends BaseBean {
+
+    @SerializedName("refresh_sso_tk") public String token;
 }

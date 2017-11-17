@@ -2,8 +2,10 @@ package cc.seedland.inf.passport.network;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import cc.seedland.inf.passport.util.Constant;
+import cc.seedland.inf.passport.util.LogUtil;
 
 /**
  * 运行时缓存
@@ -28,6 +30,8 @@ public class RuntimeCache {
      */
     public static void saveToken(String token) {
         save(KEY_TOKEN, token);
+        LogUtil.d(Constant.TAG, "update token to " + token);
+        Toast.makeText(Constant.APP_CONTEXT, token, Toast.LENGTH_LONG).show();
     }
 
     /**

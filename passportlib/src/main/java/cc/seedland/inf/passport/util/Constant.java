@@ -24,11 +24,19 @@ public class Constant {
     public static final String PREFS_SEEDLAND = "seedland";
 
     /** 请求Url-验证Token登录状态 */
-    public static final String API_URL_TOKEN = "1.0/token/check";
+    public static final String API_URL_TOKEN = "1.0/token/refresh";
     /** 请求Url-下发短信激活码 */
     public static final String API_URL_CAPTCHA = "/1.0/sms/send";
     /** 请求Url-手机号注册 */
     public static final String API_URL_REGISTER_PHONE = "/1.0/register";
+    /** 请求Url-密码登录 */
+    public static final String API_URL_LOGIN_PASSWORD = "/1.0/login/password";
+    /** 请求Url-验证码登录 */
+    public static final String API_URL_LOGIN_CAPTCHA = "/1.0/login/verify_code";
+    /** 请求Url-重置密码 */
+    public static final String API_URL_PASSWORD_RESET = "/1.0/password/reset";
+    /** 请求Url-修改密码 */
+    public static final String API_URL_PASSWORD_MODIFY = "/1.0/password/modify";
 
     /** 请求返回码-成功 */
     public static final int RESPONSE_CODE_SUCCESS = 0;

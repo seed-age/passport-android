@@ -25,4 +25,9 @@ public interface IBaseView {
      * 隐藏加载对话框
      */
     void hideLoading();
+
+    /**
+     * 关闭界面
+     */
+    void close();
 }

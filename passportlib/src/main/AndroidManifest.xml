@@ -17,10 +17,10 @@
         <activity android:name=".register.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SeedLandTheme" />
-        <activity android:name=".password.reset.ResetPasswordActivity"
+        <activity android:name=".password.ResetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SeedLandTheme" />
-        <activity android:name=".password.modify.ModifyPasswordActivity"
+        <activity android:name=".password.ModifyPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SeedLandTheme" />
     </application>

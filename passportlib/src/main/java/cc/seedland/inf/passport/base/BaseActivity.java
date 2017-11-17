@@ -38,12 +38,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.detach();
-    }
-
-    @Override
     public void showError(String errMsg) {
         Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show();
     }
@@ -61,5 +55,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             loadingDlg.dismiss();
             loadingDlg = null;
         }
+    }
+
+    @Override
+    public void close() {
+        finish();
     }
 }

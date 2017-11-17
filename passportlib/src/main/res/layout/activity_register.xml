@@ -31,13 +31,8 @@
         android:padding="@dimen/size_common_15">
         <EditText
             android:id="@+id/register_phone_edt"
-            style="@style/PassportEdit"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/size_common_10"
-            android:inputType="phone"
-            android:maxLength="20"
-            android:hint="@string/hint_phone"/>
+            style="@style/PhoneEdit"
+            android:layout_width="match_parent" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,37 +60,20 @@
                 app:countingTextColor="@color/default_gray"
                 app:endText="@string/text_captcha_retrieve"/>
         </LinearLayout>
-        <LinearLayout
+        <cc.seedland.inf.passport.widget.PasswordEditText
+            android:id="@+id/register_password_edt"
+            style="@style/PasswordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/register_password_edt"
-                style="@style/PassportEdit"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_password"
-                android:drawablePadding="@dimen/size_common_10"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:hint="@string/hint_password"/>
-            <CheckBox
-                android:id="@+id/register_password_show_chb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/size_common_5"
-                android:button="@drawable/password_show_selector"/>
-        </LinearLayout>
-        <EditText
+            app:hint="@string/hint_password"
+            app:button="@drawable/password_show_selector"/>
+        <cc.seedland.inf.passport.widget.PasswordEditText
             android:id="@+id/register_password_confirm_edt"
-            style="@style/PassportEdit"
+            style="@style/PasswordEdit"
             android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_password"
-            android:drawablePadding="@dimen/size_common_10"
-            android:inputType="textPassword"
-            android:maxLength="16"
-            android:hint="@string/hint_password_confirm"/>
+            android:layout_height="wrap_content"
+            app:hint="@string/hint_password_confirm"
+            app:button="@drawable/password_show_selector"/>
         <Button
             android:id="@+id/register_perform_btn"
             style="@style/PerformBtn"

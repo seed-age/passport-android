@@ -3,7 +3,6 @@ package cc.seedland.inf.passport;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -17,8 +16,9 @@ import java.util.logging.Level;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
-import cc.seedland.inf.passport.password.modify.ModifyPasswordActivity;
-import cc.seedland.inf.passport.password.reset.ResetPasswordActivity;
+import cc.seedland.inf.passport.network.PassportInterceptor;
+import cc.seedland.inf.passport.password.ModifyPasswordActivity;
+import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.util.Constant;
 import okhttp3.OkHttpClient;
@@ -50,6 +50,7 @@ public final class PassportHome {
 
         // 初始化OkGo
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(new PassportInterceptor());
         if(BuildConfig.DEBUG) {
             // 日志支持
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("seeldand-passport");
@@ -57,6 +58,7 @@ public final class PassportHome {
             loggingInterceptor.setColorLevel(Level.INFO);
             builder.addInterceptor(loggingInterceptor);
         }
+
         builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)      // 全局读取超时时间
                .writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
                .connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间

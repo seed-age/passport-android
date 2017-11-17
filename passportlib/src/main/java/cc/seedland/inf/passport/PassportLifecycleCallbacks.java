@@ -3,7 +3,9 @@ package cc.seedland.inf.passport;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import cc.seedland.inf.passport.common.TokenBean;
+import cc.seedland.inf.passport.network.ApiUtil;
 
 /**
  * Created by xuchunlei on 2017/11/16.
@@ -23,7 +25,7 @@ class PassportLifecycleCallbacks implements Application.ActivityLifecycleCallbac
     public void onActivityStarted(Activity activity) {
         count++;
         if(count == 1) {
-            Toast.makeText(activity, "刷新Token", Toast.LENGTH_SHORT).show();
+            ApiUtil.refreshToken();
         }
     }
 

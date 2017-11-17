@@ -57,12 +57,7 @@ public class ApiUtil {
         AUTH_KEY = key;
         HOST = host;
 
-        refreshToken(new JsonCallback<TokenBean>(TokenBean.class) {
-            @Override
-            public void onSuccess(Response<TokenBean> response) {
-
-            }
-        });
+        refreshToken();
     }
 
 
@@ -95,6 +90,35 @@ public class ApiUtil {
     public static RequestBody generateParamsBodyForPost(Map<String, String> params) {
 
         return RequestBody.create(FORM_CONTENT_TYPE, generateQueryString(params, true));
+    }
+
+    // 刷新Token
+    public static void refreshToken() {
+        String cachedToken = RuntimeCache.getToken();
+        if(!TextUtils.isEmpty(cachedToken)) { // 缓存过Token，则进行刷新
+            Map<String, String> params = new HashMap<>();
+            params.put("sso_tk", RuntimeCache.getToken());
+            OkGo.<TokenBean>post(generateUrlForPost(Constant.API_URL_TOKEN))
+                    .upRequestBody(generateParamsBodyForPost(params))
+                    .execute(new JsonCallback<TokenBean>(TokenBean.class) {
+                        @Override
+                        public void onSuccess(Response<TokenBean> response) {
+                            RuntimeCache.saveToken(response.body().token);
+                        }
+                    });
+        }
+
+    }
+
+    /**
+     * 检验签名　
+     * @param timestamp
+     * @param sign
+     * @return
+     */
+    public static boolean checkSign(long timestamp, String sign) {
+        String checkSign = ApiUtil.MD5(CHANNEL + "." + timestamp);
+        return checkSign.equals(sign);
     }
 
     /**
@@ -167,15 +191,6 @@ public class ApiUtil {
 
     }
 
-    private static String encode(String value) {
-        try {
-            return URLEncoder.encode(value, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-
     private static String MD5(String s) {
 
         try {
@@ -202,16 +217,13 @@ public class ApiUtil {
         }
     }
 
-    // 刷新Token
-    private static void refreshToken(JsonCallback<TokenBean> callback) {
-        String cachedToken = RuntimeCache.getToken();
-        if(!TextUtils.isEmpty(cachedToken)) { // 缓存过Token，则进行刷新
-            Map<String, String> params = new HashMap<>();
-            params.put("sso_tk", RuntimeCache.getToken());
-            OkGo.<TokenBean>get(generalUrlForGet(Constant.API_URL_TOKEN, params))
-                    .execute(callback);
+    private static String encode(String value) {
+        try {
+            return URLEncoder.encode(value, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-
+        return value;
     }
 
 }
