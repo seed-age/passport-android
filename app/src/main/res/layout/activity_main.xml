@@ -16,5 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录" />
+    <Button
+        android:id="@+id/main_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="签名测试"/>
 
 </LinearLayout>

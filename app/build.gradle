@@ -18,10 +18,15 @@ android {
 //            resValue "string", "passport_key", "hueugegey"
         }
         release {
-            resValue "string", "passport_channel", "hachi"         // PassportSDK的渠道号
-            resValue "string", "passport_key", "G0YVngfS4yP3TmRd"  // PassportSDK的开发者Key
+//            resValue "string", "passport_channel", "hachi"         // PassportSDK的渠道号
+//            resValue "string", "passport_key", "G0YVngfS4yP3TmRd"  // PassportSDK的开发者Key
 
-            minifyEnabled false
+            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
+            resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
+
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

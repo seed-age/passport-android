@@ -2,6 +2,8 @@ package cc.seedland.inf.passport.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
@@ -33,6 +36,7 @@ public class DeviceUtil {
 
     private static String MAC_ADDRESS; // 设备Mac地址
     private static String DEVICE_ID;   // 设备唯一标识符
+    private static final String DEFAULT_IP_ADDRESS = "127.0.0.1";
 
     private static final String PREF_KEY_DEVICE_ID = "device_id";
 
@@ -50,7 +54,7 @@ public class DeviceUtil {
                 NetworkInterface ni = en.nextElement();
                 for (Enumeration<InetAddress> enumIpAddr = ni.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
+                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
                         return inetAddress.getHostAddress().toString();
                     }
                 }
@@ -58,7 +62,7 @@ public class DeviceUtil {
         } catch (Exception ex) {
             Log.e(Constant.TAG, "DeviceUtil.getLocalIpAddress" + ex.toString());
         }
-        return null;
+        return DEFAULT_IP_ADDRESS;
     }
 
     /**
@@ -145,6 +149,55 @@ public class DeviceUtil {
 
         return DEVICE_ID;
 
+    }
+
+    /***
+     *  本地的网络是否连通
+     * @return
+     */
+    public static boolean isNetworkConnected() {
+
+        // 判断是否具有可以用于通信渠道
+        boolean mobileConnection = isMobileConnection(Constant.APP_CONTEXT);
+        boolean wifiConnection = isWIFIConnection(Constant.APP_CONTEXT);
+        return !(mobileConnection == false && wifiConnection == false);
+    }
+
+    /**
+     * 判断手机接入点（APN）是否处于可以使用的状态
+     *
+     * @param context
+     * @return
+     */
+    private static boolean isMobileConnection(Context context) {
+        if(context == null) return false;
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(manager != null){
+            NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+            if (networkInfo != null && networkInfo.isConnected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断当前wifi是否是处于可以使用状态
+     *
+     * @param context
+     * @return
+     */
+    private static boolean isWIFIConnection(Context context) {
+        if(context == null) return false;
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(manager != null){
+            NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (networkInfo != null && networkInfo.isConnected()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static void saveToSettings(Context context, String value) {

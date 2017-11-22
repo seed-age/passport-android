@@ -1,11 +1,14 @@
 package cc.seedland.inf.passport.base;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.LoadingDialog;
 
 /**
@@ -58,7 +61,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
-    public void close() {
+    public void close(Bundle args, String raw) {
+        Intent data = new Intent();
+        data.putExtra(Constant.EXTRA_KEY_RESULT, args);
+        data.putExtra(Constant.EXTRA_KEY_RAW_RESULT, raw);
+        setResult(RESULT_OK, data);
         finish();
     }
 }

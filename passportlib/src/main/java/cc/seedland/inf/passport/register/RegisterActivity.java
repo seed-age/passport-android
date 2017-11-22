@@ -3,12 +3,7 @@ package cc.seedland.inf.passport.register;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,7 +17,7 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implements ICaptchaView, View.OnClickListener{
+public class RegisterActivity extends BaseActivity<RegisterPresenter> implements ICaptchaView, View.OnClickListener{
 
     private EditText phoneEdt;
     private CountDownButton captchaBtn;
@@ -58,8 +53,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implem
     }
 
     @Override
-    protected RegisterPresenterImpl createPresenter() {
-        return new RegisterPresenterImpl();
+    protected RegisterPresenter createPresenter() {
+        return new RegisterPresenter();
     }
 
     @Override

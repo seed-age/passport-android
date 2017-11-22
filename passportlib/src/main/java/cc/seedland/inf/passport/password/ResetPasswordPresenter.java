@@ -62,9 +62,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
         model.reset(phone, password, captcha, new BizCallback<BaseBean>(BaseBean.class, view) {
             @Override
             public void onSuccess(Response<BaseBean> response) {
-                if(view.get() != null) {
-                    view.get().close();
-                }
+                BaseViewGuard.callCloseSafely(view, null, null);
             }
         });
 

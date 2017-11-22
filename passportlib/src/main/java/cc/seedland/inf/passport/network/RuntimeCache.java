@@ -31,7 +31,6 @@ public class RuntimeCache {
     public static void saveToken(String token) {
         save(KEY_TOKEN, token);
         LogUtil.d(Constant.TAG, "update token to " + token);
-        Toast.makeText(Constant.APP_CONTEXT, token, Toast.LENGTH_LONG).show();
     }
 
     /**

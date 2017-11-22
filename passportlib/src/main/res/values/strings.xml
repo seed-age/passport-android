@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">PassportLib</string>
+
+    <!-- 通用 -->
+    <string name="error_phone">手机号为空或不正确</string>
+    <string name="error_captcha">激活码不能为空</string>
+    <string name="error_password">密码不能为空或少于8位</string>
+    <string name="error_password_confirm">两次输入的密码不一致</string>
+    <string name="error_sign">非法签名</string>
+    <string name="error_network">网络连接异常,请检查设备网络</string>
+    <string name="hint_phone">请输入手机号</string>
+    <string name="hint_captcha">请输入验证码</string>
+    <string name="hint_password">请设置密码，8-16位数字、英文、符号</string>
+    <string name="hint_password_confirm">请再次输入设置的密码</string>
+    <string name="hint_captcha_counting">%1$ds</string>
+    <string name="text_captcha_retrieve">重新获取</string>
+
+    <!-- 注册界面 -->
+    <string name="register_title">用户注册</string>
+    <string name="register_do">完成</string>
+    <string name="register_obtain_captcha">获取验证码</string>
+
+    <!-- 密码登录界面 -->
+    <string name="login_forget_password">忘记密码</string>
+    <string name="login_register">新用户注册</string>
+    <string name="login_do">登录</string>
+    <string name="login_hint_password">请输入密码</string>
+    <string name="login_captcha_entry">使用验证码登录</string>
+
+    <!-- 验证码登录界面 -->
+    <string name="login_captcha_title">验证码登录</string>
+
+    <!-- 重置密码 -->
+    <string name="reset_password_title">重置密码</string>
+    <string name="reset_password_tip">重置密码将同时更改实地集团下平台的密码，如：哈奇APP、家有健康APP等，请注意使用新密码登录</string>
+
+    <!-- 修改密码 -->
+    <string name="password_modify_title">修改密码</string>
+    <string name="password_modify_hint_origin">请输入原密码</string>
 </resources>

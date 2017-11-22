@@ -1,5 +1,7 @@
 package cc.seedland.inf.passport.base;
 
+import android.os.Bundle;
+
 /**
  * View基础接口
  * <p>
@@ -29,5 +31,5 @@ public interface IBaseView {
     /**
      * 关闭界面
      */
-    void close();
+    void close(Bundle args, String raw);
 }

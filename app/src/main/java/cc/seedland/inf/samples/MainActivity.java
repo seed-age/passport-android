@@ -1,5 +1,6 @@
 package cc.seedland.inf.samples;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,14 @@ import android.util.Log;
 import android.view.View;
 
 import cc.seedland.inf.passport.PassportHome;
+import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.DeviceUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    private static final int REQUEST_CODE_LOGIN = 1;
+    private static final int REQUEST_CODE_PASSWORD = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,16 +24,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.main_login).setOnClickListener(this);
         findViewById(R.id.main_password).setOnClickListener(this);
+        findViewById(R.id.main_sign).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_password:
-                PassportHome.getInstance().startModifyPassword(this);
+                PassportHome.getInstance().startModifyPassword(this, REQUEST_CODE_PASSWORD);
                 break;
             case R.id.main_login:
-                PassportHome.getInstance().startLoginByPassword(this);
+                PassportHome.getInstance().startLoginByPassword(this, REQUEST_CODE_LOGIN);
+                break;
+            case R.id.main_sign:
+                Intent iSign = new Intent(this, SignActivity.class);
+                startActivity(iSign);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CODE_LOGIN:
+                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
+                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
+                break;
+            case REQUEST_CODE_PASSWORD:
+//                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
+//                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
                 break;
         }
     }

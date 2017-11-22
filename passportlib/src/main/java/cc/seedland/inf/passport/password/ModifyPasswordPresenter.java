@@ -43,9 +43,7 @@ class ModifyPasswordPresenter extends BasePresenter<IBaseView> {
             @Override
             public void onSuccess(Response<BaseBean> response) {
                 RuntimeCache.saveToken("");
-                if(view.get() != null) {
-                    view.get().close();
-                }
+                BaseViewGuard.callCloseSafely(view, null, null);
             }
         });
 

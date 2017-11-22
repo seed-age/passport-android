@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -59,9 +60,9 @@ public final class PassportHome {
             builder.addInterceptor(loggingInterceptor);
         }
 
-        builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)      // 全局读取超时时间
-               .writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
-               .connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
+        builder.readTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)      // 全局读取超时时间
+               .writeTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
+               .connectTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
 
         HttpHeaders headers = new HttpHeaders();
         // TODO: 2017/11/13 增加若干参数到header 
@@ -87,44 +88,65 @@ public final class PassportHome {
      * 打开注册界面
      * @param context
      */
-    public void startRegister(Context context) {
+    public void startRegister(Context context, int requestCode) {
         Intent i = new Intent(context, RegisterActivity.class);
-        context.startActivity(i);
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
     }
 
     /**
      * 打开密码登录界面
      * @param context
      */
-    public void startLoginByPassword(Context context) {
+    public void startLoginByPassword(Context context, int requestCode) {
         Intent i = new Intent(context, LoginPasswordActivity.class);
-        context.startActivity(i);
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
+
     }
 
     /**
      * 打开验证码登录界面
      * @param context
      */
-    public void startLoginByCaptcha(Context context) {
+    public void startLoginByCaptcha(Context context, int requestCode) {
         Intent i = new Intent(context, LoginCaptchaActivity.class);
-        context.startActivity(i);
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
     }
 
     /**
      * 打开重置密码界面
      * @param context
      */
-    public void startResetPassword(Context context) {
+    public void startResetPassword(Context context, int requestCode) {
         Intent i = new Intent(context, ResetPasswordActivity.class);
-        context.startActivity(i);
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
     }
 
     /**
      * 打开修改密码界面
      * @param context
      */
-    public void startModifyPassword(Context context) {
+    public void startModifyPassword(Context context, int requestCode) {
         Intent i = new Intent(context, ModifyPasswordActivity.class);
-        context.startActivity(i);
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
     }
 }

@@ -42,7 +42,7 @@ class LoginPasswordPresenter extends BasePresenter<IBaseView> {
             public void onSuccess(Response<LoginBean> response) {
                 LoginBean bean = response.body();
                 RuntimeCache.saveToken(bean.token);
-                BaseViewGuard.callCloseSafely(view);
+                BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
 
         });

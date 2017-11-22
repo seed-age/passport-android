@@ -22,12 +22,10 @@
     <View
         style="@style/PassportDivider"
         android:layout_width="match_parent" />
-    <LinearLayout
+    <cc.seedland.inf.passport.widget.DividerLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:divider="@color/default_gray"
-        android:showDividers="middle"
+        style="@style/PassportDividerLayout"
         android:padding="@dimen/size_common_15">
         <EditText
             android:id="@+id/login_captcha_phone_edt"
@@ -73,5 +71,5 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_common_30"
             android:text="@string/register_do"/>
-    </LinearLayout>
+    </cc.seedland.inf.passport.widget.DividerLinearLayout>
 </LinearLayout>

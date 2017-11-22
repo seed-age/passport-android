@@ -10,6 +10,7 @@ import android.widget.TextView;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
 import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.widget.PasswordEditText;
 
 /**
  * Created by xuchunlei on 2017/11/16.
@@ -17,9 +18,9 @@ import cc.seedland.inf.passport.base.IBaseView;
 
 public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter> implements View.OnClickListener, IBaseView {
 
-    private EditText originEdt;
-    private EditText currentEdt;
-    private EditText confirmEdt;
+    private PasswordEditText originEdt;
+    private PasswordEditText currentEdt;
+    private PasswordEditText confirmEdt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

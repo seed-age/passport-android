@@ -4,7 +4,8 @@ ext {
             "compileSdkVersion"                            : 26,
             "targetSdkVersion"                             : 26,
             "minSdkVersion"                                : 16,
-            "buildTools"                                   : "26.0.2"
+            "buildTools"                                   : "26.0.2",
+
     ]
 
     dependencies = [

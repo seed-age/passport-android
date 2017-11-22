@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources >
     <style name="PassportDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -56,7 +56,7 @@
     <!-- 默认的分割线样式 -->
     <style name="PassportDivider">
         <item name="android:layout_height">@dimen/border_width_small</item>
-        <item name="android:background">@color/default_black</item>
+        <item name="android:background">@color/default_gray</item>
     </style>
 
     <!-- 电话号码输入框样式 -->
@@ -76,5 +76,12 @@
         <item name="android:inputType">textPassword</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">18</item>
+    </style>
+
+    <!-- 内含编辑框的布局 -->
+    <style name="PassportDividerLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="divider">?android:attr/dividerHorizontal</item>
+        <item name="showDividers">middle</item>
     </style>
 </resources>

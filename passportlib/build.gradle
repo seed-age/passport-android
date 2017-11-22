@@ -26,7 +26,8 @@ android {
 
             resValue "string", "sit_http_host", "http://test-passport.seedland.cc"
 
-            minifyEnabled false
+            minifyEnabled true       // 开启混淆
+            zipAlignEnabled true     // 对齐优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -44,4 +45,24 @@ dependencies {
     implementation rootProject.ext.dependencies['appcompat-v7']
     implementation rootProject.ext.dependencies['okgo']
     implementation rootProject.ext.dependencies['gson']
+}
+
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://nexus.seedland.cc:8081/repository/maven-snapshots/"){
+                authentication(userName:'admin', password:'changeme')
+            }
+            pom.project {
+                groupId 'cc.seedland.inf'
+                artifactId 'passport'
+                version '1.0-SNAPSHOT'
+                packaging 'aar'
+
+            }
+
+        }
+    }
 }

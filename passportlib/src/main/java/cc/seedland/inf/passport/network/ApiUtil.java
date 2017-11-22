@@ -1,11 +1,15 @@
 package cc.seedland.inf.passport.network;
 
+import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -13,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.TokenBean;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.DeviceUtil;
@@ -104,6 +109,19 @@ public class ApiUtil {
                         @Override
                         public void onSuccess(Response<TokenBean> response) {
                             RuntimeCache.saveToken(response.body().token);
+
+                            if(Constant.DEBUG) {
+                                Toast.makeText(Constant.APP_CONTEXT, RuntimeCache.getToken(), Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Response<TokenBean> response) {
+                            super.onError(response);
+                            if(Constant.DEBUG) {
+                                Toast.makeText(Constant.APP_CONTEXT, response.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
         }
@@ -119,6 +137,35 @@ public class ApiUtil {
     public static boolean checkSign(long timestamp, String sign) {
         String checkSign = ApiUtil.MD5(CHANNEL + "." + timestamp);
         return checkSign.equals(sign);
+    }
+
+    public static String testSign(TreeMap<String, String> params, String key) {
+
+        // 生成签名
+        String signQuery = generateQueryString(params, false);
+        signQuery = signQuery + "&" + key;
+        Log.e("xuchunlei", signQuery);
+
+        return encode(MD5(signQuery));
+
+    }
+
+    public static <T extends BaseBean> String testPost(String url, Map<String, String> commonParams, Map<String, String> params, String sign) {
+        try {
+
+            // 请求参数
+            String baseQuery = generateQueryString(commonParams, true);
+            String quary = baseQuery + "&" + encode("auth") + "=" + sign;
+
+
+            return OkGo.<T>post(url + "?" + quary)
+                    .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+                    .execute()
+                    .body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "nothing";
     }
 
     /**
@@ -143,10 +190,6 @@ public class ApiUtil {
         params.put("device_mac", DeviceUtil.getMacAddress());
         params.put("device_imei", DeviceUtil.getDeviceId());
 
-
-//        params.put("channel", "haqi");
-//        params.put("timestamp", "1508415634");
-//        params.put("client_ip", String.valueOf("123.25.1.23"));
         return params;
     }
 
@@ -161,7 +204,6 @@ public class ApiUtil {
         String baseQuery = generateQueryString(params, true);
 
         // 生成签名
-//        params.put("key", AUTH_KEY);
         String signQuery = generateQueryString(params, false);
         signQuery = signQuery + "&" + AUTH_KEY;
 
@@ -218,12 +260,7 @@ public class ApiUtil {
     }
 
     private static String encode(String value) {
-        try {
-            return URLEncoder.encode(value, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return value;
+        return Uri.encode(value, "UTF-8");
     }
 
 }

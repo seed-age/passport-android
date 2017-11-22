@@ -1,5 +1,7 @@
 package cc.seedland.inf.passport.base;
 
+import android.os.Bundle;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -26,17 +28,17 @@ public class BaseViewGuard {
         }
     }
 
-    public static void callShowErrorSafely(WeakReference<? extends IBaseView> view,String message) {
+    public static void callShowErrorSafely(WeakReference<? extends IBaseView> view, String message) {
         IBaseView v = view.get();
         if(v != null) {
             v.showError(message);
         }
     }
 
-    public static void callCloseSafely(WeakReference<? extends IBaseView> view) {
+    public static void callCloseSafely(WeakReference<? extends IBaseView> view, Bundle args, String raw) {
         IBaseView v = view.get();
         if(v != null) {
-            v.close();
+            v.close(args, raw);
         }
     }
 }

@@ -28,4 +28,5 @@
         <!-- 密码可视开关图标 -->
         <attr name="button" format="reference" />
     </declare-styleable>
+
 </resources>

@@ -15,7 +15,7 @@ import cc.seedland.inf.passport.util.ValidateUtil;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class RegisterPresenterImpl extends BasePresenter<ICaptchaView> implements IRegisterPresenter {
+public class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegisterPresenter {
 
     private final RegisterModel model = new RegisterModel();
 
@@ -45,7 +45,8 @@ public class RegisterPresenterImpl extends BasePresenter<ICaptchaView> implement
 
                 @Override
                 public void onSuccess(Response<RegisterBean> response) {
-                    BaseViewGuard.callCloseSafely(view);
+                    RegisterBean bean = response.body();
+                    BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
                 }
             });
         }
