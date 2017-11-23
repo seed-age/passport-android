@@ -28,10 +28,17 @@ public class BaseViewGuard {
         }
     }
 
-    public static void callShowErrorSafely(WeakReference<? extends IBaseView> view, String message) {
+    public static void callShowToastSafely(WeakReference<? extends IBaseView> view, String message) {
         IBaseView v = view.get();
         if(v != null) {
-            v.showError(message);
+            v.showToast(message);
+        }
+    }
+
+    public static void callShowTipSafely(WeakReference<? extends IBaseView> view, String message) {
+        IBaseView v = view.get();
+        if(v != null) {
+            v.showTip(message);
         }
     }
 

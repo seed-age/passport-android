@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -18,6 +19,7 @@ import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.PassportInterceptor;
+import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.password.ModifyPasswordActivity;
 import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
@@ -148,5 +150,20 @@ public final class PassportHome {
         }else {
             context.startActivity(i);
         }
+    }
+
+    /**
+     * 登录状态
+     * @return
+     */
+    public String getToken() {
+        return RuntimeCache.getToken();
+    }
+
+    /**
+     * 登出
+     */
+    public void logout() {
+        RuntimeCache.saveToken("");
     }
 }

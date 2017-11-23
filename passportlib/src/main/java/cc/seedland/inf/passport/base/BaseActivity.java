@@ -41,8 +41,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
-    public void showError(String errMsg) {
-        Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show();
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showTip(String tip) {
+        Toast.makeText(this, tip, Toast.LENGTH_LONG).show();
     }
 
     @Override

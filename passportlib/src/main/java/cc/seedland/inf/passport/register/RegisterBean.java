@@ -7,5 +7,6 @@ import cc.seedland.inf.passport.base.BaseBean;
  */
 
 public class RegisterBean extends BaseBean{
-
+    public String uid;
+    public String mobile;
 }

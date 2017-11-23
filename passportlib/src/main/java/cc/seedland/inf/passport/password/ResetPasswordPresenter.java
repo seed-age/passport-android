@@ -7,6 +7,7 @@ import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
+import cc.seedland.inf.passport.common.SimpleBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.ValidateUtil;
@@ -34,7 +35,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
                 }
             });
         }else {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
         }
     }
 
@@ -47,22 +48,23 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      */
     void performReset(String phone, String password, String confirm, String captcha) {
         if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
             return;
         }
         if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_captcha));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
             return;
         }
         if(!ValidateUtil.checkPasswordConfirm(password, confirm)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password_confirm));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
             return;
         }
 
-        model.reset(phone, password, captcha, new BizCallback<BaseBean>(BaseBean.class, view) {
+        model.reset(phone, password, captcha, new BizCallback<SimpleBean>(SimpleBean.class, view) {
             @Override
-            public void onSuccess(Response<BaseBean> response) {
-                BaseViewGuard.callCloseSafely(view, null, null);
+            public void onSuccess(Response<SimpleBean> response) {
+                SimpleBean bean = response.body();
+                BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
         });
 

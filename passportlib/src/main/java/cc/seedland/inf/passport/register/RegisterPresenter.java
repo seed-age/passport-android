@@ -15,7 +15,7 @@ import cc.seedland.inf.passport.util.ValidateUtil;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegisterPresenter {
+class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegisterPresenter {
 
     private final RegisterModel model = new RegisterModel();
 
@@ -55,7 +55,7 @@ public class RegisterPresenter extends BasePresenter<ICaptchaView> implements IR
     // 检验手机号
     private boolean checkPhone(String phone) {
         if(ValidateUtil.checkNull(phone)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
             return false;
         }
 
@@ -65,7 +65,7 @@ public class RegisterPresenter extends BasePresenter<ICaptchaView> implements IR
     // 检验激活码
     private boolean checkCaptcha(String captcha) {
         if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_captcha));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
             return false;
         }
         return true;
@@ -75,12 +75,12 @@ public class RegisterPresenter extends BasePresenter<ICaptchaView> implements IR
     public boolean checkPassword(String password, String confirm) {
 
         if(ValidateUtil.checkNull(password)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
             return false;
         }
 
         if(!password.equals(confirm)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password_confirm));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
             return false;
         }
         return true;

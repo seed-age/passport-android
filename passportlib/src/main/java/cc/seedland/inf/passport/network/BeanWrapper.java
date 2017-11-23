@@ -12,7 +12,7 @@ import cc.seedland.inf.passport.base.BaseBean;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class BeanWrapper {
+class BeanWrapper {
     /** 返回码  */
     @SerializedName("error_code") public int code;
 

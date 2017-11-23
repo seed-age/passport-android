@@ -30,12 +30,12 @@ class ModifyPasswordPresenter extends BasePresenter<IBaseView> {
     void performModify(String origin, String current, String confirm) {
 
         if(!ValidateUtil.checkPassword(origin)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
             return;
         }
 
         if(!ValidateUtil.checkPasswordConfirm(current, confirm)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password_confirm));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
             return;
         }
 

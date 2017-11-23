@@ -14,7 +14,7 @@ import cc.seedland.inf.passport.util.Constant;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class LoginModel {
+class LoginModel {
 
     /**
      * 密码登录

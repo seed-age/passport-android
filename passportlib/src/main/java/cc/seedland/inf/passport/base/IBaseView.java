@@ -13,10 +13,16 @@ import android.os.Bundle;
 public interface IBaseView {
 
     /**
-     * 显示错误
-     * @param errMsg
+     * Toast显示信息
+     * @param msg
      */
-    void showError(String errMsg);
+    void showToast(String msg);
+
+    /**
+     * 显示提示，时间较长
+     * @param tip
+     */
+    void showTip(String tip);
 
     /**
      * 显示加载对话框

@@ -15,7 +15,7 @@ import cc.seedland.inf.passport.network.ApiUtil;
  * Created by xuchunlei on 2017/11/10.
  */
 
-public class RegisterModel {
+class RegisterModel {
 
     /**
      * 获取短信激活码

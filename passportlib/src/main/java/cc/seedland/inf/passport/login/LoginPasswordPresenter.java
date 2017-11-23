@@ -15,7 +15,7 @@ import cc.seedland.inf.passport.util.ValidateUtil;
  * Created by xuchunlei on 2017/11/8.
  */
 
-class LoginPasswordPresenter extends BasePresenter<IBaseView> {
+class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
 
     private final LoginModel model = new LoginModel();
 
@@ -26,12 +26,12 @@ class LoginPasswordPresenter extends BasePresenter<IBaseView> {
      */
     public void perform(String phone, String password) {
         if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
             return;
         }
 
         if(!ValidateUtil.checkPassword(password)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_password));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
             return;
         }
 
@@ -40,12 +40,20 @@ class LoginPasswordPresenter extends BasePresenter<IBaseView> {
 
             @Override
             public void onSuccess(Response<LoginBean> response) {
+                super.onSuccess(response);
                 LoginBean bean = response.body();
                 RuntimeCache.saveToken(bean.token);
                 BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
 
         });
+    }
+
+    public void refreshPhone(String phone, String info) {
+        BaseViewGuard.callShowTipSafely(view, info);
+        if(view.get() != null) {
+            view.get().loadPhone(phone);
+        }
     }
 
 }

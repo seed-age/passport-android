@@ -10,6 +10,8 @@ import java.lang.ref.WeakReference;
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.util.Constant;
+import cc.seedland.inf.passport.util.LogUtil;
 
 /**
  * Created by xuchunlei on 2017/11/16.
@@ -32,9 +34,14 @@ public abstract class BizCallback<T extends BaseBean> extends JsonCallback<T> {
     }
 
     @Override
+    public void onSuccess(Response<T> response) {
+        LogUtil.d(Constant.TAG, "api-response:" + response.body().toString());
+    }
+
+    @Override
     public void onError(Response<T> response) {
         super.onError(response);
-        BaseViewGuard.callShowErrorSafely(view, response.getException().getMessage());
+        BaseViewGuard.callShowToastSafely(view, response.getException().getMessage());
     }
 
     @Override

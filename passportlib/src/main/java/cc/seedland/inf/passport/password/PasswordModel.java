@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.passport.common.SimpleBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
@@ -40,13 +41,13 @@ class PasswordModel {
      * @param captcha
      * @param callback
      */
-    public void reset(String phone, String password, String captcha, BizCallback<BaseBean> callback) {
+    public void reset(String phone, String password, String captcha, BizCallback<SimpleBean> callback) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
         params.put("password", password);
         params.put("code", captcha);
 
-        OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_RESET))
+        OkGo.<SimpleBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_RESET))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
                 .execute(callback);
     }

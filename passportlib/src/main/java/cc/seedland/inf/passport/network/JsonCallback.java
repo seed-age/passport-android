@@ -13,7 +13,7 @@ import cc.seedland.inf.passport.util.GsonHolder;
  * Created by xuchunlei on 2017/11/10.
  */
 
-public abstract class JsonCallback<T extends BaseBean> extends AbsCallback<T> {
+abstract class JsonCallback<T extends BaseBean> extends AbsCallback<T> {
 
     private Class<T> clazz;
 

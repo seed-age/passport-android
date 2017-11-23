@@ -18,7 +18,7 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> implements View.OnClickListener, IBaseView {
+public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> implements View.OnClickListener, ILoginMainView {
 
     private static final int REQUEST_CODE_REGISTER = 1;
     private static final int REQUEST_CODE_LOGIN_CAPTCHA = 2;
@@ -67,19 +67,23 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
+
         switch (requestCode) {
             case REQUEST_CODE_REGISTER:
-                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
+                presenter.refreshPhone(args.getString("mobile"), getString(R.string.register_success_tip));
                 break;
             case REQUEST_CODE_LOGIN_CAPTCHA:
-                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
+                close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
                 break;
             case REQUEST_CODE_RESET_PASSWORD:
-//                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-//                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
+                presenter.refreshPhone(args.getString("mobile"), getString(R.string.reset_passpord_success_tip));
                 break;
         }
+    }
+
+    @Override
+    public void loadPhone(String phone) {
+        phoneEdt.setText(phone);
     }
 }

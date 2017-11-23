@@ -37,7 +37,7 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
                 }
             });
         }else {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
         }
     }
 
@@ -48,12 +48,12 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
      */
     public void perform(String phone, String captcha) {
         if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
             return;
         }
 
         if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowErrorSafely(view, Constant.getString(R.string.error_captcha));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
             return;
         }
 
