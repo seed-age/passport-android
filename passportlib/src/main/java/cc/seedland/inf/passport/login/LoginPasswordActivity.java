@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,7 +36,6 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_password);
 
         findViewById(R.id.login_register_txv).setOnClickListener(this);
         findViewById(R.id.login_forget_password_txv).setOnClickListener(this);
@@ -45,6 +45,13 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
         phoneEdt = findViewById(R.id.login_password_phone_edt);
         passwordEdt = findViewById(R.id.login_password_password_edt);
 
+        setToolbarDivider(false);
+
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_login_password;
     }
 
     @Override
@@ -67,18 +74,19 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
-
-        switch (requestCode) {
-            case REQUEST_CODE_REGISTER:
-                presenter.refreshPhone(args.getString("mobile"), getString(R.string.register_success_tip));
-                break;
-            case REQUEST_CODE_LOGIN_CAPTCHA:
-                close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-                break;
-            case REQUEST_CODE_RESET_PASSWORD:
-                presenter.refreshPhone(args.getString("mobile"), getString(R.string.reset_passpord_success_tip));
-                break;
+        if(resultCode == Activity.RESULT_OK) {
+            Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
+            switch (requestCode) {
+                case REQUEST_CODE_REGISTER:
+                    presenter.refreshPhone(args.getString("mobile"), getString(R.string.register_success_tip));
+                    break;
+                case REQUEST_CODE_LOGIN_CAPTCHA:
+                    close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
+                    break;
+                case REQUEST_CODE_RESET_PASSWORD:
+                    presenter.refreshPhone(args.getString("mobile"), getString(R.string.reset_passpord_success_tip));
+                    break;
+            }
         }
     }
 

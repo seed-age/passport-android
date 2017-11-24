@@ -1,75 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<cc.seedland.inf.passport.widget.DividerLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/login_captcha_toolbar"
+    style="@style/PassportDividerLayout"
+    android:padding="@dimen/size_common_15">
+    <EditText
+        android:id="@+id/login_captcha_phone_edt"
+        style="@style/PassportEdit"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="@dimen/size_common_10"
+        android:inputType="phone"
+        android:maxLength="20"
+        android:hint="@string/hint_phone"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?android:attr/actionBarSize"
-        app:contentInsetStart="0dp">
-        <TextView
-            android:id="@+id/login_captcha_title_txv"
-            style="@style/PassportTitle"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/login_captcha_captcha_edt"
+            style="@style/PassportEdit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_captcha"
+            android:drawablePadding="@dimen/size_common_10"
+            android:inputType="number"
+            android:maxLength="10"
+            android:hint="@string/hint_captcha"/>
+        <cc.seedland.inf.passport.widget.CountDownButton
+            android:id="@+id/login_captcha_gain_txv"
+            style="@style/PerformBorderBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:text="标题"/>
-    </android.support.v7.widget.Toolbar>
-    <View
-        style="@style/PassportDivider"
-        android:layout_width="match_parent" />
-    <cc.seedland.inf.passport.widget.DividerLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/PassportDividerLayout"
-        android:padding="@dimen/size_common_15">
-        <EditText
-            android:id="@+id/login_captcha_phone_edt"
-            style="@style/PassportEdit"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/size_common_10"
-            android:inputType="phone"
-            android:maxLength="20"
-            android:hint="@string/hint_phone"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/login_captcha_captcha_edt"
-                style="@style/PassportEdit"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_captcha"
-                android:drawablePadding="@dimen/size_common_10"
-                android:inputType="number"
-                android:maxLength="10"
-                android:hint="@string/hint_captcha"/>
-            <cc.seedland.inf.passport.widget.CountDownButton
-                android:id="@+id/login_captcha_gain_txv"
-                style="@style/PerformBorderBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/size_common_5"
-                android:padding="@dimen/size_common_5"
-                android:text="@string/register_obtain_captcha"
-                app:countingText="@string/hint_captcha_counting"
-                app:countingTextColor="@color/default_gray"
-                app:endText="@string/text_captcha_retrieve"/>
-        </LinearLayout>
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/size_common_5"
+            android:padding="@dimen/size_common_5"
+            android:text="@string/register_obtain_captcha"
+            app:countingText="@string/hint_captcha_counting"
+            app:countingTextColor="@color/default_gray"
+            app:endText="@string/text_captcha_retrieve"/>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/login_captcha_perform_btn"
-            style="@style/PerformBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_common_30"
-            android:text="@string/register_do"/>
-    </cc.seedland.inf.passport.widget.DividerLinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/login_captcha_perform_btn"
+        style="@style/PerformBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_common_30"
+        android:text="@string/register_do"/>
+</cc.seedland.inf.passport.widget.DividerLinearLayout>

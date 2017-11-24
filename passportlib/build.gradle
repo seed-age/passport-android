@@ -18,12 +18,13 @@ android {
     buildTypes {
 
         debug {
+            resValue "string", "product_http_host", "http://passport.seedland.cc"
             resValue "string", "sit_http_host", "http://test-passport.seedland.cc"
         }
 
 
         release {
-
+            resValue "string", "product_http_host", "http://passport.seedland.cc"
             resValue "string", "sit_http_host", "http://test-passport.seedland.cc"
 
             minifyEnabled true       // 开启混淆

@@ -1,10 +1,15 @@
 package cc.seedland.inf.passport.base;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewStub;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cc.seedland.inf.passport.R;
@@ -22,6 +27,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     private LoadingDialog loadingDlg;
 
+    private TextView titleTxv;
+
     /**
      * 创建Presenter实例
      * @return Presenter实例
@@ -32,6 +39,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.template_toolbar);
+        initToolbar();
+        initContent();
+
         presenter = createPresenter();
         if(presenter == null) {
             throw new NullPointerException("Presenter should not be null, please create an instance first!");
@@ -39,6 +50,52 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         presenter.attach(this);
 
     }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.template_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        titleTxv = findViewById(R.id.template_title_txv);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initContent() {
+        ViewStub contentStub = findViewById(R.id.template_content_stub);
+        @LayoutRes final int layout = getLayoutResource();
+        if(layout == 0) {
+            throw new IllegalArgumentException("supply a valid layout resource please");
+        }else {
+            contentStub.setLayoutResource(layout);
+            contentStub.inflate();
+        }
+    }
+
+    /**
+     * 设置标题
+     * @param title
+     */
+    protected void setTitle(String title) {
+        titleTxv.setText(title);
+    }
+
+    protected void setToolbarDivider(boolean show) {
+        Toolbar toolbar = findViewById(R.id.template_toolbar);
+        LinearLayoutCompat parent = (LinearLayoutCompat) toolbar.getParent();
+        parent.setShowDividers(LinearLayoutCompat.SHOW_DIVIDER_NONE);
+
+    }
+
+    /**
+     * 实际的布局资源
+     * @return
+     */
+    protected abstract  @LayoutRes int getLayoutResource();
 
     @Override
     public void showToast(String msg) {

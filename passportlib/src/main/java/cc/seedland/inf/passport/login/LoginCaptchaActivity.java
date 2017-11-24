@@ -26,26 +26,18 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_login_captcha);
-
         phoneEdt = findViewById(R.id.login_captcha_phone_edt);
         captchaEdt = findViewById(R.id.login_captcha_captcha_edt);
         gainTxv = findViewById(R.id.login_captcha_gain_txv);
         gainTxv.setOnClickListener(this);
         findViewById(R.id.login_captcha_perform_btn).setOnClickListener(this);
 
-        Toolbar toolbar = findViewById(R.id.login_captcha_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        TextView titleTxv = findViewById(R.id.login_captcha_title_txv);
-        titleTxv.setText(R.string.login_captcha_title);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setTitle(getString(R.string.login_captcha_title));
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_login_captcha;
     }
 
     @Override

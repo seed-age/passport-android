@@ -28,7 +28,6 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password_reset);
 
         phoneEdt = findViewById(R.id.password_reset_phone_edt);
         captchaBtn = findViewById(R.id.password_reset_captcha_txv);
@@ -38,20 +37,13 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> 
         confirmEdt = findViewById(R.id.password_reset_confirm_edt);
         findViewById(R.id.password_reset_perform_btn).setOnClickListener(this);
 
-        Toolbar toolbar = findViewById(R.id.password_reset_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        TextView titleTxv = findViewById(R.id.password_reset_title_txv);
-        titleTxv.setText(R.string.reset_password_title);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setTitle(getString(R.string.reset_password_title));
 
+    }
 
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_password_reset;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+//        setContentView(R.layout.activity_register);
 
         findViewById(R.id.register_captcha_txv).setOnClickListener(this);
         findViewById(R.id.register_perform_btn).setOnClickListener(this);
@@ -38,18 +38,24 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         passwordEdt = findViewById(R.id.register_password_edt);
         passwordConfirmEdt = findViewById(R.id.register_password_confirm_edt);
 
-        Toolbar toolbar = findViewById(R.id.register_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        TextView titleTxv = findViewById(R.id.register_title_txv);
-        titleTxv.setText(R.string.register_title);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        Toolbar toolbar = findViewById(R.id.register_toolbar);
+//        toolbar.setTitle("");
+//        setSupportActionBar(toolbar);
+//        TextView titleTxv = findViewById(R.id.register_title_txv);
+//        titleTxv.setText(R.string.register_title);
+//        toolbar.setNavigationIcon(R.drawable.ic_back);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+        setTitle(getString(R.string.register_title));
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_register;
     }
 
     @Override

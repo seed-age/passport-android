@@ -82,6 +82,11 @@ public final class PassportHome {
         app.registerActivityLifecycleCallbacks(new PassportLifecycleCallbacks());
     }
 
+    public void switchContext(String channel, String key, String host) {
+        RuntimeCache.saveToken("");
+        ApiUtil.init(channel, key, host);
+    }
+
     public final static PassportHome getInstance() {
         return INSTANCE;
     }

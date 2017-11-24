@@ -3,4 +3,5 @@
     <color name="default_blue">#0e80fe</color>
     <color name="default_gray">#cfcfcf</color>
     <color name="default_black">#4a4a4a</color>
+    <color name="bg_button">#1a88cb</color>
 </resources>

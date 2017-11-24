@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 背景色 -->
-    <solid android:color="@color/default_blue" />
+    <solid android:color="@color/bg_button" />
     <!-- 边角：设置圆角大小 -->
     <corners android:radius="@dimen/radius_size_normal" />
 </shape>

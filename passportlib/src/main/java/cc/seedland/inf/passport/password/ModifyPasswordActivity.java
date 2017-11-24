@@ -26,25 +26,17 @@ public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_password_modify);
-
         originEdt = findViewById(R.id.password_modify_origin_edt);
         currentEdt = findViewById(R.id.password_modify_current_edt);
         confirmEdt = findViewById(R.id.password_modify_confirm_edt);
         findViewById(R.id.password_modify_perform_btn).setOnClickListener(this);
 
-        Toolbar toolbar = findViewById(R.id.password_modify_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        TextView titleTxv = findViewById(R.id.password_modify_title_txv);
-        titleTxv.setText(R.string.password_modify_title);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setTitle(getString(R.string.password_modify_title));
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_password_modify;
     }
 
     @Override
