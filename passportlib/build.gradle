@@ -2,9 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.build['compileSdkVersion']
-
-
-
     defaultConfig {
         minSdkVersion rootProject.ext.build['minSdkVersion']
         targetSdkVersion rootProject.ext.build['targetSdkVersion']
@@ -53,8 +50,8 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "http://nexus.seedland.cc:8081/repository/maven-snapshots/"){
-                authentication(userName:'admin', password:'changeme')
+            repository(url: "http://120.79.27.17/nexus/repository/maven-snapshots/"){
+                authentication(userName:'admin', password:'inf888')
             }
             pom.project {
                 groupId 'cc.seedland.inf'

@@ -18,6 +18,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.util.DeviceUtil;
 
 /**
@@ -58,9 +59,9 @@ public class SignActivity extends AppCompatActivity {
                 obtain(commonParams, "timestamp", timestamp);
                 obtain(commonParams, "client_ip", clientIp);
                 obtain(commonParams,"device_type",deviceType);
-                obtain(commonParams, "device_mac", deviceMac);
-                obtain(commonParams, "device_imei", deviceImei);
-//                sign = ApiUtil.testSign(commonParams, key.getText().toString());
+//                obtain(commonParams, "device_mac", deviceMac);
+//                obtain(commonParams, "device_imei", deviceImei);
+                sign = ApiUtil.testSign(commonParams, key.getText().toString());
                 result.setText("签名---->" + sign);
             }
         });
