@@ -1,15 +1,11 @@
 package cc.seedland.inf.samples;
 
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import cc.seedland.inf.passport.PassportHome;
-import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.util.DeviceUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

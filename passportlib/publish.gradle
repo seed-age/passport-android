@@ -1,0 +1,98 @@
+apply plugin: 'maven-publish'
+
+/**
+ * 部署任务
+ * = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+ * gradle deploy                     - 部署debug或release构建类型的包到seedland的nexus服务器
+ * gradle deploy -PbuildType=Sit     - 部署sit构建类型的包到seedland的nexus服务器
+ * 部署仓库根据versionName动态选择，带有SNAPSHOT的版本会发布到snapshot仓库，其他发布到release仓库
+ * = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+ * 作者：徐春蕾 时间：2017年12月7日
+ */
+task deploy(dependsOn: ':passportlib:clean') {
+
+    def type = project.hasProperty('buildType') ? buildType : 'Release'
+    doFirst {
+        exec {
+            commandLine "gradle", ":passportlib:assemble$type"
+        }
+    }
+
+    doLast {
+        exec {
+            commandLine "gradle", "publish", "-PbuildType=$type"
+        }
+    }
+}
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            groupId 'cc.seedland.inf'
+            artifactId 'passport'
+            version rootProject.ext.build['versionName']
+
+            def type = project.hasProperty('buildType') ? buildType : 'Release'
+            artifact("$buildDir/outputs/aar/${project.getName()}-${type.toLowerCase()}.aar")
+
+            pom.withXml {
+                def node = asNode().appendNode('dependencies')
+
+                configurations.implementation.allDependencies.each {
+                    if(it.group != null && it.version != null) {
+                        def dependencyNode = node.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+
+        }
+    }
+
+    repositories{
+        maven {
+            if(rootProject.ext.build['versionName'].contains("SNAPSHOT")) {
+                url "http://developer.seedland.cc/nexus/repository/maven-snapshots/"
+            }else{
+                url "http://developer.seedland.cc/nexus/repository/maven-releases/"
+            }
+
+            credentials {
+                username "admin"
+                password 'inf888'
+            }
+        }
+    }
+}
+
+
+
+//apply plugin: 'maven'
+//
+//uploadArchives {
+//    mustRunAfter ':passportlib:clean'
+//    repositories {
+//        mavenDeployer {
+////            def type = project.hasProperty('buildType') ? buildType : 'Release'
+//            def repoUrl
+//            if(rootProject.ext.build['versionName'].contains("SNAPSHOT")) {
+//                repoUrl = "http://developer.seedland.cc/nexus/repository/maven-snapshots/"
+//            }else{
+//                repoUrl = "http://developer.seedland.cc/nexus/repository/maven-releases/"
+//            }
+//            repository(url: repoUrl){
+//                authentication(userName:'admin', password:'inf888')
+//            }
+//            pom.project {
+//                groupId 'cc.seedland.inf'
+//                artifactId 'passport'
+//                version rootProject.ext.build['versionName']
+//                packaging 'aar'
+//
+//            }
+//
+//        }
+//    }
+//}

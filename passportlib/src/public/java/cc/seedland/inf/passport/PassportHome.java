@@ -67,7 +67,8 @@ public final class PassportHome {
                .connectTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
 
         HttpHeaders headers = new HttpHeaders();
-        // TODO: 2017/11/13 增加若干参数到header 
+        // TODO: 2017/11/13 增加若干参数到header
+        headers.put("X-proxy-Version", "Passport Android SDK(" + BuildConfig.VERSION_NAME + ")");
         
         OkGo.getInstance().init(app)
                           .setOkHttpClient(builder.build())
@@ -77,14 +78,9 @@ public final class PassportHome {
                           .addCommonHeaders(headers);
 
         // 初始化ApiUtil
-        ApiUtil.init(channel, key, app.getString(R.string.sit_http_host));
+        ApiUtil.init(channel, key, app.getString(R.string.http_host));
 
         app.registerActivityLifecycleCallbacks(new PassportLifecycleCallbacks());
-    }
-
-    public void switchContext(String channel, String key, String host) {
-        RuntimeCache.saveToken("");
-        ApiUtil.init(channel, key, host);
     }
 
     public final static PassportHome getInstance() {

@@ -5,6 +5,8 @@ ext {
             "targetSdkVersion"                             : 26,
             "minSdkVersion"                                : 16,
             "buildTools"                                   : "26.0.2",
+            "versionName"                                  : "1.0.0-SNAPSHOT"       // for debug
+//            "versionName"                                  : "1.0.0"              // for sit & release
 
     ]
 
@@ -13,4 +15,6 @@ ext {
             "okgo"                                         : "com.lzy.net:okgo:3.0.4",
             "gson"                                         : "com.google.code.gson:gson:2.8.2"
     ]
+
+//    repoPassword = project.hasProperty('repoPassword') ? project.getProperty('repoPassword') : ''
 }

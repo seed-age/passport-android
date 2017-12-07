@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
-import cc.seedland.inf.passport.base.IBaseView;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 

@@ -1,8 +1,6 @@
 package cc.seedland.inf.samples;
 
-import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
 
 import cc.seedland.inf.passport.PassportHome;
 
