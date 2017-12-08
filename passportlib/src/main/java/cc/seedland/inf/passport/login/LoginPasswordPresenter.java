@@ -25,13 +25,15 @@ class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
      * @param password
      */
     public void perform(String phone, String password) {
-        if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 
-        if(!ValidateUtil.checkPassword(password)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
+        errCode = ValidateUtil.checkPassword(password);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 

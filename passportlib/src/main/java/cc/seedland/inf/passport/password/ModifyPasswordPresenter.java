@@ -29,13 +29,15 @@ class ModifyPasswordPresenter extends BasePresenter<IBaseView> {
      */
     void performModify(String origin, String current, String confirm) {
 
-        if(!ValidateUtil.checkPassword(origin)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
+        int errCode = ValidateUtil.checkPassword(origin);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 
-        if(!ValidateUtil.checkPasswordConfirm(current, confirm)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
+        errCode = ValidateUtil.checkPasswordConfirm(current, confirm);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 

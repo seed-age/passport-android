@@ -27,11 +27,29 @@ public class ValidateUtil {
      * @param phone
      * @return
      */
-    public static boolean checkPhone(String phone) {
-        if(!checkNull(phone)) {
-            return PHONE_NUMBER_REGEX.matcher(phone).matches();
+    public static int checkPhone(String phone) {
+        if(checkNull(phone)) {
+            return Constant.ERROR_CODE_PHONE_EMPTY;
         }
-        return false;
+
+        if(!PHONE_NUMBER_REGEX.matcher(phone).matches()) {
+            return Constant.ERROR_CODE_PHONE_FORMAT;
+        }
+
+        return Constant.ERROR_CODE_NONE;
+    }
+
+    /**
+     * 检验验证码
+     * @param captcha
+     * @return
+     */
+    public static int checkCaptcha(String captcha) {
+        if(checkNull(captcha)) {
+            return Constant.ERROR_CODE_CAPTCHA_EMPTY;
+        }
+
+        return Constant.ERROR_CODE_NONE;
     }
 
     /**
@@ -40,11 +58,12 @@ public class ValidateUtil {
      * @param confirm
      * @return
      */
-    public static boolean checkPasswordConfirm(String origin, String confirm) {
-        if(!checkNull(origin) && origin.length() >= PASSWORD_MIN_LENGTH) {
-            return origin.equals(confirm);
+    public static int checkPasswordConfirm(String origin, String confirm) {
+        int errCode = checkPassword(origin);
+        if(errCode == Constant.ERROR_CODE_NONE && !origin.equals(confirm)) {
+            return Constant.ERROR_CODE_PASSWORD_CONFIRM;
         }
-        return false;
+        return errCode;
     }
 
     /**
@@ -52,10 +71,16 @@ public class ValidateUtil {
      * @param password
      * @return
      */
-    public static boolean checkPassword(String password) {
-        if(!checkNull(password) && password.length() >= PASSWORD_MIN_LENGTH) {
-            return true;
+    public static int checkPassword(String password) {
+
+        if(checkNull(password)) {
+            return Constant.ERROR_CODE_PASSWORD_EMPTY;
         }
-        return false;
+
+        if(password.length() < PASSWORD_MIN_LENGTH) {
+            return Constant.ERROR_CODE_PASSWORD_FORMAT;
+        }
+
+        return Constant.ERROR_CODE_NONE;
     }
 }

@@ -22,7 +22,8 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
 
     @Override
     public void performCaptcha(String phone) {
-        if(checkPhone(phone)) {
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode == Constant.ERROR_CODE_NONE) {
             model.getCaptcha(phone, new BizCallback<BaseBean>(BaseBean.class, view) {
 
                 @Override
@@ -32,15 +33,30 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
                     }
                 }
             });
+        }else {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
         }
 
     }
 
     @Override
     public void performRegister(String phone, String captcha, String password, String confirmPassword) {
-        if(checkPhone(phone)
-                && checkCaptcha(captcha)
-                && checkPassword(password, confirmPassword)){
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
+            return;
+        }
+        errCode = ValidateUtil.checkCaptcha(captcha);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
+            return;
+        }
+        errCode = ValidateUtil.checkPassword(password);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
+            return;
+        }
+        if(checkPassword(password, confirmPassword)){
             model.performPhone(phone, password, captcha, new BizCallback<RegisterBean>(RegisterBean.class, view) {
 
                 @Override
@@ -52,32 +68,8 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
         }
     }
 
-    // 检验手机号
-    private boolean checkPhone(String phone) {
-        if(ValidateUtil.checkNull(phone)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
-            return false;
-        }
-
-        return true;
-    }
-
-    // 检验激活码
-    private boolean checkCaptcha(String captcha) {
-        if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
-            return false;
-        }
-        return true;
-    }
-
     // 检验密码
     public boolean checkPassword(String password, String confirm) {
-
-        if(ValidateUtil.checkNull(password)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password));
-            return false;
-        }
 
         if(!password.equals(confirm)) {
             BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));

@@ -2,11 +2,13 @@
 <resources>
 
     <!-- 通用 -->
-    <string name="error_phone">手机号为空或不正确</string>
-    <string name="error_captcha">激活码不能为空</string>
-    <string name="error_password">密码不能为空或少于8位</string>
+    <string name="error_phone_empty">手机号不能为空</string>
+    <string name="error_phone_format">手机号格式输入有误，请重新输入</string>
+    <string name="error_captcha_empty">验证码不能为空</string>
+    <string name="error_password_empty">密码不能为空</string>
+    <string name="error_password_format">密码格式输入有误，请重新输入</string>
     <string name="error_password_confirm">两次输入的密码不一致</string>
-    <string name="error_sign">非法签名</string>
+    <string name="error_network">网络异常</string>
     <string name="hint_phone">请输入手机号</string>
     <string name="hint_captcha">请输入验证码</string>
     <string name="hint_password">请设置密码，8-16位数字、英文、符号</string>

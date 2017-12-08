@@ -27,7 +27,8 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
      * @param phone
      */
     void performCaptcha(String phone) {
-        if(ValidateUtil.checkPhone(phone)) {
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode == Constant.ERROR_CODE_NONE) {
             model.obtainCaptcha(phone, new BizCallback<BaseBean>(BaseBean.class, view) {
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
@@ -37,7 +38,7 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
                 }
             });
         }else {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
         }
     }
 
@@ -47,13 +48,15 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
      * @param captcha
      */
     public void perform(String phone, String captcha) {
-        if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 
-        if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
+        errCode = ValidateUtil.checkCaptcha(captcha);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 

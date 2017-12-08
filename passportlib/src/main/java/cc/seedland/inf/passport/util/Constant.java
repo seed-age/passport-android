@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 
 import cc.seedland.inf.passport.BuildConfig;
+import cc.seedland.inf.passport.R;
 
 /**
  * 常量类,用于定义一些全局使用的常量
@@ -48,6 +49,22 @@ public class Constant {
     public static final String EXTRA_KEY_RESULT = "result";
     /** 参数键值-原始结果 */
     public static final String EXTRA_KEY_RAW_RESULT = "raw_result";
+
+    // 错误码
+    /** 错误码-没有错误 */
+    public static final int ERROR_CODE_NONE = 0;
+    /** 错误码-未输入手机号 */
+    public static final int ERROR_CODE_PHONE_EMPTY = R.string.error_phone_empty;
+    /** 错误码-手机号格式错误 */
+    public static final int ERROR_CODE_PHONE_FORMAT = R.string.error_phone_format;
+    /** 错误码-未输入验证码 */
+    public static final int ERROR_CODE_CAPTCHA_EMPTY = R.string.error_captcha_empty;
+    /** 错误码-密码格式错误 */
+    public static final int ERROR_CODE_PASSWORD_FORMAT = R.string.error_password_format;
+    /** 错误码-未输入密码 */
+    public static final int ERROR_CODE_PASSWORD_EMPTY = R.string.error_password_empty;
+    /** 错误码-两次密码输入不一致 */
+    public static final int ERROR_CODE_PASSWORD_CONFIRM = R.string.error_password_confirm;
 
     /**
      * 获取字符串资源的值

@@ -25,7 +25,8 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      * @param phone
      */
     void performCaptcha(String phone) {
-        if(ValidateUtil.checkPhone(phone)) {
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode == Constant.ERROR_CODE_NONE) {
             model.obtainCaptcha(phone, new BizCallback<BaseBean>(BaseBean.class, view) {
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
@@ -35,7 +36,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
                 }
             });
         }else {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
         }
     }
 
@@ -47,16 +48,24 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      * @param captcha
      */
     void performReset(String phone, String password, String confirm, String captcha) {
-        if(!ValidateUtil.checkPhone(phone)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_phone));
+        int errCode = ValidateUtil.checkPhone(phone);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
-        if(ValidateUtil.checkNull(captcha)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_captcha));
+        errCode = ValidateUtil.checkCaptcha(captcha);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
-        if(!ValidateUtil.checkPasswordConfirm(password, confirm)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
+        errCode = ValidateUtil.checkPassword(password);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
+            return;
+        }
+        errCode = ValidateUtil.checkPasswordConfirm(password, confirm);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
 
