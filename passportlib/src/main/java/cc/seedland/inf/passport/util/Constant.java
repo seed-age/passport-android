@@ -49,6 +49,10 @@ public class Constant {
     public static final String EXTRA_KEY_RESULT = "result";
     /** 参数键值-原始结果 */
     public static final String EXTRA_KEY_RAW_RESULT = "raw_result";
+    /** 参数键值-请求码 */
+    public static final String EXTRA_KEY_REQUEST_CODE = "request_code";
+    /** 参数数值-手机号 */
+    public static final String EXTRA_KEY_PHONE = "mobile";
 
     // 错误码
     /** 错误码-没有错误 */
@@ -65,6 +69,9 @@ public class Constant {
     public static final int ERROR_CODE_PASSWORD_EMPTY = R.string.error_password_empty;
     /** 错误码-两次密码输入不一致 */
     public static final int ERROR_CODE_PASSWORD_CONFIRM = R.string.error_password_confirm;
+
+    /** 默认的整型值，用于判断非法数据 */
+    public static final int NO_INTEGER = -1;
 
     /**
      * 获取字符串资源的值

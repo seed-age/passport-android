@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;

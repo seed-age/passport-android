@@ -10,9 +10,9 @@ import java.lang.ref.WeakReference;
  * Created by xuchunlei on 2017/11/9.
  */
 
-public abstract class BasePresenter<V extends IBaseView> {
+public class BasePresenter<V extends IBaseView> {
 
-    public WeakReference<V> view;
+    protected WeakReference<V> view;
 
     public void attach(V view) {
         this.view = new WeakReference<>(view);

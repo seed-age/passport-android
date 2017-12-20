@@ -10,6 +10,7 @@ import android.widget.TextView;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
+import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.widget.CountDownButton;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 
@@ -37,6 +38,8 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> 
         confirmEdt = findViewById(R.id.password_reset_confirm_edt);
         findViewById(R.id.password_reset_perform_btn).setOnClickListener(this);
 
+        String phone = RuntimeCache.getPhone();
+        phoneEdt.setText(phone);
         setTitle(getString(R.string.reset_password_title));
 
     }

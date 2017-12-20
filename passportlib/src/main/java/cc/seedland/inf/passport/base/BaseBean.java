@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
+import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.GsonHolder;
+import cc.seedland.inf.passport.util.LogUtil;
 
 /**
  * Created by xuchunlei on 2017/11/15.
@@ -13,6 +16,7 @@ import cc.seedland.inf.passport.util.GsonHolder;
 
 public class BaseBean {
 
+    public String raw;
 
     /**
      * 转换成参数
@@ -27,7 +31,15 @@ public class BaseBean {
                 try {
                     String key = field.getName();
                     if(!key.equals("serialVersionUID")) {
-                        args.putString(field.getName(), "" + field.get(this));
+                        Type type = field.getType();
+                        if(type.equals(String.class)) {
+                            args.putString(key, field.get(this) + "");
+                        } else if(type.equals(Integer.TYPE)) {
+                            args.putInt(key, field.getInt(this));
+                        } else {
+                            args.putString(key, field.get(this) + "");
+                        }
+
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
@@ -41,6 +53,7 @@ public class BaseBean {
 
     @Override
     public String toString() {
-        return GsonHolder.getInstance().toJson(this);
+        LogUtil.d(Constant.TAG, "BaseBean.toString:" + raw);
+        return raw;
     }
 }

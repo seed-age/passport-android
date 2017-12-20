@@ -7,7 +7,7 @@ import cc.seedland.inf.passport.base.BaseBean;
  */
 
 public class SimpleBean extends BaseBean {
-    public String uid;
+    public int uid;
     public String mobile;
     public String nickname;
 }

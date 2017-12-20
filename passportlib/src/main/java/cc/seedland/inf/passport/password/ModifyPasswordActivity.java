@@ -16,7 +16,7 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter> implements View.OnClickListener, IBaseView {
+public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter> implements View.OnClickListener {
 
     private PasswordEditText originEdt;
     private PasswordEditText currentEdt;

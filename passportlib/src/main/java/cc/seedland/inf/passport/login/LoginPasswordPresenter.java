@@ -2,10 +2,9 @@ package cc.seedland.inf.passport.login;
 
 import com.lzy.okgo.model.Response;
 
-import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
@@ -17,7 +16,11 @@ import cc.seedland.inf.passport.util.ValidateUtil;
 
 class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
 
-    private final LoginModel model = new LoginModel();
+    private LoginModel model;
+
+    public LoginPasswordPresenter(LoginModel model) {
+        this.model = model;
+    }
 
     /**
      * 密码登录
@@ -45,6 +48,7 @@ class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
                 super.onSuccess(response);
                 LoginBean bean = response.body();
                 RuntimeCache.saveToken(bean.token);
+                RuntimeCache.savePhone(bean.mobile);
                 BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
 
@@ -53,7 +57,7 @@ class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
 
     public void refreshPhone(String phone, String info) {
         BaseViewGuard.callShowTipSafely(view, info);
-        if(view.get() != null) {
+        if(view.get() != null && ValidateUtil.checkPhone(phone) == Constant.ERROR_CODE_NONE) {
             view.get().loadPhone(phone);
         }
     }

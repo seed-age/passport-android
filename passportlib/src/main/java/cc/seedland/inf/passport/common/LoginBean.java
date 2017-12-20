@@ -1,4 +1,4 @@
-package cc.seedland.inf.passport.login;
+package cc.seedland.inf.passport.common;
 
 import com.google.gson.annotations.SerializedName;
 

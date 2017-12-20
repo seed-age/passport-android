@@ -36,6 +36,15 @@ public interface IBaseView {
 
     /**
      * 关闭界面
+     * 返回RESULT_OK
      */
     void close(Bundle args, String raw);
+
+    /**
+     * 退出界面
+     * 返回RESULT_CANCELED
+     * @param args
+     * @param raw
+     */
+    void cancel(Bundle args, String raw);
 }

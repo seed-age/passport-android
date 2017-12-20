@@ -64,6 +64,7 @@
         <item name="android:drawableLeft">@drawable/ic_phone</item>
         <item name="android:drawablePadding">@dimen/size_common_10</item>
         <item name="android:inputType">phone</item>
+        <item name="android:digits">0123456789</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">11</item>
         <item name="android:hint">@string/hint_phone</item>

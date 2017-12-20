@@ -12,6 +12,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -105,13 +106,26 @@ public final class PassportHome {
      * @param context
      */
     public void startLoginByPassword(Context context, int requestCode) {
+        startLoginByPassword(context, requestCode, null);
+    }
+
+    /**
+     * 打开密码登录界面
+     * @param context
+     * @param requestCode
+     * @param defPhone 默认电话号码
+     */
+    public void startLoginByPassword(Context context, int requestCode, String defPhone) {
         Intent i = new Intent(context, LoginPasswordActivity.class);
+        if(!TextUtils.isEmpty(defPhone)) {
+            i.putExtra(Constant.EXTRA_KEY_PHONE, defPhone);
+        }
+
         if(context instanceof Activity) {
             ((Activity) context).startActivityForResult(i, requestCode);
         }else {
             context.startActivity(i);
         }
-
     }
 
     /**
@@ -147,6 +161,7 @@ public final class PassportHome {
     public void startModifyPassword(Context context, int requestCode) {
         Intent i = new Intent(context, ModifyPasswordActivity.class);
         if(context instanceof Activity) {
+            i.putExtra(Constant.EXTRA_KEY_REQUEST_CODE, requestCode);
             ((Activity) context).startActivityForResult(i, requestCode);
         }else {
             context.startActivity(i);

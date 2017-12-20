@@ -17,7 +17,7 @@ import cc.seedland.inf.passport.util.LogUtil;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public abstract class BizCallback<T extends BaseBean> extends JsonCallback<T> {
+public class BizCallback<T extends BaseBean> extends JsonCallback<T> {
 
     private WeakReference<? extends IBaseView> view;
 

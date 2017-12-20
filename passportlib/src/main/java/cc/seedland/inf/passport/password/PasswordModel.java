@@ -7,6 +7,7 @@ import java.util.Map;
 
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.SimpleBean;
+import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
@@ -54,17 +55,20 @@ class PasswordModel {
 
     /**
      * 修改密码
+     * <p>
+     *     修改密码后获取新token，相当于重新登录
+     * </p>
      * @param origin
      * @param current
      * @param callback
      */
-    public void modify(String origin, String current, BizCallback<BaseBean> callback) {
+    public void modify(String origin, String current, BizCallback<LoginBean> callback) {
         Map<String, String> params = new HashMap<>();
         params.put("sso_tk", RuntimeCache.getToken());
         params.put("old_password", origin);
         params.put("new_password", current);
 
-        OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_MODIFY))
+        OkGo.<LoginBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_MODIFY))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
                 .execute(callback);
     }

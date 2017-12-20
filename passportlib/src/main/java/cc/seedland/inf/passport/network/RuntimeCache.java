@@ -19,6 +19,7 @@ public class RuntimeCache {
 
     private static final String CACHE_NAME = "passport_cache";
     private static final String KEY_TOKEN = "token";
+    private static final String KEY_PHONE = "phone";
 
     private RuntimeCache() {
 
@@ -34,11 +35,28 @@ public class RuntimeCache {
     }
 
     /**
+     * 保存phone到缓存
+     * @param phone
+     */
+    public static void savePhone(String phone) {
+        save(KEY_PHONE, phone);
+        LogUtil.d(Constant.TAG, "update phone to " + phone);
+    }
+
+    /**
      * 从缓存获取Token
      * @return
      */
     public static String getToken() {
         return obtain(KEY_TOKEN, "");
+    }
+
+    /**
+     * 从缓存获取phone
+     * @return
+     */
+    public static String getPhone() {
+        return obtain(KEY_PHONE, "");
     }
 
     private static void save(String key, String value) {

@@ -3,6 +3,7 @@ package cc.seedland.inf.passport.login;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
+import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.widget.CountDownButton;
 
 /**
@@ -31,6 +33,9 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
         gainTxv = findViewById(R.id.login_captcha_gain_txv);
         gainTxv.setOnClickListener(this);
         findViewById(R.id.login_captcha_perform_btn).setOnClickListener(this);
+
+        String phone = RuntimeCache.getPhone();
+        phoneEdt.setText(phone);
 
         setTitle(getString(R.string.login_captcha_title));
     }

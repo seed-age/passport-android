@@ -12,6 +12,8 @@ import android.view.ViewStub;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.LoadingDialog;
@@ -60,6 +62,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -128,6 +131,17 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         data.putExtra(Constant.EXTRA_KEY_RESULT, args);
         data.putExtra(Constant.EXTRA_KEY_RAW_RESULT, raw);
         setResult(RESULT_OK, data);
+        finish();
+
+        data.putExtra("", new HashMap<>());
+    }
+
+    @Override
+    public void cancel(Bundle args, String raw) {
+        Intent data = new Intent();
+        data.putExtra(Constant.EXTRA_KEY_RESULT, args);
+        data.putExtra(Constant.EXTRA_KEY_RAW_RESULT, raw);
+        setResult(RESULT_CANCELED, data);
         finish();
     }
 }

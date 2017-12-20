@@ -46,6 +46,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      * @param password
      * @param confirm
      * @param captcha
+     * @param reqCode
      */
     void performReset(String phone, String password, String confirm, String captcha) {
         int errCode = ValidateUtil.checkPhone(phone);

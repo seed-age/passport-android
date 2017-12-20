@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseActivity;
+import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 
@@ -28,7 +30,7 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
 
     @Override
     protected LoginPasswordPresenter createPresenter() {
-        return new LoginPasswordPresenter();
+        return new LoginPasswordPresenter(new LoginModel());
     }
 
     @Override
@@ -42,6 +44,14 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
 
         phoneEdt = findViewById(R.id.login_password_phone_edt);
         passwordEdt = findViewById(R.id.login_password_password_edt);
+
+        // 来自修改密码界面的手机号
+        String phone = getIntent().getStringExtra(Constant.EXTRA_KEY_PHONE);
+        if(TextUtils.isEmpty(phone)) {
+            phone = RuntimeCache.getPhone();
+        }
+        loadPhone(phone);
+
 
         setToolbarDivider(false);
 
@@ -64,7 +74,7 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
         }else if(id == R.id.login_password_perform_btn) {
             String phone = phoneEdt.getText().toString();
             String password = passwordEdt.getText().toString();
-            presenter.perform(phone, password);
+            presenter.perform(phone.trim(), password.trim());
         }
     }
 
@@ -72,17 +82,17 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK) {
+        if(resultCode == RESULT_OK) {
             Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
             switch (requestCode) {
                 case REQUEST_CODE_REGISTER:
-                    presenter.refreshPhone(args.getString("mobile"), getString(R.string.register_success_tip));
+                    presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.register_success_tip));
                     break;
                 case REQUEST_CODE_LOGIN_CAPTCHA:
                     close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
                     break;
                 case REQUEST_CODE_RESET_PASSWORD:
-                    presenter.refreshPhone(args.getString("mobile"), getString(R.string.reset_passpord_success_tip));
+                    presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.reset_passpord_success_tip));
                     break;
             }
         }

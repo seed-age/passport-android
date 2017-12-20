@@ -21,6 +21,7 @@ import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.TokenBean;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.DeviceUtil;
+import cc.seedland.inf.passport.util.ValidateUtil;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -100,7 +101,7 @@ public class ApiUtil {
     // 刷新Token
     public static void refreshToken() {
         String cachedToken = RuntimeCache.getToken();
-        if(!TextUtils.isEmpty(cachedToken)) { // 缓存过Token，则进行刷新
+        if(!ValidateUtil.checkNull(cachedToken)) { // 缓存过Token，则进行刷新
             Map<String, String> params = new HashMap<>();
             params.put("sso_tk", RuntimeCache.getToken());
             OkGo.<TokenBean>post(generateUrlForPost(Constant.API_URL_TOKEN))

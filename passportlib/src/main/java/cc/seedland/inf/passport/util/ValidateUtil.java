@@ -1,7 +1,5 @@
 package cc.seedland.inf.passport.util;
 
-import android.text.TextUtils;
-
 import java.util.regex.Pattern;
 
 /**
@@ -18,7 +16,8 @@ public class ValidateUtil {
     }
 
     public static boolean checkNull(String value) {
-        return TextUtils.isEmpty(value) || TextUtils.isEmpty(value.trim());
+
+        return value == null || value.trim().length() == 0;
 
     }
 
@@ -32,7 +31,7 @@ public class ValidateUtil {
             return Constant.ERROR_CODE_PHONE_EMPTY;
         }
 
-        if(!PHONE_NUMBER_REGEX.matcher(phone).matches()) {
+        if(!PHONE_NUMBER_REGEX.matcher(phone.trim()).matches()) {
             return Constant.ERROR_CODE_PHONE_FORMAT;
         }
 
@@ -45,11 +44,8 @@ public class ValidateUtil {
      * @return
      */
     public static int checkCaptcha(String captcha) {
-        if(checkNull(captcha)) {
-            return Constant.ERROR_CODE_CAPTCHA_EMPTY;
-        }
 
-        return Constant.ERROR_CODE_NONE;
+        return checkNull(captcha) ? Constant.ERROR_CODE_CAPTCHA_EMPTY : Constant.ERROR_CODE_NONE;
     }
 
     /**
@@ -60,7 +56,7 @@ public class ValidateUtil {
      */
     public static int checkPasswordConfirm(String origin, String confirm) {
         int errCode = checkPassword(origin);
-        if(errCode == Constant.ERROR_CODE_NONE && !origin.equals(confirm)) {
+        if(errCode == Constant.ERROR_CODE_NONE && !origin.equals(confirm.trim())) {
             return Constant.ERROR_CODE_PASSWORD_CONFIRM;
         }
         return errCode;
@@ -77,10 +73,6 @@ public class ValidateUtil {
             return Constant.ERROR_CODE_PASSWORD_EMPTY;
         }
 
-        if(password.length() < PASSWORD_MIN_LENGTH) {
-            return Constant.ERROR_CODE_PASSWORD_FORMAT;
-        }
-
-        return Constant.ERROR_CODE_NONE;
+        return password.trim().length() < PASSWORD_MIN_LENGTH ? Constant.ERROR_CODE_PASSWORD_FORMAT : Constant.ERROR_CODE_NONE;
     }
 }

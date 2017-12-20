@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport.network;
 
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
 import cc.seedland.inf.passport.base.BaseBean;
@@ -25,7 +26,7 @@ class BeanWrapper {
     private String sign;
 
     /** Json格式的data字段 */
-    public Object data;
+    public JsonElement data;
 
     /**
      * 检验签名

@@ -1,14 +1,12 @@
 package cc.seedland.inf.passport.login;
 
-import android.os.Bundle;
-
 import com.lzy.okgo.model.Response;
 
-import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
+import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
@@ -67,7 +65,7 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
             public void onSuccess(Response<LoginBean> response) {
                 LoginBean bean = response.body();
                 RuntimeCache.saveToken(bean.token);
-
+                RuntimeCache.savePhone(bean.mobile);
                 BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
 
