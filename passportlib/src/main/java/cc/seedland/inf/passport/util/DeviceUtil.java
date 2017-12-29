@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
@@ -34,11 +35,16 @@ import java.util.UUID;
 
 public class DeviceUtil {
 
-    private static String MAC_ADDRESS; // 设备Mac地址
-    private static String DEVICE_ID;   // 设备唯一标识符
-    private static final String DEFAULT_IP_ADDRESS = "127.0.0.1";
+    private static String MAC_ADDRESS = ""; // 设备Mac地址
+    private static String DEVICE_ID = "";   // 设备唯一标识符
+    private static final String DEFAULT_IP_ADDRESS;
 
     private static final String PREF_KEY_DEVICE_ID = "device_id";
+
+    // 方便单元测试
+    static {
+        DEFAULT_IP_ADDRESS = "127.0.0.1";
+    }
 
     private DeviceUtil() {
 
@@ -60,17 +66,17 @@ public class DeviceUtil {
                 }
             }
         } catch (Exception ex) {
-            Log.e(Constant.TAG, "DeviceUtil.getLocalIpAddress" + ex.toString());
+            LogUtil.e(Constant.TAG, "DeviceUtil.getLocalIpAddress" + ex.toString());
         }
         return DEFAULT_IP_ADDRESS;
     }
 
     /**
-     * 获取MAC地址，该方法兼容6.0及以上版本
+     * 获取MAC地址，该方法兼容7.0及以下（8.0未测试）版本
      * @return 设备唯一的Mac地址
      */
     public static String getMacAddress() {
-        if(TextUtils.isEmpty(MAC_ADDRESS)) {
+        if(MAC_ADDRESS.length() == 0) {
             try {
                 List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
                 for (NetworkInterface nif : all) {
@@ -84,7 +90,6 @@ public class DeviceUtil {
                     StringBuilder res1 = new StringBuilder();
                     for (byte b : macBytes) {
                         res1.append(String.format("%02X:", b));
-//                        res1.append(Integer.toHexString(b & 0xff ) + ":");
                     }
 
                     if (res1.length() > 0) {
@@ -108,7 +113,7 @@ public class DeviceUtil {
      * @return
      */
     public static String getDeviceId() {
-        if(TextUtils.isEmpty(DEVICE_ID)) {
+        if(DEVICE_ID.length() == 0) {
             // 优先从设置获取
             final Context context = Constant.APP_CONTEXT;
             DEVICE_ID = obtainFromSettings(context);
@@ -120,15 +125,15 @@ public class DeviceUtil {
 //            }
 
             // 再次生成
-            if(TextUtils.isEmpty(DEVICE_ID)) {
+            if(DEVICE_ID.length() == 0) {
                 final String androidId = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
                 LogUtil.d(Constant.TAG, "DeviceUtil.getDeviceId:android_id---->" + androidId);
                 try {
-                    if(!TextUtils.isEmpty(androidId)) {
+                    if(androidId != null && androidId.length() != 0) {
                         DEVICE_ID = UUID.nameUUIDFromBytes(androidId.getBytes("utf8")).toString();
                     }else {
                         final String macAddress = getMacAddress();
-                        if(!TextUtils.isEmpty(macAddress)) {
+                        if(macAddress.length() != 0) {
                             DEVICE_ID = UUID.nameUUIDFromBytes(macAddress.getBytes("utf8")).toString();
                         }
                     }
@@ -137,7 +142,7 @@ public class DeviceUtil {
                     e.printStackTrace();
                     Log.w(Constant.TAG, "failed to generate device id");
                 }
-                if(TextUtils.isEmpty(DEVICE_ID)) { // 使用随机UUID
+                if(DEVICE_ID.length() == 0) { // 使用随机UUID
                     DEVICE_ID = UUID.randomUUID().toString();
                 }
 
@@ -158,8 +163,8 @@ public class DeviceUtil {
     public static boolean isNetworkConnected() {
 
         // 判断是否具有可以用于通信渠道
-        boolean mobileConnection = isMobileConnection(Constant.APP_CONTEXT);
-        boolean wifiConnection = isWIFIConnection(Constant.APP_CONTEXT);
+        boolean mobileConnection = isMobileConnected(Constant.APP_CONTEXT);
+        boolean wifiConnection = isWIFIConnected(Constant.APP_CONTEXT);
         return !(mobileConnection == false && wifiConnection == false);
     }
 
@@ -169,8 +174,10 @@ public class DeviceUtil {
      * @param context
      * @return
      */
-    private static boolean isMobileConnection(Context context) {
-        if(context == null) return false;
+    private static boolean isMobileConnected(Context context) {
+        if(context == null) {
+            return false;
+        }
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(manager != null){
             NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -187,7 +194,7 @@ public class DeviceUtil {
      * @param context
      * @return
      */
-    private static boolean isWIFIConnection(Context context) {
+    private static boolean isWIFIConnected(Context context) {
         if(context == null) return false;
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(manager != null){
@@ -208,7 +215,7 @@ public class DeviceUtil {
 
     private static String obtainFromSettings(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(Constant.PREFS_SEEDLAND, Context.MODE_PRIVATE);
-        return prefs.getString(PREF_KEY_DEVICE_ID, null);
+        return prefs.getString(PREF_KEY_DEVICE_ID, DEVICE_ID);
     }
 
 //    private static void saveToFiles(Context context, String value) {

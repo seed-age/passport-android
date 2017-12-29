@@ -27,7 +27,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
     void performCaptcha(String phone) {
         int errCode = ValidateUtil.checkPhone(phone);
         if(errCode == Constant.ERROR_CODE_NONE) {
-            model.obtainCaptcha(phone, new BizCallback<BaseBean>(BaseBean.class, view) {
+            model.obtainCaptcha(phone.trim(), new BizCallback<BaseBean>(BaseBean.class, view) {
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
                     if(view.get() != null) {
@@ -46,7 +46,6 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      * @param password
      * @param confirm
      * @param captcha
-     * @param reqCode
      */
     void performReset(String phone, String password, String confirm, String captcha) {
         int errCode = ValidateUtil.checkPhone(phone);
@@ -70,7 +69,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
             return;
         }
 
-        model.reset(phone, password, captcha, new BizCallback<SimpleBean>(SimpleBean.class, view) {
+        model.reset(phone.trim(), password.trim(), captcha.trim(), new BizCallback<SimpleBean>(SimpleBean.class, view) {
             @Override
             public void onSuccess(Response<SimpleBean> response) {
                 SimpleBean bean = response.body();

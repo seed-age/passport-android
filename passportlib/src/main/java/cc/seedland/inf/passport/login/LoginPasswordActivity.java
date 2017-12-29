@@ -74,7 +74,7 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
         }else if(id == R.id.login_password_perform_btn) {
             String phone = phoneEdt.getText().toString();
             String password = passwordEdt.getText().toString();
-            presenter.perform(phone.trim(), password.trim());
+            presenter.perform(phone, password);
         }
     }
 

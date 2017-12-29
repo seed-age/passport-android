@@ -12,6 +12,21 @@ public class TestConstant {
     public static final String NULL_STRING = null;
     public static final String SPACE_STRING = "  ";
 
+    // 设备相关
+    public static final String DEVICE_IP_ADDRESS_LOOPBACK = "127.0.0.1";
+
+    // API相关
+    public static final String CHANNEL = "channel-test";
+    public static final String KEY = "aBcDEfghIjKLMnoPqRStuvWXYz0123456789";
+    public static final String HOST_RIGHT_1 = "http://port.seedemo.cc";
+    public static final String HOST_RIGHT_2 = "http://test-port.seedemo.cc";
+
+    public static final String HOST_WRONG_1 = "port.seedemo.cc";
+    public static final String HOST_WRONG_2 = "port.seedemo.cc/";
+
+    public static final String API_ROOT_PATH = "api/rest";
+    public static final String API_PATH = "/1.0/login";
+
     public static final String PHONE_RIGHT_1 = "13800138000";
     public static final String PASSWORD_STRING = "12345678";
 

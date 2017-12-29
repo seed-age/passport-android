@@ -2,6 +2,7 @@ package cc.seedland.inf.passport.password;
 
 import com.lzy.okgo.model.Response;
 
+import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.base.IBaseView;
@@ -38,7 +39,12 @@ class ModifyPasswordPresenter extends BasePresenter<IBaseView> {
             return;
         }
 
-        model.modify(origin, current, new BizCallback<LoginBean>(LoginBean.class, view) {
+        if(origin.equals(current)) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_same));
+            return;
+        }
+
+        model.modify(origin.trim(), current.trim(), new BizCallback<LoginBean>(LoginBean.class, view) {
             @Override
             public void onSuccess(Response<LoginBean> response) {
                 LoginBean bean = response.body();

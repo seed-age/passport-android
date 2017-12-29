@@ -67,13 +67,19 @@ public class LoginPasswordPresenterTest {
     @Test
     public void perform() throws Exception {
 
-        // 正确
+        // 正确 - 参数中不含空格
         presenter.perform(TestConstant.PHONE_RIGHT_1, TestConstant.PASSWORD_RIGHT_1);
         verify(model).loginByPassword(eq(TestConstant.PHONE_RIGHT_1), eq(TestConstant.PASSWORD_RIGHT_1), callbackCaptor.capture());
 
         callbackCaptor.getValue().onSuccess(TestConstant.LOGIN_RESPONSE);
         LoginBean bean = TestConstant.LOGIN_RESPONSE.body();
         verify(view).close(any(Bundle.class), eq(bean.raw));
+
+        // 正确 - 参数中含空格
+        presenter.perform(TestConstant.PHONE_RIGHT_2, TestConstant.PASSWORD_RIGHT_2);
+        verify(model).loginByPassword(eq(TestConstant.PHONE_RIGHT_2.trim()), eq(TestConstant.PASSWORD_RIGHT_2.trim()), callbackCaptor.capture());
+        callbackCaptor.getValue().onSuccess(TestConstant.LOGIN_RESPONSE);
+        verify(view, times(2)).close(any(Bundle.class), eq(bean.raw));
 
         // 错误 - 手机号错误
         presenter.perform(TestConstant.PHONE_WRONG_1, anyString());
@@ -92,11 +98,11 @@ public class LoginPasswordPresenterTest {
         // 正确
         presenter.refreshPhone(TestConstant.PHONE_RIGHT_1, info);
         verify(view).loadPhone(TestConstant.PHONE_RIGHT_1);
+        verify(view, times(1)).showTip(info);
 
         // 错误 - 手机号码不正确
         presenter.refreshPhone(TestConstant.PHONE_WRONG_1, info);
         verify(view, times(0)).loadPhone(TestConstant.PHONE_WRONG_1);
-
         verify(view, times(2)).showTip(info);
     }
 

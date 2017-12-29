@@ -2,11 +2,13 @@ package cc.seedland.inf.passport;
 
 import android.os.Bundle;
 
+import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 import com.lzy.okgo.request.base.Request;
 
 import cc.seedland.inf.passport.common.LoginBean;
+import okhttp3.RequestBody;
 
 /**
  * Created by xuchunlei on 2017/12/14.
@@ -17,6 +19,27 @@ public class TestConstant {
     public static final String EMPTY_STRING = "";
     public static final String NULL_STRING = null;
     public static final String SPACE_STRING = "  ";
+
+    // 设备相关
+    public static final String DEVICE_IP_ADDRESS_V4 = "192.168.1.101";
+    public static final String DEVICE_IP_ADDRESS_LOOPBACK = "127.0.0.1";
+    public static final String DEVICE_IP_ADDRESS_V6 = "fec0::945e:edf5:749f:49c6";
+    public static final String DEVICE_MAC_ADDRESS = "B0:55:09:E8:9A:CF";
+    public static final String DEVICE_ANDROID_ID = "8850417ed04b75b1";
+    public static final String DEVICE_ID_BY_ANDROID_ID = "ece793a5-85fa-3e6d-abd0-309e904a91b9";
+    public static final String DEVICE_ID_BY_MAC_ADDRESS = "f86d8dee-8ca6-31c9-a427-09db107965da";
+
+    // API相关
+    public static final String CHANNEL = "channel-test";
+    public static final String KEY = "aBcDEfghIjKLMnoPqRStuvWXYz0123456789";
+    public static final String HOST_RIGHT_1 = "http://api.seedland.cc";
+    public static final String HOST_RIGHT_2 = "http://test-api.seedland.cc";
+
+    public static final String HOST_WRONG_1 = "api.seedland.cc";
+    public static final String HOST_WRONG_2 = "api.seedland.cc/";
+
+    public static final String API = HOST_RIGHT_1 + "/biz";
+    public static final String API_2 = HOST_RIGHT_1 + "/biz2";
 
     // 电话号码
     public static final String PHONE_RIGHT_1 = "13800138000";
@@ -44,6 +67,8 @@ public class TestConstant {
 
     // 登录相关
 
+//    public static final String LOGIN_URL = "/1.0/login/password";
+
     public static final String LOGIN_RESPONSE_BODY_RIGHT =
             "{" +
                 "\"error_code\":0," +
@@ -65,9 +90,14 @@ public class TestConstant {
     public static final String RESPONSE_NICKNAME = "User_13800138000";
     public static final Bundle LOGIN_BEAN_ARGS = new Bundle();
 
+    public static final Request<LoginBean, PostRequest<LoginBean>> LOGIN_REQUEST;
     public static final Response<LoginBean> LOGIN_RESPONSE;
 
     static {
+        /*------------ login ------------*/
+
+        LOGIN_REQUEST = new PostRequest<>("");
+
         LoginBean loginBean = new LoginBean();
         loginBean.mobile = TestConstant.PHONE_RIGHT_1;
         loginBean.uid = RESPONSE_UID;

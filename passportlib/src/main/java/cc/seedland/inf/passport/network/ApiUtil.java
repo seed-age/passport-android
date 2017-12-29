@@ -16,6 +16,7 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.TokenBean;
@@ -31,6 +32,9 @@ import okhttp3.RequestBody;
  */
 
 public class ApiUtil {
+
+    // 正则表达式 - host
+    private static final Pattern HOST_REGEX = Pattern.compile("^(http|https):\\/\\/(([a-zA-Z0-9]*\\-?[a-zA-Z0-9]*)\\.)*([A-Za-z]*)$");
 
     // API使用的Host
     private static String HOST;
@@ -59,11 +63,16 @@ public class ApiUtil {
      */
     public static void init(String channel, String key, String host) {
 
-        CHANNEL = channel;
-        AUTH_KEY = key;
-        HOST = host;
+        if(HOST_REGEX.matcher(host).matches()) {
+            CHANNEL = channel;
+            AUTH_KEY = key;
+            HOST = host;
 
-        refreshToken();
+            refreshToken();
+        }else {
+            throw new IllegalArgumentException("invalid host name " + host);
+        }
+
     }
 
 
@@ -129,17 +138,6 @@ public class ApiUtil {
 
     }
 
-    /**
-     * 检验签名　
-     * @param timestamp
-     * @param sign
-     * @return
-     */
-    public static boolean checkSign(long timestamp, String sign) {
-        String checkSign = ApiUtil.MD5(CHANNEL + "." + timestamp);
-        return checkSign.equals(sign);
-    }
-
     public static String testSign(TreeMap<String, String> params, String key) {
 
         // 生成签名
@@ -149,24 +147,6 @@ public class ApiUtil {
 
         return encode(MD5(signQuery));
 
-    }
-
-    public static <T extends BaseBean> String testPost(String url, Map<String, String> commonParams, Map<String, String> params, String sign) {
-        try {
-
-            // 请求参数
-            String baseQuery = generateQueryString(commonParams, true);
-            String quary = baseQuery + "&" + encode("auth") + "=" + sign;
-
-
-            return OkGo.<T>post(url + "?" + quary)
-                    .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
-                    .execute()
-                    .body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "nothing";
     }
 
     /**

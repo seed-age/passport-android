@@ -40,7 +40,7 @@ class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
             return;
         }
 
-        model.loginByPassword(phone, password, new BizCallback<LoginBean>(LoginBean.class, view) {
+        model.loginByPassword(phone.trim(), password.trim(), new BizCallback<LoginBean>(LoginBean.class, view) {
 
 
             @Override

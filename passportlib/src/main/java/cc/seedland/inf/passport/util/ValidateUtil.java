@@ -56,7 +56,7 @@ public class ValidateUtil {
      */
     public static int checkPasswordConfirm(String origin, String confirm) {
         int errCode = checkPassword(origin);
-        if(errCode == Constant.ERROR_CODE_NONE && !origin.equals(confirm.trim())) {
+        if(errCode == Constant.ERROR_CODE_NONE && !origin.trim().equals(confirm.trim())) {
             return Constant.ERROR_CODE_PASSWORD_CONFIRM;
         }
         return errCode;

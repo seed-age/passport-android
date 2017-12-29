@@ -58,12 +58,12 @@ public class ValidateUtilTest {
 
     @Test
     public void checkPasswordConfirm() throws Exception {
-        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.SPACE_STRING, anyString()), Constant.ERROR_CODE_PASSWORD_EMPTY);
-        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.EMPTY_STRING, anyString()), Constant.ERROR_CODE_PASSWORD_EMPTY);
-        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.NULL_STRING, anyString()), Constant.ERROR_CODE_PASSWORD_EMPTY);
+        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.SPACE_STRING, TestConstant.SPACE_STRING), Constant.ERROR_CODE_PASSWORD_EMPTY);
+        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.EMPTY_STRING, TestConstant.EMPTY_STRING), Constant.ERROR_CODE_PASSWORD_EMPTY);
+        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.NULL_STRING, TestConstant.NULL_STRING), Constant.ERROR_CODE_PASSWORD_EMPTY);
 
-        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_WRONG_1, anyString()), Constant.ERROR_CODE_PASSWORD_FORMAT);
-        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_WRONG_2, anyString()), Constant.ERROR_CODE_PASSWORD_FORMAT);
+        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_WRONG_1, TestConstant.PASSWORD_WRONG_1), Constant.ERROR_CODE_PASSWORD_FORMAT);
+        assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_WRONG_2, TestConstant.PASSWORD_WRONG_2), Constant.ERROR_CODE_PASSWORD_FORMAT);
 
         assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_RIGHT_1, TestConstant.PASSWORD_RIGHT_1), Constant.ERROR_CODE_NONE);
         assertEquals(ValidateUtil.checkPasswordConfirm(TestConstant.PASSWORD_RIGHT_1, TestConstant.PASSWORD_RIGHT_2), Constant.ERROR_CODE_NONE);

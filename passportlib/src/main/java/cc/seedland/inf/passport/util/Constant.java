@@ -69,6 +69,8 @@ public class Constant {
     public static final int ERROR_CODE_PASSWORD_EMPTY = R.string.error_password_empty;
     /** 错误码-两次密码输入不一致 */
     public static final int ERROR_CODE_PASSWORD_CONFIRM = R.string.error_password_confirm;
+    /** 错误码-原密码与旧密码相同 */
+    public static final int ERROR_CODE_PASSWORD_SAME = R.string.error_password_same;
 
     /** 默认的整型值，用于判断非法数据 */
     public static final int NO_INTEGER = -1;
