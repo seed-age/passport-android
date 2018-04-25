@@ -1,6 +1,9 @@
 package cc.seedland.inf.passport.register;
 
+import android.graphics.Bitmap;
+
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.BitmapCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +25,12 @@ class RegisterModel {
      * @param phone
      * @param callback
      */
-    public void getCaptcha(String phone, BizCallback<BaseBean> callback) {
+    public void getCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
+        params.put("captcha_id", imgCaptchaId);
+        params.put("captcha_text", imgCaptcha);
         params.put("action", "reg");
         OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
@@ -48,6 +53,15 @@ class RegisterModel {
 
         OkGo.<RegisterBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_REGISTER_PHONE))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+                .execute(callback);
+    }
+
+    /**
+     * 获取图形验证码
+     * @param callback
+     */
+    public void obtainImageCaptcha(BitmapCallback callback) {
+        OkGo.<Bitmap>get(ApiUtil.generateUrlForGet(Constant.API_URL_IMAGE_CAPTCHA, null))
                 .execute(callback);
     }
 

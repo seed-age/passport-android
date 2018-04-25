@@ -1,85 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:orientation="vertical">-->
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/register_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:minHeight="?android:attr/actionBarSize"-->
-        <!--app:contentInsetStart="0dp">-->
-        <!--<TextView-->
-            <!--android:id="@+id/register_title_txv"-->
-            <!--style="@style/PassportTitle"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--tools:text="标题"/>-->
-    <!--</android.support.v7.widget.Toolbar>-->
-    <!--<View-->
-        <!--style="@style/PassportDivider"-->
-        <!--android:layout_width="match_parent" />-->
-    <cc.seedland.inf.passport.widget.DividerLinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        style="@style/PassportDividerLayout"
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:orientation="vertical">-->
+<!--<android.support.v7.widget.Toolbar-->
+<!--android:id="@+id/register_toolbar"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:minHeight="?android:attr/actionBarSize"-->
+<!--app:contentInsetStart="0dp">-->
+<!--<TextView-->
+<!--android:id="@+id/register_title_txv"-->
+<!--style="@style/PassportTitle"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="center"-->
+<!--tools:text="标题"/>-->
+<!--</android.support.v7.widget.Toolbar>-->
+<!--<View-->
+<!--style="@style/PassportDivider"-->
+<!--android:layout_width="match_parent" />-->
+<cc.seedland.inf.passport.widget.DividerLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PassportDividerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/size_common_15">
+
+    <EditText
+        android:id="@+id/register_phone_edt"
+        style="@style/PhoneEdit"
+        android:layout_width="match_parent"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/size_common_15">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <EditText
-            android:id="@+id/register_phone_edt"
-            style="@style/PhoneEdit"
-            android:layout_width="match_parent" />
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/register_captcha_image_edt"
+            style="@style/PassportEdit"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:hint="@string/hint_image_captcha"/>
+
+        <cc.seedland.inf.passport.widget.RatioImageView
+            android:id="@+id/register_captcha_image_imv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/register_captcha_edt"
-                style="@style/PassportEdit"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_captcha"
-                android:drawablePadding="@dimen/size_common_10"
-                android:inputType="number"
-                android:maxLength="10"
-                android:hint="@string/hint_captcha"/>
-            <cc.seedland.inf.passport.widget.CountDownButton
-                android:id="@+id/register_captcha_txv"
-                style="@style/PerformBorderBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/size_common_5"
-                android:padding="@dimen/size_common_5"
-                android:text="@string/register_obtain_captcha"
-                app:countingText="@string/hint_captcha_counting"
-                app:countingTextColor="@color/default_gray"
-                app:endText="@string/text_captcha_retrieve"/>
-        </LinearLayout>
-        <cc.seedland.inf.passport.widget.PasswordEditText
-            android:id="@+id/register_password_edt"
-            style="@style/PasswordEdit"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.2"
+            app:ratio="1.33"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/register_captcha_edt"
+            style="@style/PassportEdit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_captcha"
+            android:drawablePadding="@dimen/size_common_10"
+            android:hint="@string/hint_captcha"
+            android:inputType="number"
+            android:maxLength="10"/>
+
+        <cc.seedland.inf.passport.widget.CountDownButton
+            android:id="@+id/register_captcha_txv"
+            style="@style/PerformBorderBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:hint="@string/hint_password"
-            app:button="@drawable/password_show_selector"/>
-        <cc.seedland.inf.passport.widget.PasswordEditText
-            android:id="@+id/register_password_confirm_edt"
-            style="@style/PasswordEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hint="@string/hint_password_confirm"
-            app:button="@drawable/password_show_selector"/>
-        <Button
-            android:id="@+id/register_perform_btn"
-            style="@style/PerformBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_common_30"
-            android:text="@string/register_do"/>
-    </cc.seedland.inf.passport.widget.DividerLinearLayout>
-<!--</LinearLayout>-->
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/size_common_5"
+            android:padding="@dimen/size_common_5"
+            android:text="@string/register_obtain_captcha"
+            app:countingText="@string/hint_captcha_counting"
+            app:countingTextColor="@color/default_gray"
+            app:endText="@string/text_captcha_retrieve"/>
+    </LinearLayout>
+
+    <cc.seedland.inf.passport.widget.PasswordEditText
+        android:id="@+id/register_password_edt"
+        style="@style/PasswordEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:button="@drawable/password_show_selector"
+        app:hint="@string/hint_password"/>
+
+    <cc.seedland.inf.passport.widget.PasswordEditText
+        android:id="@+id/register_password_confirm_edt"
+        style="@style/PasswordEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:button="@drawable/password_show_selector"
+        app:hint="@string/hint_password_confirm"/>
+
+    <Button
+        android:id="@+id/register_perform_btn"
+        style="@style/PerformBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_common_30"
+        android:text="@string/register_do"/>
+</cc.seedland.inf.passport.widget.DividerLinearLayout>
+    <!--</LinearLayout>-->

@@ -13,6 +13,7 @@
     <string name="error_network">网络异常</string>
     <!--<string name="error_sign">非法签名</string>-->
     <string name="hint_phone">请输入手机号</string>
+    <string name="hint_image_captcha">请输入图形验证码</string>
     <string name="hint_captcha">请输入验证码</string>
     <string name="hint_password">请设置密码，8-16位数字、英文、符号</string>
     <string name="hint_password_confirm">请再次输入设置的密码</string>

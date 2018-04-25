@@ -26,18 +26,23 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
     private CountDownButton gainTxv;
     private EditText phoneEdt;
     private EditText captchaEdt;
+    private EditText imgCaptchaEdt;
     private ImageView captchaImv;
+
+    private String imgCaptchaId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         phoneEdt = findViewById(R.id.login_captcha_phone_edt);
+        imgCaptchaEdt = findViewById(R.id.login_captcha_image_edt);
         captchaEdt = findViewById(R.id.login_captcha_captcha_edt);
         gainTxv = findViewById(R.id.login_captcha_gain_txv);
         gainTxv.setOnClickListener(this);
         findViewById(R.id.login_captcha_perform_btn).setOnClickListener(this);
         captchaImv = findViewById(R.id.login_captcha_image_imv);
+        captchaImv.setOnClickListener(this);
 
         String phone = RuntimeCache.getPhone();
         phoneEdt.setText(phone);
@@ -61,10 +66,13 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
         int id = v.getId();
         String phone = phoneEdt.getText().toString();
         if(id == R.id.login_captcha_gain_txv) {
-            presenter.performCaptcha(phone);
+            String imgCaptcha = imgCaptchaEdt.getText().toString();
+            presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
         }else if(id == R.id.login_captcha_perform_btn) {
             String captcha = captchaEdt.getText().toString();
             presenter.perform(phone, captcha);
+        }else if(id == R.id.login_captcha_image_imv) {
+            presenter.performImageCaptcha();
         }
     }
 
@@ -79,7 +87,8 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
     }
 
     @Override
-    public void updateImageCaptcha(Bitmap code) {
+    public void updateImageCaptcha(Bitmap code, String captchaId) {
         captchaImv.setImageBitmap(code);
+        this.imgCaptchaId = captchaId;
     }
 }

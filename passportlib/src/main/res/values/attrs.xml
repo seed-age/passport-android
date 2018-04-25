@@ -29,4 +29,10 @@
         <attr name="button" format="reference" />
     </declare-styleable>
 
+    <!-- RatioImageView -->
+    <declare-styleable name="RatioImageView">
+        <!-- 宽高比 -->
+        <attr name="ratio" format="float" />
+    </declare-styleable>
+
 </resources>

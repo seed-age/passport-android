@@ -57,10 +57,12 @@ class LoginModel {
      * @param phone
      * @param callback
      */
-    public void obtainCaptcha(String phone, BizCallback<BaseBean> callback) {
+    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
+        params.put("captcha_id", imgCaptchaId);
+        params.put("captcha_text", imgCaptcha);
         params.put("action", "login");
         OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))

@@ -71,12 +71,8 @@ public final class PassportHome {
                .writeTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
                .connectTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
 
-        // https
-        //方法一：信任所有证书,不安全有风险
+        // Https
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
-//方法二：自定义信任规则，校验服务端证书
-//        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(new SafeTrustManager());
-
         builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
         builder.hostnameVerifier(new HostnameVerifier() {
             @Override
@@ -84,9 +80,6 @@ public final class PassportHome {
                 return true;
             }
         });
-
-//配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
-//        builder.hostnameVerifier(new SafeHostnameVerifier());
 
         HttpHeaders headers = new HttpHeaders();
         headers.put("X-proxy-Version", "Passport Android SDK(" + BuildConfig.VERSION_NAME + ")");

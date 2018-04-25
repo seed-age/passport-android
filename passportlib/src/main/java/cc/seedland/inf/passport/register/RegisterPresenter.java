@@ -1,5 +1,8 @@
 package cc.seedland.inf.passport.register;
 
+import android.graphics.Bitmap;
+
+import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
 
 import cc.seedland.inf.passport.R;
@@ -21,10 +24,13 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
 
 
     @Override
-    public void performCaptcha(String phone) {
+    public void performCaptcha(String phone, String imgCaptcha, String imgCaptchaId) {
         int errCode = ValidateUtil.checkPhone(phone);
         if(errCode == Constant.ERROR_CODE_NONE) {
-            model.getCaptcha(phone, new BizCallback<BaseBean>(BaseBean.class, view) {
+            errCode = ValidateUtil.checkCaptcha(imgCaptcha);
+        }
+        if(errCode == Constant.ERROR_CODE_NONE) {
+            model.getCaptcha(phone.trim(), imgCaptcha.trim(), imgCaptchaId.trim(), new BizCallback<BaseBean>(BaseBean.class, view) {
 
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
@@ -68,6 +74,19 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
             public void onSuccess(Response<RegisterBean> response) {
                 RegisterBean bean = response.body();
                 BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
+            }
+        });
+    }
+
+    @Override
+    public void performImageCaptcha() {
+        model.obtainImageCaptcha(new BitmapCallback() {
+            @Override
+            public void onSuccess(Response<Bitmap> response) {
+                if(view != null && view.get() != null) {
+                    String captchaId = response.headers().get("Captcha-Id");
+                    view.get().updateImageCaptcha(response.body(), captchaId);
+                }
             }
         });
     }

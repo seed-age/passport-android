@@ -18,5 +18,5 @@ public interface ICaptchaView extends IBaseView {
     /**
      * 更新图片验证码
      */
-    void updateImageCaptcha(Bitmap code);
+    void updateImageCaptcha(Bitmap code, String captchaId);
 }

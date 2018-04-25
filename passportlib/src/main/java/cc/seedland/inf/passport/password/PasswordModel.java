@@ -1,6 +1,9 @@
 package cc.seedland.inf.passport.password;
 
+import android.graphics.Bitmap;
+
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.BitmapCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,10 +27,12 @@ class PasswordModel {
      * @param phone
      * @param callback
      */
-    public void obtainCaptcha(String phone, BizCallback<BaseBean> callback) {
+    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile", phone);
+        params.put("captcha_id", imgCaptchaId);
+        params.put("captcha_text", imgCaptcha);
         params.put("action", "resetpwd");
         OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
@@ -70,6 +75,15 @@ class PasswordModel {
 
         OkGo.<LoginBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_MODIFY))
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+                .execute(callback);
+    }
+
+    /**
+     * 获取图形验证码
+     * @param callback
+     */
+    public void obtainImageCaptcha(BitmapCallback callback) {
+        OkGo.<Bitmap>get(ApiUtil.generateUrlForGet(Constant.API_URL_IMAGE_CAPTCHA, null))
                 .execute(callback);
     }
 }
