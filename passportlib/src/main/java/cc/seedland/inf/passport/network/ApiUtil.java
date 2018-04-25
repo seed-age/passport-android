@@ -91,9 +91,11 @@ public class ApiUtil {
      * @param params
      * @return
      */
-    public static String generalUrlForGet(String path, Map<String, String> params) {
+    public static String generateUrlForGet(String path, Map<String, String> params) {
         Map<String, String> rawParams = getCommonParams();
-        rawParams.putAll(params);
+        if(params != null) {
+            rawParams.putAll(params);
+        }
         return generateUrl(path) + signApi(rawParams);
     }
 

@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport.password;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -71,5 +72,10 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> 
     @Override
     public void startWaitingCaptcha() {
         captchaBtn.startCountDown(true);
+    }
+
+    @Override
+    public void updateImageCaptcha(Bitmap code) {
+
     }
 }

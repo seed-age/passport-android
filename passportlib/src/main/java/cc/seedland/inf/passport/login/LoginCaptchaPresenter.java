@@ -1,5 +1,8 @@
 package cc.seedland.inf.passport.login;
 
+import android.graphics.Bitmap;
+
+import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
 
 import cc.seedland.inf.passport.base.BaseBean;
@@ -69,6 +72,17 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
                 BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
             }
 
+        });
+    }
+
+    public void performImageCaptcha() {
+        model.obtainImageCaptcha(new BitmapCallback() {
+            @Override
+            public void onSuccess(Response<Bitmap> response) {
+                if(view != null && view.get() != null) {
+                    view.get().updateImageCaptcha(response.body());
+                }
+            }
         });
     }
 }

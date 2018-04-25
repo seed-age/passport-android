@@ -16,14 +16,14 @@ android {
 
         // 开发调试
         debug {
-            resValue "string", "http_host", "http://test-passport.seedland.cc"
+            resValue "string", "http_host", "https://test-passport.seedland.cc"
 
             testCoverageEnabled true
         }
 
         // 功能测试-开放动态切换线上线下环境
         sit {
-            resValue "string", "http_host", "http://test-passport.seedland.cc"
+            resValue "string", "http_host", "https://test-passport.seedland.cc"
 
             minifyEnabled true       // 开启混淆
             zipAlignEnabled true     // 对齐优化

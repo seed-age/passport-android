@@ -1,17 +1,17 @@
 ext {
     // 构建
     build = [
-            "compileSdkVersion"                            : 26,
-            "targetSdkVersion"                             : 26,
+            "compileSdkVersion"                            : 27,
+            "targetSdkVersion"                             : 27,
             "minSdkVersion"                                : 16,
-            "buildTools"                                   : "26.0.2",
+            "buildTools"                                   : "27.0.3",
             "versionName"                                  : "1.0.0-SNAPSHOT"       // for debug
 //            "versionName"                                  : "1.0.0"              // for sit & release
 
     ]
 
     dependencies = [
-            "appcompat-v7"                                 : "com.android.support:appcompat-v7:26.1.0",
+            "appcompat-v7"                                 : "com.android.support:appcompat-v7:27.0.2",
             "okgo"                                         : "com.lzy.net:okgo:3.0.4",
             "gson"                                         : "com.google.code.gson:gson:2.8.2"
     ]

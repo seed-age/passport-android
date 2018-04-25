@@ -9,12 +9,16 @@ import android.text.TextUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
@@ -67,8 +71,24 @@ public final class PassportHome {
                .writeTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
                .connectTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
 
+        // https
+        //方法一：信任所有证书,不安全有风险
+        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
+//方法二：自定义信任规则，校验服务端证书
+//        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(new SafeTrustManager());
+
+        builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        builder.hostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                return true;
+            }
+        });
+
+//配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
+//        builder.hostnameVerifier(new SafeHostnameVerifier());
+
         HttpHeaders headers = new HttpHeaders();
-        // TODO: 2017/11/13 增加若干参数到header
         headers.put("X-proxy-Version", "Passport Android SDK(" + BuildConfig.VERSION_NAME + ")");
         
         OkGo.getInstance().init(app)

@@ -1,11 +1,13 @@
 package cc.seedland.inf.passport.login;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
@@ -13,6 +15,7 @@ import cc.seedland.inf.passport.base.BaseActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.widget.CountDownButton;
+import cc.seedland.inf.passport.widget.ImageCaptchaView;
 
 /**
  * Created by xuchunlei on 2017/11/16.
@@ -23,6 +26,7 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
     private CountDownButton gainTxv;
     private EditText phoneEdt;
     private EditText captchaEdt;
+    private ImageView captchaImv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +37,18 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
         gainTxv = findViewById(R.id.login_captcha_gain_txv);
         gainTxv.setOnClickListener(this);
         findViewById(R.id.login_captcha_perform_btn).setOnClickListener(this);
+        captchaImv = findViewById(R.id.login_captcha_image_imv);
 
         String phone = RuntimeCache.getPhone();
         phoneEdt.setText(phone);
 
         setTitle(getString(R.string.login_captcha_title));
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        presenter.performImageCaptcha();
     }
 
     @Override
@@ -65,5 +76,10 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
     @Override
     public void startWaitingCaptcha() {
         gainTxv.startCountDown(true);
+    }
+
+    @Override
+    public void updateImageCaptcha(Bitmap code) {
+        captchaImv.setImageBitmap(code);
     }
 }

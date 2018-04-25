@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport.register;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -69,5 +70,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     public void startWaitingCaptcha() {
         captchaBtn.startCountDown(true);
+    }
+
+    @Override
+    public void updateImageCaptcha(Bitmap code) {
+
     }
 }

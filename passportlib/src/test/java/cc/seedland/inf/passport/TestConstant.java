@@ -69,7 +69,7 @@ public class TestConstant {
 
 //    public static final String LOGIN_URL = "/1.0/login/password";
 
-    public static final String LOGIN_RESPONSE_BODY_RIGHT =
+    public static final String RESPONSE_BODY_SUCCESS =
             "{" +
                 "\"error_code\":0," +
                 "\"error_message\":\"succeed\"," +
@@ -84,6 +84,14 @@ public class TestConstant {
                 "\"sign\":\"eE6ah90HkjvOdSb2xJ9JFUS14kmJZ7DWh3PDytSNSXNHItYO3kVxj6hRg69mgdM0xxgyoRyPaBU7TWJkuoqyq0WYJ0nkU9GpVbwv0lJaTNKNlNRC0+C6V0rRRnI/j5/ABLEXJBv4drk8wiEfiSwbfDGNiXDvB0HHwSTbf9/cKMA=\"," +
                 "\"timestamp\":1513221836" +
             "}\n";
+
+    public static final String RESPONSE_BODY_FALIED =
+            "{" +
+                "\"error_code\":100008," +
+                "\"error_message\":\"帐号或密码输入有误，请重新输入\"," +
+                "\"sign\":\"Nvrar4X90NHF6EO1fZr34Kavu0Vc1bx5VRWdDr7ARVxJ8tymsRc6KqRc0Ez3qiLWOgIcGHc42BbEKeluo4rSXRiJuVWdlIDstfF/XW5Pexv38pOquBajYgAvzJQXo3PnGvBqU4XCOnKPAd7GDKKjjzcr6ZUf0k81Y1XAwPWON4w=\"," +
+                "\"timestamp\":1514946994" +
+            "}";
 
     public static final String RESPONSE_TOKEN = "WVr5CyKwtEH1wAjXPG7AlNDZRb9FKvnAVhB8ppliGVnGpaTHryWoBgoiv56kMy1Nd9cC3N7ufASX7C3BoEXh/Wy8XYI7InM4e3RN6PUccHxejHy5LJiuk3cOrkDMyl22vO7tEu9UmKUJ5bTWkeOg2Nz+gpoeNA9u+rfPIRjh3gQ=";
     public static final int RESPONSE_UID = 100;
@@ -103,7 +111,7 @@ public class TestConstant {
         loginBean.uid = RESPONSE_UID;
         loginBean.nickname = RESPONSE_NICKNAME;
         loginBean.token = RESPONSE_TOKEN;
-        loginBean.raw = LOGIN_RESPONSE_BODY_RIGHT;
+        loginBean.raw = RESPONSE_BODY_SUCCESS;
         LOGIN_RESPONSE = new Response<>();
         LOGIN_RESPONSE.setBody(loginBean);
     }

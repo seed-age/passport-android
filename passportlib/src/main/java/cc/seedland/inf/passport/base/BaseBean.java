@@ -17,6 +17,7 @@ import cc.seedland.inf.passport.util.LogUtil;
 public class BaseBean {
 
     public String raw;
+    private Bundle args;
 
     /**
      * 转换成参数
@@ -24,28 +25,30 @@ public class BaseBean {
      */
     public Bundle toArgs() {
 
-        Bundle args = new Bundle();
-        Field[] fields = getClass().getFields();
-        for(Field field : fields){
-            if(!field.getDeclaringClass().isAssignableFrom(BaseBean.class) && !field.isSynthetic()) { // isSynthetic()方法排除"$change"属性
-                try {
-                    String key = field.getName();
-                    if(!key.equals("serialVersionUID")) {
-                        Type type = field.getType();
-                        if(type.equals(String.class)) {
-                            args.putString(key, field.get(this) + "");
-                        } else if(type.equals(Integer.TYPE)) {
-                            args.putInt(key, field.getInt(this));
-                        } else {
-                            args.putString(key, field.get(this) + "");
+        if(args == null) {
+            args = new Bundle();
+            Field[] fields = getClass().getFields();
+            for(Field field : fields){
+                if(!field.getDeclaringClass().isAssignableFrom(BaseBean.class) && !field.isSynthetic()) { // isSynthetic()方法排除"$change"属性
+                    try {
+                        String key = field.getName();
+                        if(!key.equals("serialVersionUID")) {
+                            Type type = field.getType();
+                            if(type.equals(String.class)) {
+                                args.putString(key, field.get(this) + "");
+                            } else if(type.equals(Integer.TYPE)) {
+                                args.putInt(key, field.getInt(this));
+                            } else {
+                                args.putString(key, field.get(this) + "");
+                            }
+
                         }
-
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                     }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
                 }
-            }
 
+            }
         }
 
         return args;

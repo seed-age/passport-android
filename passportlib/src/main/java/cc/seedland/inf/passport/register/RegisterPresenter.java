@@ -41,6 +41,7 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
 
     @Override
     public void performRegister(String phone, String captcha, String password, String confirmPassword) {
+
         int errCode = ValidateUtil.checkPhone(phone);
         if(errCode != Constant.ERROR_CODE_NONE) {
             BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
@@ -56,26 +57,19 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
             BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
-        if(checkPassword(password, confirmPassword)){
-            model.performPhone(phone, password, captcha, new BizCallback<RegisterBean>(RegisterBean.class, view) {
-
-                @Override
-                public void onSuccess(Response<RegisterBean> response) {
-                    RegisterBean bean = response.body();
-                    BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
-                }
-            });
+        errCode = ValidateUtil.checkPasswordConfirm(password, confirmPassword);
+        if(errCode != Constant.ERROR_CODE_NONE) {
+            BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
+            return;
         }
-    }
+        model.performPhone(phone.trim(), password.trim(), captcha.trim(), new BizCallback<RegisterBean>(RegisterBean.class, view) {
 
-    // 检验密码
-    public boolean checkPassword(String password, String confirm) {
-
-        if(!password.equals(confirm)) {
-            BaseViewGuard.callShowToastSafely(view, Constant.getString(R.string.error_password_confirm));
-            return false;
-        }
-        return true;
+            @Override
+            public void onSuccess(Response<RegisterBean> response) {
+                RegisterBean bean = response.body();
+                BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
+            }
+        });
     }
 
 }

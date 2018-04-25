@@ -1,6 +1,9 @@
 package cc.seedland.inf.passport.login;
 
+import android.graphics.Bitmap;
+
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.BitmapCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,5 +66,10 @@ class LoginModel {
                 .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
                 .execute(callback);
 
+    }
+
+    public void obtainImageCaptcha(BitmapCallback callback) {
+        OkGo.<Bitmap>get(ApiUtil.generateUrlForGet(Constant.API_URL_IMAGE_CAPTCHA, null))
+                .execute(callback);
     }
 }

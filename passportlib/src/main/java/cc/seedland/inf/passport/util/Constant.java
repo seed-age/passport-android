@@ -38,6 +38,8 @@ public class Constant {
     public static final String API_URL_PASSWORD_RESET = "/1.0/password/reset";
     /** 请求Url-修改密码 */
     public static final String API_URL_PASSWORD_MODIFY = "/1.0/password/modify";
+    /** 请求Url-图形验证码 */
+    public static final String API_URL_IMAGE_CAPTCHA = "/1.0/captcha";
 
     /** 请求返回码-成功 */
     public static final int RESPONSE_CODE_SUCCESS = 0;

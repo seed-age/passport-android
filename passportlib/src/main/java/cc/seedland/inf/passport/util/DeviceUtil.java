@@ -2,6 +2,7 @@ package cc.seedland.inf.passport.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -123,7 +124,6 @@ public class DeviceUtil {
 //            }else {
 //                saveToSettings(context, DEVICE_ID);
 //            }
-
             // 再次生成
             if(DEVICE_ID.length() == 0) {
                 final String androidId = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);

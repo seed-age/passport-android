@@ -29,13 +29,19 @@ public class PassportInterceptor implements Interceptor {
             throw new IOException(Constant.getString(R.string.error_network));
         }else {
             Response response = chain.proceed(request);
+
+            String contentType = response.header("Content-Type");
+            if(contentType != null && contentType.equals("image/jpeg")) {
+                return response;
+            }
+
             String raw = response.body().string();
             BeanWrapper wrapper = GsonHolder.getInstance().fromJson(raw, BeanWrapper.class);
             if(wrapper.checkSign() && wrapper.code == Constant.RESPONSE_CODE_SUCCESS) {
-                MediaType contentType = response.body().contentType();
+                MediaType mediaType = response.body().contentType();
                 JsonElement bodyObj = wrapper.data == null ? new JsonObject() : wrapper.data;
                 bodyObj.getAsJsonObject().addProperty("raw", raw);
-                ResponseBody body = ResponseBody.create(contentType, GsonHolder.getInstance().toJson(bodyObj));
+                ResponseBody body = ResponseBody.create(mediaType, GsonHolder.getInstance().toJson(bodyObj));
                 return response.newBuilder()
                         .code(response.code())
                         .body(body)

@@ -41,7 +41,12 @@ public class BizCallback<T extends BaseBean> extends JsonCallback<T> {
     @Override
     public void onError(Response<T> response) {
         super.onError(response);
-        BaseViewGuard.callShowToastSafely(view, response.getException().getMessage());
+        String msg = "unknown error";
+        if(response != null && response.getException() != null) {
+            msg = response.getException().getMessage();
+
+        }
+        BaseViewGuard.callShowToastSafely(view, msg != null && msg.trim().length() > 0 ? msg : "unknown error");
     }
 
     @Override

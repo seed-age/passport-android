@@ -42,6 +42,20 @@
             app:countingTextColor="@color/default_gray"
             app:endText="@string/text_captcha_retrieve"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/login_captcha_image_edt"
+            style="@style/PassportEdit"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/login_captcha_image_imv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/login_captcha_perform_btn"
