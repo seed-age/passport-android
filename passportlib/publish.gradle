@@ -53,10 +53,17 @@ publishing {
 
     repositories{
         maven {
-            if(rootProject.ext.build['versionName'].contains("SNAPSHOT")) {
-                url "http://developer.seedland.cc/nexus/repository/maven-snapshots/"
-            }else{
-                url "http://developer.seedland.cc/nexus/repository/maven-releases/"
+            def type = project.hasProperty('buildType') ? buildType : 'Release'
+
+            if(type.equalsIgnoreCase("dev")) { // 开发环境为测试服务器并发布到开发仓库
+                url "http://developer.seedland.cc/nexus/repository/maven-dev/"
+            }else if(type.equalsIgnoreCase("release")){ // 发布环境为生产服务器并根据版本选择仓库
+                if (rootProject.ext.build['versionName'].contains("SNAPSHOT")) {
+                    url "http://developer.seedland.cc/nexus/repository/maven-snapshots/"
+                } else {
+                    url "http://developer.seedland.cc/nexus/repository/maven-releases/"
+                }
+
             }
 
             credentials {

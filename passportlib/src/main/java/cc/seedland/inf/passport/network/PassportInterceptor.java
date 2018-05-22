@@ -28,26 +28,35 @@ public class PassportInterceptor implements Interceptor {
         if(!DeviceUtil.isNetworkConnected()) {
             throw new IOException(Constant.getString(R.string.error_network));
         }else {
-            Response response = chain.proceed(request);
+            try{
+                Response response = chain.proceed(request);
+                String contentType = response.header("Content-Type");
 
-            String contentType = response.header("Content-Type");
-            if(contentType != null && contentType.equals("image/jpeg")) {
-                return response;
-            }
+                if(contentType != null) {
+                    if(contentType.contains("application/json")) {  // 处理json
+                        String raw = response.body().string();
+                        BeanWrapper wrapper = GsonHolder.getInstance().fromJson(raw, BeanWrapper.class);
+                        if(wrapper.checkSign() && wrapper.code == Constant.RESPONSE_CODE_SUCCESS) {
+                            MediaType mediaType = response.body().contentType();
+                            JsonElement bodyObj = wrapper.data == null ? new JsonObject() : wrapper.data;
+                            bodyObj.getAsJsonObject().addProperty("raw", raw);
+                            ResponseBody body = ResponseBody.create(mediaType, GsonHolder.getInstance().toJson(bodyObj));
+                            return response.newBuilder()
+                                    .code(response.code())
+                                    .body(body)
+                                    .build();
+                        }else {
+                            throw new IOException(wrapper.message);
+                        }
+                    }else if(contentType.contains("image/jpeg")) { // 处理图片
+                        return response;
+                    }
+                }
+                // 其余情况不予处理
+                throw new IOException(Constant.getString(R.string.error_server));
 
-            String raw = response.body().string();
-            BeanWrapper wrapper = GsonHolder.getInstance().fromJson(raw, BeanWrapper.class);
-            if(wrapper.checkSign() && wrapper.code == Constant.RESPONSE_CODE_SUCCESS) {
-                MediaType mediaType = response.body().contentType();
-                JsonElement bodyObj = wrapper.data == null ? new JsonObject() : wrapper.data;
-                bodyObj.getAsJsonObject().addProperty("raw", raw);
-                ResponseBody body = ResponseBody.create(mediaType, GsonHolder.getInstance().toJson(bodyObj));
-                return response.newBuilder()
-                        .code(response.code())
-                        .body(body)
-                        .build();
-            }else {
-                throw new IOException(wrapper.message);
+            }catch (Exception e) {
+                throw new IOException(Constant.getString(R.string.error_server));
             }
         }
     }

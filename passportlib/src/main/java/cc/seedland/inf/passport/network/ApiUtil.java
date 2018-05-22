@@ -38,7 +38,7 @@ public class ApiUtil {
 
     // API使用的Host
     private static String HOST;
-    private static final String PARENT_PATH = "/api/rest";
+    private static final String PARENT_PATH = "/passport/api/rest";
     // 用于Api签名的key, 可视为常量
     private static String AUTH_KEY;
     // 用于Api请求参数，可视为常量
@@ -145,7 +145,6 @@ public class ApiUtil {
         // 生成签名
         String signQuery = generateQueryString(params, false);
         signQuery = signQuery + "&" + key;
-        Log.e("xuchunlei", signQuery);
 
         return encode(MD5(signQuery));
 

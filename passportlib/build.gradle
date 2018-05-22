@@ -16,15 +16,18 @@ android {
 
         // 开发调试
         debug {
-            resValue "string", "http_host", "https://test-passport.seedland.cc"
+            resValue "string", "http_host", "https://test-open.seedland.cc"
 
-            testCoverageEnabled true
+//            testCoverageEnabled true
+
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         // 功能测试-开放动态切换线上线下环境
-        sit {
-            resValue "string", "http_host", "https://test-passport.seedland.cc"
-
+        dev {
+            resValue "string", "http_host", "https://test-open.seedland.cc"
             minifyEnabled true       // 开启混淆
             zipAlignEnabled true     // 对齐优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -32,34 +35,11 @@ android {
 
         // 线上发布
         release {
-            resValue "string", "http_host", "http://passport.seedland.cc"
+            resValue "string", "http_host", "https://open.seedland.cc"
 
             minifyEnabled true       // 开启混淆
             zipAlignEnabled true     // 对齐优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    sourceSets {
-
-        // 通用代码集合
-        main {
-            java.srcDirs = ['src/main/java', 'src/main/java/']
-        }
-
-        // 测试代码集合
-        sit {
-            java.srcDirs = ['src/main/java', 'src/sit/java']
-        }
-
-        // 开发代码集合
-        debug {
-            java.srcDirs = ['src/main/java', 'src/public/java']
-        }
-
-        // 发布代码集合
-        release {
-            java.srcDirs = ['src/main/java', 'src/public/java']
         }
     }
 

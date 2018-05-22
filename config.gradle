@@ -5,8 +5,9 @@ ext {
             "targetSdkVersion"                             : 27,
             "minSdkVersion"                                : 16,
             "buildTools"                                   : "27.0.3",
-            "versionName"                                  : "1.0.0-SNAPSHOT"       // for debug
-//            "versionName"                                  : "1.0.0"              // for sit & release
+//            "versionName"                                  : "1.0.1-SNAPSHOT"     // for debug
+            "versionName"                                  : "1.0.2"                  // for dev
+//            "versionName"                                  : "1.0.0"              // for release
 
     ]
 

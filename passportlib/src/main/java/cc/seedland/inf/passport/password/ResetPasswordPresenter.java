@@ -11,6 +11,7 @@ import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.common.SimpleBean;
+import cc.seedland.inf.passport.network.BizBitmapCallback;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.ValidateUtil;
@@ -89,14 +90,6 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
      * 执行获取图形验证码
      */
     public void performImageCaptcha() {
-        model.obtainImageCaptcha(new BitmapCallback() {
-            @Override
-            public void onSuccess(Response<Bitmap> response) {
-                if(view != null && view.get() != null) {
-                    String captchaId = response.headers().get("Captcha-Id");
-                    view.get().updateImageCaptcha(response.body(), captchaId);
-                }
-            }
-        });
+        model.obtainImageCaptcha(new BizBitmapCallback(view));
     }
 }

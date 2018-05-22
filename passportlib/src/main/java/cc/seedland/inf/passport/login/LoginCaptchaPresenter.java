@@ -11,6 +11,7 @@ import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.common.LoginBean;
+import cc.seedland.inf.passport.network.BizBitmapCallback;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
@@ -82,14 +83,6 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
     }
 
     public void performImageCaptcha() {
-        model.obtainImageCaptcha(new BitmapCallback() {
-            @Override
-            public void onSuccess(Response<Bitmap> response) {
-                if(view != null && view.get() != null) {
-                    String captchaId = response.headers().get("Captcha-Id");
-                    view.get().updateImageCaptcha(response.body(), captchaId);
-                }
-            }
-        });
+        model.obtainImageCaptcha(new BizBitmapCallback(view));
     }
 }

@@ -9,6 +9,7 @@ import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
+import cc.seedland.inf.passport.network.BizBitmapCallback;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.base.BasePresenter;
@@ -80,15 +81,7 @@ class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegister
 
     @Override
     public void performImageCaptcha() {
-        model.obtainImageCaptcha(new BitmapCallback() {
-            @Override
-            public void onSuccess(Response<Bitmap> response) {
-                if(view != null && view.get() != null) {
-                    String captchaId = response.headers().get("Captcha-Id");
-                    view.get().updateImageCaptcha(response.body(), captchaId);
-                }
-            }
-        });
+        model.obtainImageCaptcha(new BizBitmapCallback(view));
     }
 
 }

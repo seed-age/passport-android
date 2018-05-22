@@ -24,6 +24,8 @@
 #-dontwarn com.lzy.okgo.**
 #-keep class com.lzy.okgo.**{*;}
 
+-ignorewarnings
+
 #okhttp
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}

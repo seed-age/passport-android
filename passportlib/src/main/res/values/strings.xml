@@ -11,6 +11,7 @@
     <string name="error_password_confirm">两次输入的密码不一致</string>
     <string name="error_password_same">新旧密码不能一致，请重新输入</string>
     <string name="error_network">网络异常</string>
+    <string name="error_server">服务器开小差了，请稍后再试</string>
     <!--<string name="error_sign">非法签名</string>-->
     <string name="hint_phone">请输入手机号</string>
     <string name="hint_image_captcha">请输入图形验证码</string>
