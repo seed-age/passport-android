@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import cc.seedland.inf.network.Networkit;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -54,41 +55,7 @@ public final class PassportHome {
     public void init(Application app, String channel, String key) {
 
         Constant.APP_CONTEXT = app.getApplicationContext();
-
-        // 初始化OkGo
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(new PassportInterceptor());
-        if(BuildConfig.DEBUG) {
-            // 日志支持
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("seeldand-passport");
-            loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
-            loggingInterceptor.setColorLevel(Level.INFO);
-            builder.addInterceptor(loggingInterceptor);
-        }
-
-        builder.readTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)      // 全局读取超时时间
-               .writeTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS)     // 全局写入超时时间
-               .connectTimeout(Constant.WAITTING_MILLISECONDS, TimeUnit.MILLISECONDS);  // 全局连接超时时间
-
-        // Https
-        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
-        builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
-        builder.hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.put("X-proxy-Version", "Passport Android SDK(" + BuildConfig.VERSION_NAME + ")");
-        
-        OkGo.getInstance().init(app)
-                          .setOkHttpClient(builder.build())
-                          .setCacheMode(CacheMode.NO_CACHE)
-                          .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
-                          .setRetryCount(3)
-                          .addCommonHeaders(headers);
+        Networkit.init(app, channel, key);
 
         // 初始化ApiUtil
         ApiUtil.init(channel, key, app.getString(R.string.http_host));

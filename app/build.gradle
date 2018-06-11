@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.build['compileSdkVersion']
+    compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "cc.seedland.inf.samples"
-        minSdkVersion rootProject.ext.build['minSdkVersion']
-        targetSdkVersion rootProject.ext.build['targetSdkVersion']
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -39,6 +39,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    implementation rootProject.ext.dependencies['appcompat-v7']
+    implementation "com.android.support:appcompat-v7:$support_version"
     implementation project(':passportlib')
 }
