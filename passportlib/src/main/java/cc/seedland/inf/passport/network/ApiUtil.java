@@ -210,7 +210,10 @@ public class ApiUtil {
             paramSb.append(encodeFlag ? encode(value) : value);
             paramSb.append("&");
         }
-        paramSb.deleteCharAt(paramSb.length() - 1);
+        if(paramSb.length() > 0) {
+            paramSb.deleteCharAt(paramSb.length() - 1);
+        }
+
         return paramSb.toString();
 
     }

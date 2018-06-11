@@ -56,7 +56,7 @@ public class PassportInterceptor implements Interceptor {
                 throw new IOException(Constant.getString(R.string.error_server));
 
             }catch (Exception e) {
-                throw new IOException(Constant.getString(R.string.error_server));
+                throw new IOException(e.getMessage());
             }
         }
     }
