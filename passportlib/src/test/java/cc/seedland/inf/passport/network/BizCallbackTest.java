@@ -6,26 +6,19 @@ import com.lzy.okgo.request.base.Request;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 
 import java.lang.ref.WeakReference;
 
-import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.base.IBaseView;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by xuchunlei on 2017/12/16.

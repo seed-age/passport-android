@@ -7,7 +7,8 @@ import com.lzy.okgo.request.base.Request;
 
 import java.lang.ref.WeakReference;
 
-import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.network.BaseBean;
+import cc.seedland.inf.network.SeedCallback;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.base.IBaseView;
 import cc.seedland.inf.passport.util.Constant;
@@ -17,7 +18,7 @@ import cc.seedland.inf.passport.util.LogUtil;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class BizCallback<T extends BaseBean> extends JsonCallback<T> {
+public class BizCallback<T extends BaseBean> extends SeedCallback<T> {
 
     private WeakReference<? extends IBaseView> view;
 

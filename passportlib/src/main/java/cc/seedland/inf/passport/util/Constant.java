@@ -19,7 +19,7 @@ public class Constant {
     }
 
     public static final String TAG = "seedland-passport";
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     /** 应用的Context */
     public static Application APP;
     /**用于保存SDK配置的偏好文件名，保存通用配置参数*/

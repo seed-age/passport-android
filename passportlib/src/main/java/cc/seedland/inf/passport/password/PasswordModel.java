@@ -8,7 +8,7 @@ import com.lzy.okgo.callback.BitmapCallback;
 import java.util.HashMap;
 import java.util.Map;
 
-import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.passport.common.SimpleBean;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -29,13 +29,11 @@ class PasswordModel {
      */
     public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
-        Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("captcha_id", imgCaptchaId);
-        params.put("captcha_text", imgCaptcha);
-        params.put("action", "resetpwd");
-        OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<BaseBean>post(ApiUtil.generateFullUrl(Constant.API_URL_CAPTCHA))
+                .params("mobile", phone)
+                .params("captcha_id", imgCaptchaId)
+                .params("captcha_text", imgCaptcha)
+                .params("action", "resetpwd")
                 .execute(callback);
 
     }
@@ -48,13 +46,11 @@ class PasswordModel {
      * @param callback
      */
     public void reset(String phone, String password, String captcha, BizCallback<SimpleBean> callback) {
-        Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("password", password);
-        params.put("code", captcha);
 
-        OkGo.<SimpleBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_RESET))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<SimpleBean>post(ApiUtil.generateFullUrl(Constant.API_URL_PASSWORD_RESET))
+                .params("mobile", phone)
+                .params("password", password)
+                .params("code", captcha)
                 .execute(callback);
     }
 
@@ -68,13 +64,11 @@ class PasswordModel {
      * @param callback
      */
     public void modify(String origin, String current, BizCallback<LoginBean> callback) {
-        Map<String, String> params = new HashMap<>();
-        params.put("sso_tk", RuntimeCache.getToken());
-        params.put("old_password", origin);
-        params.put("new_password", current);
 
-        OkGo.<LoginBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_PASSWORD_MODIFY))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_PASSWORD_MODIFY))
+                .params("sso_tk", RuntimeCache.getToken())
+                .params("old_password", origin)
+                .params("new_password", current)
                 .execute(callback);
     }
 
@@ -83,7 +77,7 @@ class PasswordModel {
      * @param callback
      */
     public void obtainImageCaptcha(BitmapCallback callback) {
-        OkGo.<Bitmap>get(ApiUtil.generateUrlForGet(Constant.API_URL_IMAGE_CAPTCHA, null))
+        OkGo.<Bitmap>get(ApiUtil.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
                 .execute(callback);
     }
 }

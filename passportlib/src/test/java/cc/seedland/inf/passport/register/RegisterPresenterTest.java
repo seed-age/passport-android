@@ -15,14 +15,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.TestConstant;
-import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;

@@ -19,15 +19,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.TestConstant;
-import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.common.SimpleBean;
-import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.util.DeviceUtil;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;

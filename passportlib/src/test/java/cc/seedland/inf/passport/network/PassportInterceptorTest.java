@@ -5,19 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
-
-import java.io.IOException;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.TestConstant;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.util.DeviceUtil;
-import cc.seedland.inf.passport.util.GsonHolder;
 import okhttp3.Interceptor.Chain;
 import okhttp3.Protocol;
 import okhttp3.Request;
@@ -27,7 +22,6 @@ import okhttp3.ResponseBody;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;

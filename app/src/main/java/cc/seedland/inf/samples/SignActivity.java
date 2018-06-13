@@ -18,9 +18,6 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import cc.seedland.inf.passport.network.ApiUtil;
-import cc.seedland.inf.passport.util.DeviceUtil;
-
 /**
  * Created by xuchunlei on 2017/11/21.
  */
@@ -44,10 +41,7 @@ public class SignActivity extends AppCompatActivity {
         final EditText key = findViewById(R.id.sign_key);
         final TextView result = findViewById(R.id.sign_result);
 
-        clientIp.setText(DeviceUtil.getLocalIpAddress());
         deviceType.setText(Build.MANUFACTURER + "-" + Build.MODEL);
-        deviceMac.setText(DeviceUtil.getMacAddress());
-        deviceImei.setText(DeviceUtil.getDeviceId());
 
         final TreeMap<String, String> commonParams = new TreeMap<>();
 
@@ -61,7 +55,7 @@ public class SignActivity extends AppCompatActivity {
                 obtain(commonParams,"device_type",deviceType);
 //                obtain(commonParams, "device_mac", deviceMac);
 //                obtain(commonParams, "device_imei", deviceImei);
-                sign = ApiUtil.testSign(commonParams, key.getText().toString());
+//                sign = ApiUtil.testSign(commonParams, key.getText().toString());
                 result.setText("签名---->" + sign);
             }
         });

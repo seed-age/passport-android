@@ -90,3 +90,5 @@
 -keep class cc.seedland.inf.passport.network.BeanWrapper{*;}
 -keepparameternames
 -keep interface cc.seedland.inf.passport.network.TokenCallback{*;}
+
+# network

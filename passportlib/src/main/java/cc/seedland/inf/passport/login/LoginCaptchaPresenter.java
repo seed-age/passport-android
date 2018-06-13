@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
 
-import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;

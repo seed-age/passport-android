@@ -9,21 +9,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Map;
 
 import cc.seedland.inf.passport.TestConstant;
-import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
-import cc.seedland.inf.passport.util.DeviceUtil;
 import okhttp3.RequestBody;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;

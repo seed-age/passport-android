@@ -6,31 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheEntity;
-import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.https.HttpsUtils;
-import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
-import com.lzy.okgo.model.HttpHeaders;
-
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-
 import cc.seedland.inf.network.Networkit;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
-import cc.seedland.inf.passport.network.PassportInterceptor;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.network.TokenCallback;
 import cc.seedland.inf.passport.password.ModifyPasswordActivity;
 import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.util.Constant;
-import okhttp3.OkHttpClient;
 
 /**
  * Passport门面,这里统一提供对外调用接口
@@ -59,7 +44,7 @@ public final class PassportHome {
         Constant.APP = app;
         Networkit.init(app, channel, key);
         // 初始化ApiUtil
-        ApiUtil.init(channel, key, app.getString(R.string.http_host));
+        ApiUtil.init(app.getString(R.string.http_host));
 
     }
 

@@ -5,10 +5,7 @@ import android.graphics.Bitmap;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import cc.seedland.inf.passport.base.BaseBean;
+import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
@@ -28,12 +25,9 @@ class LoginModel {
      */
     public void loginByPassword(String phone, String password, BizCallback<LoginBean> callback) {
 
-        Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("password", password);
-
-        OkGo.<LoginBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_LOGIN_PASSWORD))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_LOGIN_PASSWORD))
+                .params("mobile", phone)
+                .params("password", password)
                 .execute(callback);
     }
 
@@ -43,12 +37,10 @@ class LoginModel {
      * @param captcha
      */
     public void loginByCaptcha(String phone, String captcha, BizCallback<LoginBean> callback) {
-        Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("code", captcha);
 
-        OkGo.<LoginBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_LOGIN_CAPTCHA))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_LOGIN_CAPTCHA))
+                .params("mobile", phone)
+                .params("code", captcha)
                 .execute(callback);
     }
 
@@ -59,19 +51,17 @@ class LoginModel {
      */
     public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
-        Map<String, String> params = new HashMap<>();
-        params.put("mobile", phone);
-        params.put("captcha_id", imgCaptchaId);
-        params.put("captcha_text", imgCaptcha);
-        params.put("action", "login");
-        OkGo.<BaseBean>post(ApiUtil.generateUrlForPost(Constant.API_URL_CAPTCHA))
-                .upRequestBody(ApiUtil.generateParamsBodyForPost(params))
+        OkGo.<BaseBean>post(ApiUtil.generateFullUrl(Constant.API_URL_CAPTCHA))
+                .params("mobile", phone)
+                .params("captcha_id", imgCaptchaId)
+                .params("captcha_text", imgCaptcha)
+                .params("action", "login")
                 .execute(callback);
 
     }
 
     public void obtainImageCaptcha(BitmapCallback callback) {
-        OkGo.<Bitmap>get(ApiUtil.generateUrlForGet(Constant.API_URL_IMAGE_CAPTCHA, null))
+        OkGo.<Bitmap>get(ApiUtil.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
                 .execute(callback);
     }
 }
