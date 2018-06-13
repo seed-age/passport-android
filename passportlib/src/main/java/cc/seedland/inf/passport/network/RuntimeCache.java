@@ -60,8 +60,8 @@ public class RuntimeCache {
     }
 
     private static void save(String key, String value) {
-        if(Constant.APP_CONTEXT != null) {
-            SharedPreferences pref = Constant.APP_CONTEXT.getSharedPreferences(CACHE_NAME, Context.MODE_PRIVATE);
+        if(Constant.APP != null) {
+            SharedPreferences pref = Constant.APP.getSharedPreferences(CACHE_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString(key, value);
             editor.commit();
@@ -71,8 +71,8 @@ public class RuntimeCache {
     }
 
     private static String obtain(String key, String def) {
-        if(Constant.APP_CONTEXT != null) {
-            SharedPreferences pref = Constant.APP_CONTEXT.getSharedPreferences(CACHE_NAME, Context.MODE_PRIVATE);
+        if(Constant.APP != null) {
+            SharedPreferences pref = Constant.APP.getSharedPreferences(CACHE_NAME, Context.MODE_PRIVATE);
             return pref.getString(key, def);
         }
         throw new NullPointerException("initialize CONTEXT before using it");

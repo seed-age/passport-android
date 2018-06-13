@@ -24,6 +24,47 @@
 #-dontwarn com.lzy.okgo.**
 #-keep class com.lzy.okgo.**{*;}
 
+#-ignorewarnings
+#
+##okhttp
+#-dontwarn okhttp3.**
+#-keep class okhttp3.**{*;}
+#
+##okio
+#-dontwarn okio.**
+#-keep class okio.**{*;}
+#
+##passport
+#-keepparameternames
+#-keep class cc.seedland.inf.passport.PassportHome{*;}
+#
+##-keep class cc.seedland.inf.** {*;}
+#
+###---------------Begin: proguard configuration for Gson  ----------
+## Gson uses generic type information stored in a class file when working with fields. Proguard
+## removes such information by default, so configure it to keep all of it.
+#-keepattributes Signature
+#
+## For using GSON @Expose annotation
+#-keepattributes *Annotation*
+#
+## Gson specific classes
+#-dontwarn sun.misc.**
+##-keep class com.google.gson.stream.** { *; }
+#
+## Application classes that will be serialized/deserialized over Gson
+#-keep public class * extends cc.seedland.inf.passport.base.BaseBean{*;}
+#-keep class cc.seedland.inf.passport.base.BaseBean{*;}
+#-keep class cc.seedland.inf.passport.network.BeanWrapper{*;}
+#
+## Prevent proguard from stripping interface information from TypeAdapterFactory,
+## JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
+#-keep class * implements com.google.gson.TypeAdapterFactory
+#-keep class * implements com.google.gson.JsonSerializer
+#-keep class * implements com.google.gson.JsonDeserializer
+#
+###---------------End: proguard configuration for Gson  ----------
+
 -ignorewarnings
 
 #okhttp
@@ -34,33 +75,21 @@
 -dontwarn okio.**
 -keep class okio.**{*;}
 
-#passport
--keepparameternames
--keep class cc.seedland.inf.passport.PassportHome{*;}
-
-#-keep class cc.seedland.inf.** {*;}
-
 ##---------------Begin: proguard configuration for Gson  ----------
-# Gson uses generic type information stored in a class file when working with fields. Proguard
-# removes such information by default, so configure it to keep all of it.
 -keepattributes Signature
-
-# For using GSON @Expose annotation
 -keepattributes *Annotation*
-
-# Gson specific classes
 -dontwarn sun.misc.**
-#-keep class com.google.gson.stream.** { *; }
-
-# Application classes that will be serialized/deserialized over Gson
--keep public class * extends cc.seedland.inf.passport.base.BaseBean{*;}
--keep class cc.seedland.inf.passport.base.BaseBean{*;}
--keep class cc.seedland.inf.passport.network.BeanWrapper{*;}
-
-# Prevent proguard from stripping interface information from TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 
 ##---------------End: proguard configuration for Gson  ----------
+
+# passport
+-keepparameternames
+-keep class cc.seedland.inf.passport.PassportHome{*;}
+-keep public class * extends cc.seedland.inf.passport.base.BaseBean{*;}
+-keep class cc.seedland.inf.passport.base.BaseBean{*;}
+-keep class cc.seedland.inf.passport.network.BeanWrapper{*;}
+-keepparameternames
+-keep interface cc.seedland.inf.passport.network.TokenCallback{*;}

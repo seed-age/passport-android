@@ -6,13 +6,13 @@ ext {
             "minSdkVersion"                                : 16,
             "buildTools"                                   : "27.0.3",
 //            "versionName"                                  : "1.0.1-SNAPSHOT"     // for debug
-            "versionName"                                  : "1.0.2"                  // for dev
-//            "versionName"                                  : "1.0.0"              // for release
+//            "versionName"                                  : "1.0.2"                  // for dev
+            "versionName"                                  : "1.0.3"              // for release
 
     ]
 
     dependencies = [
-            "appcompat-v7"                                 : "com.android.support:appcompat-v7:27.0.2",
+            "appcompat-v7"                                 : "com.android.support:appcompat-v7:27.1.0",
             "okgo"                                         : "com.lzy.net:okgo:3.0.4",
             "gson"                                         : "com.google.code.gson:gson:2.8.2"
     ]

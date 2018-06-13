@@ -18,11 +18,11 @@ android {
         debug {
             resValue "string", "http_host", "https://test-open.seedland.cc"
 
-//            testCoverageEnabled true
+            minifyEnabled true       // 开启混淆
+            zipAlignEnabled true     // 对齐优化
 
-//            minifyEnabled true
-//            zipAlignEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         // 功能测试-开放动态切换线上线下环境

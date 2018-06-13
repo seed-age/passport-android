@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        config {
+            keyAlias 'sdk'
+            keyPassword 'Seedland2018'
+            storeFile file('/Users/xuchunlei/Projects/seedland/passport-android/app/sdk.jks')
+            storePassword 'Seedland2018'
+        }
+    }
+
     compileSdkVersion rootProject.ext.build['compileSdkVersion']
     defaultConfig {
         applicationId "cc.seedland.inf.samples"
@@ -14,31 +24,32 @@ android {
         debug {
             resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
             resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
-//            resValue "string", "passport_channel", "haqi"
-//            resValue "string", "passport_key", "hueugegey"
-        }
-        release {
-//            resValue "string", "passport_channel", "hachi"         // PassportSDK的渠道号
-//            resValue "string", "passport_key", "G0YVngfS4yP3TmRd"  // PassportSDK的开发者Key
-
-            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
-            resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
 
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable true
+        }
+        release {
+            resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
+            resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"          // PassportSDK的开发者Key
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable true
         }
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     implementation rootProject.ext.dependencies['appcompat-v7']
     implementation project(':passportlib')
 }

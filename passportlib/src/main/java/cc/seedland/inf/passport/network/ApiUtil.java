@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseBean;
 import cc.seedland.inf.passport.common.TokenBean;
 import cc.seedland.inf.passport.util.Constant;
@@ -51,6 +52,8 @@ public class ApiUtil {
     private static final MediaType FORM_CONTENT_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
 
+    private static boolean refreshing;
+
     private ApiUtil(){
 
     }
@@ -67,8 +70,6 @@ public class ApiUtil {
             CHANNEL = channel;
             AUTH_KEY = key;
             HOST = host;
-
-            refreshToken();
         }else {
             throw new IllegalArgumentException("invalid host name " + host);
         }
@@ -111,10 +112,16 @@ public class ApiUtil {
 
     // 刷新Token
     public static void refreshToken() {
-        String cachedToken = RuntimeCache.getToken();
+        refreshToken(null);
+
+    }
+
+    public static void refreshToken(final TokenCallback callback) {
+        final String cachedToken = RuntimeCache.getToken();
         if(!ValidateUtil.checkNull(cachedToken)) { // 缓存过Token，则进行刷新
             Map<String, String> params = new HashMap<>();
             params.put("sso_tk", RuntimeCache.getToken());
+            refreshing = true;
             OkGo.<TokenBean>post(generateUrlForPost(Constant.API_URL_TOKEN))
                     .upRequestBody(generateParamsBodyForPost(params))
                     .execute(new JsonCallback<TokenBean>(TokenBean.class) {
@@ -123,7 +130,10 @@ public class ApiUtil {
                             RuntimeCache.saveToken(response.body().token);
 
                             if(Constant.DEBUG) {
-                                Toast.makeText(Constant.APP_CONTEXT, RuntimeCache.getToken(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(Constant.APP, RuntimeCache.getToken(), Toast.LENGTH_LONG).show();
+                            }
+                            if(callback != null) {
+                                callback.onTokenReceived(RuntimeCache.getToken());
                             }
 
                         }
@@ -131,13 +141,30 @@ public class ApiUtil {
                         @Override
                         public void onError(Response<TokenBean> response) {
                             super.onError(response);
-                            if(Constant.DEBUG) {
-                                Toast.makeText(Constant.APP_CONTEXT, response.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            String msg = response.getException().getMessage();
+                            if(!TextUtils.isEmpty(msg)) {
+                                Toast.makeText(Constant.APP, msg, Toast.LENGTH_LONG).show();
                             }
+                            if(!Constant.getString(R.string.error_network).equals(msg)) { // 不是因为没有网络，导致的刷新缓存错误
+                                RuntimeCache.saveToken("");
+                            }
+                            if(callback != null) {
+                                callback.onTokenExpired(cachedToken);
+                            }
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            super.onFinish();
+                            refreshing = false;
                         }
                     });
         }
+    }
 
+    public static boolean isRefreshing() {
+        return refreshing;
     }
 
     public static String testSign(TreeMap<String, String> params, String key) {

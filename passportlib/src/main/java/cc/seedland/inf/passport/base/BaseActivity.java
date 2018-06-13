@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.TextView;
@@ -132,8 +133,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         data.putExtra(Constant.EXTRA_KEY_RAW_RESULT, raw);
         setResult(RESULT_OK, data);
         finish();
-
-        data.putExtra("", new HashMap<>());
     }
 
     @Override

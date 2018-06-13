@@ -3,9 +3,12 @@ package cc.seedland.inf.samples;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import cc.seedland.inf.passport.PassportHome;
+import cc.seedland.inf.passport.network.TokenCallback;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +24,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.main_login).setOnClickListener(this);
         findViewById(R.id.main_password).setOnClickListener(this);
         findViewById(R.id.main_sign).setOnClickListener(this);
+
+        PassportHome.getInstance().checkLogin(new TokenCallback() {
+            @Override
+            public void onTokenReceived(String token) {
+                Log.e("MainActivity", "received new token");
+            }
+
+            @Override
+            public void onTokenExpired(String oldToken) {
+            }
+        });
     }
 
     @Override
