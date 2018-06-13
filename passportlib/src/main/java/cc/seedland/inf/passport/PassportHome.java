@@ -25,6 +25,7 @@ import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.PassportInterceptor;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.network.TokenCallback;
 import cc.seedland.inf.passport.password.ModifyPasswordActivity;
 import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
@@ -39,6 +40,7 @@ import okhttp3.OkHttpClient;
 public final class PassportHome {
 
     private static final PassportHome INSTANCE = new PassportHome();
+    private static final PassportLifecycleCallbacks LIFECYCLE_CALLBACKS = new PassportLifecycleCallbacks();
     private PassportHome(){
 
     }
@@ -54,17 +56,32 @@ public final class PassportHome {
      */
     public void init(Application app, String channel, String key) {
 
-        Constant.APP_CONTEXT = app.getApplicationContext();
+        Constant.APP = app;
         Networkit.init(app, channel, key);
-
         // 初始化ApiUtil
         ApiUtil.init(channel, key, app.getString(R.string.http_host));
 
-        app.registerActivityLifecycleCallbacks(new PassportLifecycleCallbacks());
     }
 
     public final static PassportHome getInstance() {
         return INSTANCE;
+    }
+
+    /**
+     * 开启或关闭刷新token，默认关闭自动
+     * 必须在初始化之后调用，才会生效
+     * @param value
+     */
+    public final static void enableTokenUpdate(boolean value) {
+        if(value) {
+            if(Constant.APP != null) {
+                Constant.APP.registerActivityLifecycleCallbacks(LIFECYCLE_CALLBACKS);
+            }
+        }else {
+            if(Constant.APP != null) {
+                Constant.APP.unregisterActivityLifecycleCallbacks(LIFECYCLE_CALLBACKS);
+            }
+        }
     }
 
     /**
@@ -161,4 +178,9 @@ public final class PassportHome {
     public void logout() {
         RuntimeCache.saveToken("");
     }
+
+    public void checkLogin(TokenCallback callback) {
+        ApiUtil.refreshToken(callback);
+    }
+
 }

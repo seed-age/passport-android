@@ -116,7 +116,7 @@ public class DeviceUtil {
     public static String getDeviceId() {
         if(DEVICE_ID.length() == 0) {
             // 优先从设置获取
-            final Context context = Constant.APP_CONTEXT;
+            final Context context = Constant.APP;
             DEVICE_ID = obtainFromSettings(context);
             // 其次从文件获取
 //            if(TextUtils.isEmpty(DEVICE_ID)) {
@@ -163,8 +163,8 @@ public class DeviceUtil {
     public static boolean isNetworkConnected() {
 
         // 判断是否具有可以用于通信渠道
-        boolean mobileConnection = isMobileConnected(Constant.APP_CONTEXT);
-        boolean wifiConnection = isWIFIConnected(Constant.APP_CONTEXT);
+        boolean mobileConnection = isMobileConnected(Constant.APP);
+        boolean wifiConnection = isWIFIConnected(Constant.APP);
         return !(mobileConnection == false && wifiConnection == false);
     }
 

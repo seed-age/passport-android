@@ -1,5 +1,6 @@
 package cc.seedland.inf.passport.util;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.StringRes;
 
@@ -18,9 +19,9 @@ public class Constant {
     }
 
     public static final String TAG = "seedland-passport";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     /** 应用的Context */
-    public static Context APP_CONTEXT;
+    public static Application APP;
     /**用于保存SDK配置的偏好文件名，保存通用配置参数*/
     public static final String PREFS_SEEDLAND = "seedland";
 
@@ -83,6 +84,6 @@ public class Constant {
      * @return
      */
     public static String getString(@StringRes int id) {
-        return APP_CONTEXT.getString(id);
+        return APP.getString(id);
     }
 }
