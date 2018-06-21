@@ -3,25 +3,23 @@ package cc.seedland.inf.passport.login;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.BaseActivity;
+import cc.seedland.inf.passport.base.PassportOActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
+import cc.seedland.inf.passport.template.TemplateFactory;
 import cc.seedland.inf.passport.widget.CountDownButton;
-import cc.seedland.inf.passport.widget.ImageCaptchaView;
 
 /**
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> implements View.OnClickListener, ICaptchaView {
+public class LoginCaptchaActivity extends PassportOActivity<LoginCaptchaViewAgent, LoginCaptchaPresenter> implements View.OnClickListener, ICaptchaView {
 
     private CountDownButton gainTxv;
     private EditText phoneEdt;
@@ -33,6 +31,7 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        agent = TemplateFactory.getTemplate().createLoginCaptchaAgent();
         super.onCreate(savedInstanceState);
 
         phoneEdt = findViewById(R.id.login_captcha_phone_edt);
@@ -47,7 +46,6 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
         String phone = RuntimeCache.getPhone();
         phoneEdt.setText(phone);
 
-        setTitle(getString(R.string.login_captcha_title));
     }
 
     @Override
@@ -56,10 +54,6 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
         presenter.performImageCaptcha();
     }
 
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_login_captcha;
-    }
 
     @Override
     public void onClick(View v) {
@@ -78,7 +72,7 @@ public class LoginCaptchaActivity extends BaseActivity<LoginCaptchaPresenter> im
 
     @Override
     protected LoginCaptchaPresenter createPresenter() {
-        return new LoginCaptchaPresenter();
+        return new LoginCaptchaPresenter(this);
     }
 
     @Override

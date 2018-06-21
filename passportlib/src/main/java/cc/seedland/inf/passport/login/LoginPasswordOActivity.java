@@ -1,6 +1,5 @@
 package cc.seedland.inf.passport.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +9,10 @@ import android.widget.EditText;
 
 import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.BaseActivity;
+import cc.seedland.inf.passport.base.PassportOActivity;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.template.LoginMainViewAgent;
+import cc.seedland.inf.passport.template.TemplateFactory;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 
@@ -19,7 +20,7 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> implements View.OnClickListener, ILoginMainView {
+public class LoginPasswordOActivity extends PassportOActivity<LoginMainViewAgent, LoginPasswordPresenter> implements View.OnClickListener, ILoginMainView {
 
     private static final int REQUEST_CODE_REGISTER = 1;
     private static final int REQUEST_CODE_LOGIN_CAPTCHA = 2;
@@ -30,11 +31,12 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
 
     @Override
     protected LoginPasswordPresenter createPresenter() {
-        return new LoginPasswordPresenter(new LoginModel());
+        return new LoginPasswordPresenter(this);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        agent = TemplateFactory.getTemplate().createLoginMainAgent();
         super.onCreate(savedInstanceState);
 
         findViewById(R.id.login_register_txv).setOnClickListener(this);
@@ -52,14 +54,6 @@ public class LoginPasswordActivity extends BaseActivity<LoginPasswordPresenter> 
         }
         loadPhone(phone);
 
-
-        setToolbarDivider(false);
-
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_login_password;
     }
 
     @Override

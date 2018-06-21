@@ -8,7 +8,7 @@
     <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
 
     <application>
-        <activity android:name=".login.LoginPasswordActivity"
+        <activity android:name=".login.LoginPasswordOActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SeedLandTheme"/>
         <activity android:name=".login.LoginCaptchaActivity"
@@ -23,5 +23,9 @@
         <activity android:name=".password.ModifyPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SeedLandTheme" />
+
+        <!-- 模版 -->
+        <activity android:name=".login.LoginActivity"
+            android:theme="@style/SeedLandTheme"/>
     </application>
 </manifest>

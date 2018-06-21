@@ -6,6 +6,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 
 import cc.seedland.inf.network.BaseBean;
+import cc.seedland.inf.network.Networkit;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.BizCallback;
@@ -25,7 +26,7 @@ class LoginModel {
      */
     public void loginByPassword(String phone, String password, BizCallback<LoginBean> callback) {
 
-        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_LOGIN_PASSWORD))
+        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_PASSWORD))
                 .params("mobile", phone)
                 .params("password", password)
                 .execute(callback);
@@ -38,7 +39,7 @@ class LoginModel {
      */
     public void loginByCaptcha(String phone, String captcha, BizCallback<LoginBean> callback) {
 
-        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_LOGIN_CAPTCHA))
+        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_CAPTCHA))
                 .params("mobile", phone)
                 .params("code", captcha)
                 .execute(callback);
@@ -51,7 +52,7 @@ class LoginModel {
      */
     public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
-        OkGo.<BaseBean>post(ApiUtil.generateFullUrl(Constant.API_URL_CAPTCHA))
+        OkGo.<BaseBean>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
                 .params("mobile", phone)
                 .params("captcha_id", imgCaptchaId)
                 .params("captcha_text", imgCaptcha)
@@ -61,7 +62,7 @@ class LoginModel {
     }
 
     public void obtainImageCaptcha(BitmapCallback callback) {
-        OkGo.<Bitmap>get(ApiUtil.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
+        OkGo.<Bitmap>get(Networkit.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
                 .execute(callback);
     }
 }

@@ -2,7 +2,7 @@ package cc.seedland.inf.passport.login;
 
 import com.lzy.okgo.model.Response;
 
-import cc.seedland.inf.passport.base.BasePresenter;
+import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
@@ -16,10 +16,10 @@ import cc.seedland.inf.passport.util.ValidateUtil;
 
 class LoginPasswordPresenter extends BasePresenter<ILoginMainView> {
 
-    private LoginModel model;
+    private LoginModel model = new LoginModel();
 
-    public LoginPasswordPresenter(LoginModel model) {
-        this.model = model;
+    public LoginPasswordPresenter(ILoginMainView view) {
+        super(view);
     }
 
     /**

@@ -2,8 +2,8 @@ package cc.seedland.inf.passport.password;
 
 import com.lzy.okgo.model.Response;
 
+import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.network.BaseBean;
-import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.common.SimpleBean;
@@ -19,6 +19,10 @@ import cc.seedland.inf.passport.util.ValidateUtil;
 class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
 
     PasswordModel model = new PasswordModel();
+
+    public ResetPasswordPresenter(ICaptchaView view) {
+        super(view);
+    }
 
     /**
      * 执行获取验证码接口

@@ -66,6 +66,7 @@
 ###---------------End: proguard configuration for Gson  ----------
 
 -ignorewarnings
+-keep class **.R$* {*;}
 
 #okhttp
 -dontwarn okhttp3.**
@@ -88,8 +89,8 @@
 # passport
 -keepparameternames
 -keep class cc.seedland.inf.passport.PassportHome{*;}
--keep public class * extends cc.seedland.inf.passport.base.BaseBean{*;}
--keep class cc.seedland.inf.passport.base.BaseBean{*;}
--keep class cc.seedland.inf.passport.network.BeanWrapper{*;}
+-keep public class * extends cc.seedland.inf.network.BaseBean{*;}
+-keep class cc.seedland.inf.network.BaseBean{*;}
+-keep class cc.seedland.inf.network.BeanWrapper{*;}
 -keepparameternames
 -keep interface cc.seedland.inf.passport.network.TokenCallback{*;}

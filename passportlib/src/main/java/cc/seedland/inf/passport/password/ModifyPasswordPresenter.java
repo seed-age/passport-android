@@ -2,10 +2,10 @@ package cc.seedland.inf.passport.password;
 
 import com.lzy.okgo.model.Response;
 
+import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.base.IPassportView;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
@@ -16,9 +16,13 @@ import cc.seedland.inf.passport.util.ValidateUtil;
  * Created by xuchunlei on 2017/11/17.
  */
 
-class ModifyPasswordPresenter extends BasePresenter<IBaseView> {
+class ModifyPasswordPresenter extends BasePresenter<IPassportView> {
 
     private PasswordModel model = new PasswordModel();
+
+    public ModifyPasswordPresenter(IPassportView view) {
+        super(view);
+    }
 
     /**
      * 执行修改密码

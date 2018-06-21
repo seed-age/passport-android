@@ -19,28 +19,28 @@ public class Constant {
     }
 
     public static final String TAG = "seedland-passport";
-    public static final boolean DEBUG = true;
+//    public static final boolean DEBUG = true;
     /** 应用的Context */
     public static Application APP;
     /**用于保存SDK配置的偏好文件名，保存通用配置参数*/
     public static final String PREFS_SEEDLAND = "seedland";
 
     /** 请求Url-验证Token登录状态 */
-    public static final String API_URL_TOKEN = "/1.0/token/refresh";
+    public static final String API_URL_TOKEN = "/passport/api/rest/1.0/token/refresh";
     /** 请求Url-下发短信激活码 */
-    public static final String API_URL_CAPTCHA = "/1.0/sms/send";
+    public static final String API_URL_CAPTCHA = "/passport/api/rest/1.0/sms/send";
     /** 请求Url-手机号注册 */
-    public static final String API_URL_REGISTER_PHONE = "/1.0/register";
+    public static final String API_URL_REGISTER_PHONE = "/passport/api/rest/1.0/register";
     /** 请求Url-密码登录 */
-    public static final String API_URL_LOGIN_PASSWORD = "/1.0/login/password";
+    public static final String API_URL_LOGIN_PASSWORD = "/passport/api/rest/1.0/login/password";
     /** 请求Url-验证码登录 */
-    public static final String API_URL_LOGIN_CAPTCHA = "/1.0/login/verify_code";
+    public static final String API_URL_LOGIN_CAPTCHA = "/passport/api/rest/1.0/login/verify_code";
     /** 请求Url-重置密码 */
-    public static final String API_URL_PASSWORD_RESET = "/1.0/password/reset";
+    public static final String API_URL_PASSWORD_RESET = "/passport/api/rest/1.0/password/reset";
     /** 请求Url-修改密码 */
-    public static final String API_URL_PASSWORD_MODIFY = "/1.0/password/modify";
+    public static final String API_URL_PASSWORD_MODIFY = "/passport/api/rest/1.0/password/modify";
     /** 请求Url-图形验证码 */
-    public static final String API_URL_IMAGE_CAPTCHA = "/1.0/captcha";
+    public static final String API_URL_IMAGE_CAPTCHA = "/passport/api/rest/1.0/captcha";
 
     /** 请求返回码-成功 */
     public static final int RESPONSE_CODE_SUCCESS = 0;

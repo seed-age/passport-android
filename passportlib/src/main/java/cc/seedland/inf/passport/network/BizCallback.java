@@ -1,16 +1,14 @@
 package cc.seedland.inf.passport.network;
 
-import android.view.View;
-
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.Reference;
 
 import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.network.SeedCallback;
 import cc.seedland.inf.passport.base.BaseViewGuard;
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.base.IPassportView;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.LogUtil;
 
@@ -20,9 +18,9 @@ import cc.seedland.inf.passport.util.LogUtil;
 
 public class BizCallback<T extends BaseBean> extends SeedCallback<T> {
 
-    private WeakReference<? extends IBaseView> view;
+    private Reference<? extends IPassportView> view;
 
-    public BizCallback(Class<T> clz, WeakReference<? extends IBaseView> view) {
+    public BizCallback(Class<T> clz, Reference<? extends IPassportView> view) {
         super(clz);
         this.view = view;
     }

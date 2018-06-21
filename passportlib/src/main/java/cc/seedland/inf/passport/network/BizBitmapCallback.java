@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.Reference;
 
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
@@ -20,9 +20,9 @@ import cc.seedland.inf.passport.common.ICaptchaView;
  */
 public class BizBitmapCallback extends BitmapCallback {
 
-    private WeakReference<? extends ICaptchaView> view;
+    private Reference<? extends ICaptchaView> view;
 
-    public BizBitmapCallback(WeakReference<? extends ICaptchaView> view) {
+    public BizBitmapCallback(Reference<? extends ICaptchaView> view) {
         this.view = view;
     }
 

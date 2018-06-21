@@ -3,15 +3,14 @@ package cc.seedland.inf.passport.password;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.BaseActivity;
+import cc.seedland.inf.passport.base.PassportOActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 import cc.seedland.inf.passport.widget.RatioImageView;
@@ -20,7 +19,7 @@ import cc.seedland.inf.passport.widget.RatioImageView;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> implements ICaptchaView, View.OnClickListener {
+public class ResetPasswordActivity extends PassportOActivity<IViewAgent, ResetPasswordPresenter> implements ICaptchaView, View.OnClickListener {
 
     private CountDownButton captchaBtn;
     private EditText phoneEdt;
@@ -54,13 +53,8 @@ public class ResetPasswordActivity extends BaseActivity<ResetPasswordPresenter> 
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_password_reset;
-    }
-
-    @Override
     protected ResetPasswordPresenter createPresenter() {
-        return new ResetPasswordPresenter();
+        return new ResetPasswordPresenter(this);
     }
 
     @Override

@@ -2,6 +2,8 @@ package cc.seedland.inf.passport.base;
 
 import android.os.Bundle;
 
+import cc.seedland.inf.corework.mvp.IBaseView;
+
 /**
  * View基础接口
  * <p>
@@ -10,13 +12,8 @@ import android.os.Bundle;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public interface IBaseView {
+public interface IPassportView extends IBaseView{
 
-    /**
-     * Toast显示信息
-     * @param msg
-     */
-    void showToast(String msg);
 
     /**
      * 显示提示，时间较长
@@ -25,26 +22,8 @@ public interface IBaseView {
     void showTip(String tip);
 
     /**
-     * 显示加载对话框
-     */
-    void showLoading();
-
-    /**
-     * 隐藏加载对话框
-     */
-    void hideLoading();
-
-    /**
      * 关闭界面
      * 返回RESULT_OK
      */
     void close(Bundle args, String raw);
-
-    /**
-     * 退出界面
-     * 返回RESULT_CANCELED
-     * @param args
-     * @param raw
-     */
-    void cancel(Bundle args, String raw);
 }

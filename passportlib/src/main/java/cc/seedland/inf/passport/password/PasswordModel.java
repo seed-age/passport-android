@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.seedland.inf.network.BaseBean;
+import cc.seedland.inf.network.Networkit;
 import cc.seedland.inf.passport.common.SimpleBean;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -29,7 +30,7 @@ class PasswordModel {
      */
     public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
-        OkGo.<BaseBean>post(ApiUtil.generateFullUrl(Constant.API_URL_CAPTCHA))
+        OkGo.<BaseBean>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
                 .params("mobile", phone)
                 .params("captcha_id", imgCaptchaId)
                 .params("captcha_text", imgCaptcha)
@@ -47,7 +48,7 @@ class PasswordModel {
      */
     public void reset(String phone, String password, String captcha, BizCallback<SimpleBean> callback) {
 
-        OkGo.<SimpleBean>post(ApiUtil.generateFullUrl(Constant.API_URL_PASSWORD_RESET))
+        OkGo.<SimpleBean>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_RESET))
                 .params("mobile", phone)
                 .params("password", password)
                 .params("code", captcha)
@@ -65,7 +66,7 @@ class PasswordModel {
      */
     public void modify(String origin, String current, BizCallback<LoginBean> callback) {
 
-        OkGo.<LoginBean>post(ApiUtil.generateFullUrl(Constant.API_URL_PASSWORD_MODIFY))
+        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_MODIFY))
                 .params("sso_tk", RuntimeCache.getToken())
                 .params("old_password", origin)
                 .params("new_password", current)
@@ -77,7 +78,7 @@ class PasswordModel {
      * @param callback
      */
     public void obtainImageCaptcha(BitmapCallback callback) {
-        OkGo.<Bitmap>get(ApiUtil.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
+        OkGo.<Bitmap>get(Networkit.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
                 .execute(callback);
     }
 }

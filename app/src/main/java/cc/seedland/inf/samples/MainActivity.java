@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.network.TokenCallback;
+import cc.seedland.inf.passport.util.Constant;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (requestCode) {
             case REQUEST_CODE_LOGIN:
 //                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-//                Log.e("xuchunlei", data.getBundleExtra(Constant.EXTRA_KEY_RESULT).toString());
+//                Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
+//                Log.e("xuchunlei", args.getString("mobile"));
                 break;
             case REQUEST_CODE_PASSWORD:
 //                Log.e("xuchunlei", data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));

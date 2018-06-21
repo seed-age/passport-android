@@ -2,21 +2,18 @@ package cc.seedland.inf.passport.password;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.BaseActivity;
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.base.PassportOActivity;
+import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 
 /**
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter> implements View.OnClickListener {
+public class ModifyPasswordActivity extends PassportOActivity<IViewAgent, ModifyPasswordPresenter> implements View.OnClickListener {
 
     private PasswordEditText originEdt;
     private PasswordEditText currentEdt;
@@ -34,14 +31,14 @@ public class ModifyPasswordActivity extends BaseActivity<ModifyPasswordPresenter
         setTitle(getString(R.string.password_modify_title));
     }
 
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_password_modify;
-    }
+//    @Override
+//    protected int getLayoutResource() {
+//        return R.layout.activity_password_modify;
+//    }
 
     @Override
     protected ModifyPasswordPresenter createPresenter() {
-        return new ModifyPasswordPresenter();
+        return new ModifyPasswordPresenter(this);
     }
 
     @Override

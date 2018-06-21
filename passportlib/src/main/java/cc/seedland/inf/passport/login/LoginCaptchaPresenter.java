@@ -1,13 +1,9 @@
 package cc.seedland.inf.passport.login;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-
-import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
 
+import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.network.BaseBean;
-import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.common.LoginBean;
@@ -24,6 +20,10 @@ import cc.seedland.inf.passport.util.ValidateUtil;
 class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
 
     private LoginModel model = new LoginModel();
+
+    public LoginCaptchaPresenter(ICaptchaView view) {
+        super(view);
+    }
 
     /**
      * 执行获取验证码接口

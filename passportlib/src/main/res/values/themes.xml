@@ -7,5 +7,6 @@
         <item name="colorAccent">@color/default_blue</item>
         <item name="colorControlNormal">@color/default_gray</item>
         <item name="colorControlActivated">@color/default_gray</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 </resources>

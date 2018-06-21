@@ -22,15 +22,15 @@ android {
     }
     buildTypes {
         debug {
-            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
-            resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
+            resValue "string", "channel", "test"         // PassportSDK的渠道号
+            resValue "string", "key", "hay8qwz"          // PassportSDK的开发者Key
 
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-            debuggable true
+//            minifyEnabled true
+//            shrinkResources true
+//            zipAlignEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.config
+//            debuggable true
         }
         release {
             resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号

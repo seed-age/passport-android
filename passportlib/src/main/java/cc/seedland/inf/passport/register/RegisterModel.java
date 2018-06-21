@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.seedland.inf.network.BaseBean;
+import cc.seedland.inf.network.Networkit;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -27,7 +28,7 @@ class RegisterModel {
      */
     public void getCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
 
-        OkGo.<BaseBean>post(ApiUtil.generateFullUrl(Constant.API_URL_CAPTCHA))
+        OkGo.<BaseBean>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
                 .params("mobile", phone)
                 .params("captcha_id", imgCaptchaId)
                 .params("captcha_text", imgCaptcha)
@@ -45,7 +46,7 @@ class RegisterModel {
      */
     public void performPhone(String phone, String password, String captcha, BizCallback<RegisterBean> callback) {
 
-        OkGo.<RegisterBean>post(ApiUtil.generateFullUrl(Constant.API_URL_REGISTER_PHONE))
+        OkGo.<RegisterBean>post(Networkit.generateFullUrl(Constant.API_URL_REGISTER_PHONE))
                 .params("mobile", phone)
                 .params("password", password)
                 .params("code", captcha)
@@ -57,7 +58,7 @@ class RegisterModel {
      * @param callback
      */
     public void obtainImageCaptcha(BitmapCallback callback) {
-        OkGo.<Bitmap>get(ApiUtil.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
+        OkGo.<Bitmap>get(Networkit.generateFullUrl(Constant.API_URL_IMAGE_CAPTCHA))
                 .execute(callback);
     }
 

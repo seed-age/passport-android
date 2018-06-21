@@ -14,7 +14,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.lang.ref.WeakReference;
 
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.base.IPassportView;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
 public class BizCallbackTest {
 
     @Mock
-    private IBaseView view;
+    private IPassportView view;
     @Mock
     private Request<BaseBean, PostRequest<BaseBean>> request;
 

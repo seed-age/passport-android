@@ -2,13 +2,13 @@ package cc.seedland.inf.passport.register;
 
 import com.lzy.okgo.model.Response;
 
+import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.BizBitmapCallback;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.base.BasePresenter;
 import cc.seedland.inf.passport.util.ValidateUtil;
 
 /**
@@ -18,6 +18,10 @@ import cc.seedland.inf.passport.util.ValidateUtil;
 class RegisterPresenter extends BasePresenter<ICaptchaView> implements IRegisterPresenter {
 
     private final RegisterModel model = new RegisterModel();
+
+    public RegisterPresenter(ICaptchaView view) {
+        super(view);
+    }
 
 
     @Override

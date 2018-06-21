@@ -4,8 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.test.mock.MockContext;
 
-import com.lzy.okgo.request.PostRequest;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

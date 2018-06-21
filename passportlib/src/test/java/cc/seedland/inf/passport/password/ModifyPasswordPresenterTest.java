@@ -15,7 +15,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import cc.seedland.inf.passport.TestConstant;
-import cc.seedland.inf.passport.base.IBaseView;
+import cc.seedland.inf.passport.base.IPassportView;
 import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
@@ -42,7 +42,7 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 public class ModifyPasswordPresenterTest {
 
     @Mock
-    private IBaseView view;
+    private IPassportView view;
     @Mock
     private PasswordModel model;
 

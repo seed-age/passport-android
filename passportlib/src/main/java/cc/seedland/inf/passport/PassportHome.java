@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import cc.seedland.inf.network.Networkit;
+import cc.seedland.inf.passport.login.LoginActivity;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
-import cc.seedland.inf.passport.login.LoginPasswordActivity;
+import cc.seedland.inf.passport.login.LoginPasswordOActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.network.TokenCallback;
@@ -39,13 +40,17 @@ public final class PassportHome {
      * @param channel 渠道号
      * @param key 开发者key
      */
+    @Deprecated
     public void init(Application app, String channel, String key) {
-
         Constant.APP = app;
         Networkit.init(app, channel, key);
-        // 初始化ApiUtil
-        ApiUtil.init(app.getString(R.string.http_host));
+    }
 
+    public static void init(Application app) {
+        Constant.APP = app;
+        String channel = app.getString(R.string.channel);
+        String key = app.getString(R.string.key);
+        Networkit.init(app, channel, key);
     }
 
     public final static PassportHome getInstance() {
@@ -74,7 +79,7 @@ public final class PassportHome {
      * @param context
      */
     public void startRegister(Context context, int requestCode) {
-        Intent i = new Intent(context, RegisterActivity.class);
+        Intent i = createIntent(RegisterActivity.class.getName());
         if(context instanceof Activity) {
             ((Activity) context).startActivityForResult(i, requestCode);
         }else {
@@ -97,7 +102,8 @@ public final class PassportHome {
      * @param defPhone 默认电话号码
      */
     public void startLoginByPassword(Context context, int requestCode, String defPhone) {
-        Intent i = new Intent(context, LoginPasswordActivity.class);
+//        Intent i = createIntent(LoginPasswordOActivity.class.getName());
+        Intent i = createIntent(LoginActivity.class.getName());
         if(!TextUtils.isEmpty(defPhone)) {
             i.putExtra(Constant.EXTRA_KEY_PHONE, defPhone);
         }
@@ -114,7 +120,7 @@ public final class PassportHome {
      * @param context
      */
     public void startLoginByCaptcha(Context context, int requestCode) {
-        Intent i = new Intent(context, LoginCaptchaActivity.class);
+        Intent i = createIntent(LoginCaptchaActivity.class.getName());
         if(context instanceof Activity) {
             ((Activity) context).startActivityForResult(i, requestCode);
         }else {
@@ -127,7 +133,7 @@ public final class PassportHome {
      * @param context
      */
     public void startResetPassword(Context context, int requestCode) {
-        Intent i = new Intent(context, ResetPasswordActivity.class);
+        Intent i = createIntent(ResetPasswordActivity.class.getName());
         if(context instanceof Activity) {
             ((Activity) context).startActivityForResult(i, requestCode);
         }else {
@@ -140,7 +146,7 @@ public final class PassportHome {
      * @param context
      */
     public void startModifyPassword(Context context, int requestCode) {
-        Intent i = new Intent(context, ModifyPasswordActivity.class);
+        Intent i = createIntent(ModifyPasswordActivity.class.getName());
         if(context instanceof Activity) {
             i.putExtra(Constant.EXTRA_KEY_REQUEST_CODE, requestCode);
             ((Activity) context).startActivityForResult(i, requestCode);
@@ -166,6 +172,13 @@ public final class PassportHome {
 
     public void checkLogin(TokenCallback callback) {
         ApiUtil.refreshToken(callback);
+    }
+
+    private Intent createIntent(String clzName) {
+        Intent i = new Intent();
+        i.setClassName(Constant.APP.getPackageName(), clzName);
+
+        return i;
     }
 
 }

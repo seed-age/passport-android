@@ -10,24 +10,29 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        resValue "string", "channel", "test"         // SDK的渠道号
+        resValue "string", "key", "hay8qwz"          // SDK的开发者Key
+        resValue "string", "template", "seedblue"    // 模版：seedblue-实地蓝；hachired-哈奇红
+
+        buildConfigField("boolean", "API_ENV", "true")
+
     }
 
     buildTypes {
 
         // 开发调试
         debug {
-            resValue "string", "http_host", "https://test-open.seedland.cc"
 
-            minifyEnabled true       // 开启混淆
-            zipAlignEnabled true     // 对齐优化
-
-            debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            minifyEnabled true       // 开启混淆
+//            zipAlignEnabled true     // 对齐优化
+//
+//            debuggable true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         // 功能测试-开放动态切换线上线下环境
         dev {
-            resValue "string", "http_host", "https://test-open.seedland.cc"
+
             minifyEnabled true       // 开启混淆
             zipAlignEnabled true     // 对齐优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -35,8 +40,7 @@ android {
 
         // 线上发布
         release {
-            resValue "string", "http_host", "https://open.seedland.cc"
-
+            buildConfigField("boolean", "API_ENV", "false")
             minifyEnabled true       // 开启混淆
             zipAlignEnabled true     // 对齐优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -50,7 +54,7 @@ android {
 }
 
 configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 dependencies {
@@ -70,16 +74,22 @@ dependencies {
 //    androidTestImplementation ''
 
     implementation "com.android.support:appcompat-v7:$support_version"
-//    implementation rootProject.ext.dependencies['okgo']
-//    implementation rootProject.ext.dependencies['gson']
-
-    implementation('cc.seedland.inf:network:1.0.1-SNAPSHOT@aar') {
+    implementation('cc.seedland.inf:network:1.0.0@aar') {
         transitive = true
         changing = true
     }
+
+    implementation('cc.seedland.inf:corework:1.0.0@aar') {
+        changing = true
+    }
+
+//    implementation('cc.seedland.inf:network:1.0.1-SNAPSHOT@aar') {
+//        transitive = true
+//        changing = true
+//    }
 
 
 }
 
 apply from: 'publish.gradle'
-apply from: 'jacoco.gradle'
+//apply from: 'jacoco.gradle'
