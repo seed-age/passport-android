@@ -1,6 +1,8 @@
 package cc.seedland.inf.passport.template;
 
 import android.support.annotation.LayoutRes;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,12 +15,21 @@ import java.util.Set;
  **/
 public interface ITemplate {
 
-    LoginMainViewAgent createLoginMainAgent();
-
-    LoginCaptchaViewAgent createLoginCaptchaAgent();
-
+    /**
+     * 创建界面代理
+     * @param clzName
+     * @param <T>
+     * @return
+     */
     <T extends IViewAgent> T createAgent(String clzName);
 
+    /**
+     * 创建界面布局
+     * @param clzName
+     * @return
+     */
     @LayoutRes int createLayout(String clzName);
+
+    void initView(AppCompatActivity activity);
 
 }

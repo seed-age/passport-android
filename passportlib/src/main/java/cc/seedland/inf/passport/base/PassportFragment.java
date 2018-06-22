@@ -31,7 +31,7 @@ public abstract class PassportFragment<A extends IViewAgent, P extends BasePrese
 
     @Override
     protected void initViews(View v) {
-        agent.initViews(v);
+//        agent.initViews(v);
     }
 
     @Override

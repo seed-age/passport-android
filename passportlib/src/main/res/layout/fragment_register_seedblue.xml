@@ -1,27 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:orientation="vertical">-->
-<!--<android.support.v7.widget.Toolbar-->
-<!--android:id="@+id/register_toolbar"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:minHeight="?android:attr/actionBarSize"-->
-<!--app:contentInsetStart="0dp">-->
-<!--<TextView-->
-<!--android:id="@+id/register_title_txv"-->
-<!--style="@style/PassportTitle"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_gravity="center"-->
-<!--tools:text="标题"/>-->
-<!--</android.support.v7.widget.Toolbar>-->
-<!--<View-->
-<!--style="@style/PassportDivider"-->
-<!--android:layout_width="match_parent" />-->
 <cc.seedland.inf.passport.widget.DividerLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -26,7 +26,7 @@ public class TemplateFactory {
         SUPPORTED_TEMPLATES.add(TEMPLATE_HACHI_RED); // 哈奇红
     }
 
-    public static <T extends ITemplate> T getTemplate() {
+    public static ITemplate getTemplate() {
         if(sTemplate == null) {
             String name = Constant.getString(R.string.template);
             if(TEMPLATE_SEED_BLUE.equalsIgnoreCase(name)) {
@@ -36,6 +36,6 @@ public class TemplateFactory {
             }
             sTemplate = new SeedBlueTemplate();
         }
-        return (T)sTemplate;
+        return sTemplate;
     }
 }

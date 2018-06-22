@@ -1,19 +1,27 @@
 package cc.seedland.inf.passport.template.seedblue;
 
-import android.app.Activity;
-import android.support.annotation.LayoutRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewStub;
+import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.login.LoginCaptchaActivity;
+import cc.seedland.inf.passport.login.LoginCaptchaFragment;
+import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.login.LoginPasswordFragment;
+import cc.seedland.inf.passport.password.ModifyPasswordActivity;
+import cc.seedland.inf.passport.password.ModifyPasswordFragment;
+import cc.seedland.inf.passport.password.ResetPasswordActivity;
+import cc.seedland.inf.passport.password.ResetPasswordFragment;
+import cc.seedland.inf.passport.register.RegisterActivity;
+import cc.seedland.inf.passport.register.RegisterFragment;
 import cc.seedland.inf.passport.template.ITemplate;
 import cc.seedland.inf.passport.template.IViewAgent;
-import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
-import cc.seedland.inf.passport.template.LoginMainViewAgent;
 
 /**
  * 作者 ： 徐春蕾
@@ -24,30 +32,30 @@ import cc.seedland.inf.passport.template.LoginMainViewAgent;
 public class SeedBlueTemplate implements ITemplate {
 
     @Override
-    public LoginMainViewAgent createLoginMainAgent() {
-        return new SeedBlueLoginMainView();
-    }
-
-    @Override
-    public LoginCaptchaViewAgent createLoginCaptchaAgent() {
-        return new SeedBlueLoginCaptchaView();
-    }
-
-    @Override
     public <T extends IViewAgent> T createAgent(String clzName) {
         if(LoginPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueLoginMainView();
+            return (T)new SeedBlueLoginMainAgent();
+        }else if(LoginCaptchaFragment.class.getName().equalsIgnoreCase(clzName)) {
+            return (T)new SeedBlueLoginCaptchaAgent();
+        }else if(RegisterFragment.class.getName().equalsIgnoreCase(clzName)) {
+            return (T)new SeedBlueRegisterAgent();
+        }else if(ResetPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
+            return (T)new SeedBlueResetPasswordAgent();
+        }else if(ModifyPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
+            return (T)new SeedBlueModifyPasswordAgent();
         }
         return null;
     }
 
     @Override
     public int createLayout(String clzName) {
-        return R.layout.template_toolbar;
+        return R.layout.template_seedblue;
     }
 
-    public static Toolbar initToolbar(View v) {
-        final AppCompatActivity activity = (AppCompatActivity) v.getContext();
+    @Override
+    public void initView(final AppCompatActivity activity) {
+
+        // 初始化标题栏
         Toolbar toolbar = activity.findViewById(R.id.template_toolbar);
         toolbar.setTitle("");
         activity.setSupportActionBar(toolbar);
@@ -59,19 +67,36 @@ public class SeedBlueTemplate implements ITemplate {
                 activity.finish();
             }
         });
-        return toolbar;
-    }
+        TextView titleTxv = activity.findViewById(R.id.template_title_txv);
 
-    public static void initContent(View v, @LayoutRes int layout) {
-        ViewStub contentStub = v.findViewById(R.id.template_content_stub);
-        if(layout == 0) {
-            throw new IllegalArgumentException("supply a valid layout resource please");
-        }else {
-            contentStub.setLayoutResource(layout);
-            contentStub.inflate();
+        // 加载界面
+        Fragment fragment = null;
+        String clzName = activity.getClass().getName();
+        if (LoginPasswordActivity.class.getName().equalsIgnoreCase(clzName)) {
+            fragment = Fragment.instantiate(activity, LoginPasswordFragment.class.getName());
+            // 不显示分割线
+            LinearLayoutCompat parent = (LinearLayoutCompat) toolbar.getParent();
+            parent.setShowDividers(LinearLayoutCompat.SHOW_DIVIDER_NONE);
+        }else if(LoginCaptchaActivity.class.getName().equalsIgnoreCase(clzName)) {
+            fragment = Fragment.instantiate(activity, LoginCaptchaFragment.class.getName());
+            titleTxv.setText(R.string.login_captcha_title);
+        }else if(RegisterActivity.class.getName().equalsIgnoreCase(clzName)) {
+            fragment = Fragment.instantiate(activity, RegisterFragment.class.getName());
+            titleTxv.setText(R.string.register_title);
+        }else if(ResetPasswordActivity.class.getName().equalsIgnoreCase(clzName)) {
+            fragment = Fragment.instantiate(activity, ResetPasswordFragment.class.getName());
+            titleTxv.setText(R.string.reset_password_title);
+        }else if(ModifyPasswordActivity.class.getName().equalsIgnoreCase(clzName)) {
+            fragment = Fragment.instantiate(activity, ModifyPasswordFragment.class.getName());
+            titleTxv.setText(R.string.password_modify_title);
+        }
+
+        if(fragment != null) {
+            FragmentManager manager = activity.getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.template_content, fragment);
+            transaction.commitNowAllowingStateLoss();
         }
     }
-
-    public static final @LayoutRes int TEMPLATE_LAYOUT = R.layout.template_toolbar;
 
 }

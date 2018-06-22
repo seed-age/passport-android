@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import cc.seedland.inf.network.Networkit;
-import cc.seedland.inf.passport.login.LoginActivity;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
-import cc.seedland.inf.passport.login.LoginPasswordOActivity;
+import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.network.TokenCallback;
@@ -102,8 +101,7 @@ public final class PassportHome {
      * @param defPhone 默认电话号码
      */
     public void startLoginByPassword(Context context, int requestCode, String defPhone) {
-//        Intent i = createIntent(LoginPasswordOActivity.class.getName());
-        Intent i = createIntent(LoginActivity.class.getName());
+        Intent i = createIntent(LoginPasswordActivity.class.getName());
         if(!TextUtils.isEmpty(defPhone)) {
             i.putExtra(Constant.EXTRA_KEY_PHONE, defPhone);
         }

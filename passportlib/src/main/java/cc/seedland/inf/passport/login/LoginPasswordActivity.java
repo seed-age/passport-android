@@ -8,7 +8,6 @@ import cc.seedland.inf.passport.base.PassportActivity;
  * 时间 ： 2018/06/22 11:17
  * 描述 ：
  **/
-public class LoginActivity extends PassportActivity {
-
+public class LoginPasswordActivity extends PassportActivity {
 
 }

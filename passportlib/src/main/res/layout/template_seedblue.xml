@@ -19,8 +19,8 @@
             android:layout_gravity="center"
             tools:text="标题"/>
     </android.support.v7.widget.Toolbar>
-    <ViewStub
-        android:id="@+id/template_content_stub"
+    <FrameLayout
+        android:id="@+id/template_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </android.support.v7.widget.LinearLayoutCompat>

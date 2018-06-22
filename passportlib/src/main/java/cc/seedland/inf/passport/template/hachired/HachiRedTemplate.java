@@ -1,5 +1,7 @@
 package cc.seedland.inf.passport.template.hachired;
 
+import android.support.v7.app.AppCompatActivity;
+
 import cc.seedland.inf.passport.template.ITemplate;
 import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
@@ -14,16 +16,6 @@ import cc.seedland.inf.passport.template.LoginMainViewAgent;
 public class HachiRedTemplate implements ITemplate {
 
     @Override
-    public LoginMainViewAgent createLoginMainAgent() {
-        return null;
-    }
-
-    @Override
-    public LoginCaptchaViewAgent createLoginCaptchaAgent() {
-        return null;
-    }
-
-    @Override
     public <T extends IViewAgent> T createAgent(String clzName) {
         return null;
     }
@@ -31,5 +23,10 @@ public class HachiRedTemplate implements ITemplate {
     @Override
     public int createLayout(String clzName) {
         return 0;
+    }
+
+    @Override
+    public void initView(AppCompatActivity activity) {
+
     }
 }
