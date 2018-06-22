@@ -8,18 +8,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.PassportOActivity;
+import cc.seedland.inf.passport.base.PassportActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
-import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
-import cc.seedland.inf.passport.template.TemplateFactory;
 import cc.seedland.inf.passport.widget.CountDownButton;
 
 /**
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class LoginCaptchaActivity extends PassportOActivity<LoginCaptchaViewAgent, LoginCaptchaPresenter> implements View.OnClickListener, ICaptchaView {
+public class LoginCaptchaActivity extends PassportActivity<LoginCaptchaPresenter> implements View.OnClickListener, ICaptchaView {
 
     private CountDownButton gainTxv;
     private EditText phoneEdt;
@@ -31,7 +29,6 @@ public class LoginCaptchaActivity extends PassportOActivity<LoginCaptchaViewAgen
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        agent = TemplateFactory.getTemplate().createLoginCaptchaAgent();
         super.onCreate(savedInstanceState);
 
         phoneEdt = findViewById(R.id.login_captcha_phone_edt);
@@ -46,6 +43,7 @@ public class LoginCaptchaActivity extends PassportOActivity<LoginCaptchaViewAgen
         String phone = RuntimeCache.getPhone();
         phoneEdt.setText(phone);
 
+        setTitle(getString(R.string.login_captcha_title));
     }
 
     @Override
@@ -54,6 +52,10 @@ public class LoginCaptchaActivity extends PassportOActivity<LoginCaptchaViewAgen
         presenter.performImageCaptcha();
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_login_captcha;
+    }
 
     @Override
     public void onClick(View v) {

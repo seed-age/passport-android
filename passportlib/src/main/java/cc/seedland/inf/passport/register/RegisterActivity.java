@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.PassportOActivity;
+import cc.seedland.inf.passport.base.PassportActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
-import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 import cc.seedland.inf.passport.widget.RatioImageView;
@@ -18,7 +17,7 @@ import cc.seedland.inf.passport.widget.RatioImageView;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class RegisterActivity extends PassportOActivity<IViewAgent, RegisterPresenter> implements ICaptchaView, View.OnClickListener{
+public class RegisterActivity extends PassportActivity<RegisterPresenter> implements ICaptchaView, View.OnClickListener{
 
     private EditText phoneEdt;
     private CountDownButton captchaBtn;
@@ -48,10 +47,10 @@ public class RegisterActivity extends PassportOActivity<IViewAgent, RegisterPres
         setTitle(getString(R.string.register_title));
     }
 
-//    @Override
-//    protected int getLayoutResource() {
-//        return R.layout.activity_register;
-//    }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_register;
+    }
 
     @Override
     protected RegisterPresenter createPresenter() {

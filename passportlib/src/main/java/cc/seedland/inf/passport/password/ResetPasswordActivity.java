@@ -7,10 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.PassportOActivity;
+import cc.seedland.inf.passport.base.PassportActivity;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
-import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 import cc.seedland.inf.passport.widget.RatioImageView;
@@ -19,7 +18,7 @@ import cc.seedland.inf.passport.widget.RatioImageView;
  * Created by xuchunlei on 2017/11/16.
  */
 
-public class ResetPasswordActivity extends PassportOActivity<IViewAgent, ResetPasswordPresenter> implements ICaptchaView, View.OnClickListener {
+public class ResetPasswordActivity extends PassportActivity<ResetPasswordPresenter> implements ICaptchaView, View.OnClickListener {
 
     private CountDownButton captchaBtn;
     private EditText phoneEdt;
@@ -50,6 +49,11 @@ public class ResetPasswordActivity extends PassportOActivity<IViewAgent, ResetPa
         phoneEdt.setText(phone);
         setTitle(getString(R.string.reset_password_title));
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_password_reset;
     }
 
     @Override

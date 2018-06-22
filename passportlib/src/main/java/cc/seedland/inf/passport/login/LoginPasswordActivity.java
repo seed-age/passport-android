@@ -4,15 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.base.PassportOActivity;
+import cc.seedland.inf.passport.base.PassportActivity;
 import cc.seedland.inf.passport.network.RuntimeCache;
-import cc.seedland.inf.passport.template.LoginMainViewAgent;
-import cc.seedland.inf.passport.template.TemplateFactory;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.widget.PasswordEditText;
 
@@ -20,7 +19,7 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  * Created by xuchunlei on 2017/11/8.
  */
 
-public class LoginPasswordOActivity extends PassportOActivity<LoginMainViewAgent, LoginPasswordPresenter> implements View.OnClickListener, ILoginMainView {
+public class LoginPasswordActivity extends PassportActivity<LoginPasswordPresenter> implements View.OnClickListener, ILoginMainView {
 
     private static final int REQUEST_CODE_REGISTER = 1;
     private static final int REQUEST_CODE_LOGIN_CAPTCHA = 2;
@@ -36,7 +35,6 @@ public class LoginPasswordOActivity extends PassportOActivity<LoginMainViewAgent
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        agent = TemplateFactory.getTemplate().createLoginMainAgent();
         super.onCreate(savedInstanceState);
 
         findViewById(R.id.login_register_txv).setOnClickListener(this);
@@ -54,6 +52,14 @@ public class LoginPasswordOActivity extends PassportOActivity<LoginMainViewAgent
         }
         loadPhone(phone);
 
+
+        setToolbarDivider(false);
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_login_password;
     }
 
     @Override
