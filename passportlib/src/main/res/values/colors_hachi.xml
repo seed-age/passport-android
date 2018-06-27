@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="red_hachi">#d8281d</color>
+    <color name="bg_button_hachi">#d8281d</color>
+    <color name="gray_hachi">#f7f7f7</color>
+    <color name="border_hachi">#dcdcdc</color>
+    <color name="gray_deep_hachi">#a9a9a9</color>
+</resources>

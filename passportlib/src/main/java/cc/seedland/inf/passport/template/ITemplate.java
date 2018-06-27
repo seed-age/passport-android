@@ -30,6 +30,10 @@ public interface ITemplate {
      */
     @LayoutRes int createLayout(String clzName);
 
+    /**
+     * 初始化模版视图
+     * @param activity
+     */
     void initView(AppCompatActivity activity);
 
 }

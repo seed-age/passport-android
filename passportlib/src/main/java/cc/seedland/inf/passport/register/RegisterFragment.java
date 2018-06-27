@@ -12,7 +12,7 @@ import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.template.RegisterViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
-import cc.seedland.inf.passport.widget.PasswordEditText;
+import cc.seedland.inf.passport.widget.PasswordOEditText;
 import cc.seedland.inf.passport.widget.RatioImageView;
 
 /**
@@ -23,13 +23,8 @@ import cc.seedland.inf.passport.widget.RatioImageView;
  **/
 public class RegisterFragment extends PassportFragment<RegisterViewAgent, RegisterPresenter> implements ICaptchaView, View.OnClickListener {
 
-    private EditText phoneEdt;
-    private CountDownButton captchaBtn;
-    private EditText captchaEdt;
-    private PasswordEditText passwordEdt;
-    private PasswordEditText passwordConfirmEdt;
+    private PasswordOEditText passwordConfirmEdt;
     private RatioImageView imgCaptchaImv;
-    private EditText imgCaptchaEdt;
 
     private String imgCaptchaId;
 
@@ -42,15 +37,11 @@ public class RegisterFragment extends PassportFragment<RegisterViewAgent, Regist
     protected void initViews(View v) {
         super.initViews(v);
 
-        v.findViewById(R.id.register_captcha_txv).setOnClickListener(this);
-        v.findViewById(R.id.register_perform_btn).setOnClickListener(this);
-        phoneEdt = v.findViewById(R.id.register_phone_edt);
-        captchaEdt = v.findViewById(R.id.register_captcha_edt);
-        captchaBtn = v.findViewById(R.id.register_captcha_txv);
-        passwordEdt = v.findViewById(R.id.register_password_edt);
+        v.findViewById(R.id.captcha_gain_txv).setOnClickListener(this);
+        agent.performBtn.setOnClickListener(this);
+
         passwordConfirmEdt = v.findViewById(R.id.register_password_confirm_edt);
-        imgCaptchaEdt = v.findViewById(R.id.register_captcha_image_edt);
-        imgCaptchaImv = v.findViewById(R.id.register_captcha_image_imv);
+        imgCaptchaImv = v.findViewById(R.id.captcha_image_imv);
         imgCaptchaImv.setOnClickListener(this);
     }
 
@@ -63,16 +54,15 @@ public class RegisterFragment extends PassportFragment<RegisterViewAgent, Regist
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        String phone = phoneEdt.getText().toString();
+        String phone = agent.phoneEdt.getText().toString();
         if(id == R.id.register_captcha_txv) {
-            String imgCaptcha = imgCaptchaEdt.getText().toString();
+            String imgCaptcha = agent.imgCaptchaEdt.getText().toString();
             presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
 
         }else if(id == R.id.register_perform_btn) {
-            String captcha = captchaEdt.getText().toString();
-            String password = passwordEdt.getText().toString();
-            String confirmPassword = passwordConfirmEdt.getText().toString();
-
+            String captcha = agent.captchaEdt.getText().toString();
+            String password = agent.passwordEdt.getText().toString();
+            String confirmPassword = passwordConfirmEdt != null ? passwordConfirmEdt.getText().toString(): null;
             presenter.performRegister(phone, captcha, password, confirmPassword);
         }else if(id == R.id.register_captcha_image_imv) {
             presenter.performImageCaptcha();
@@ -81,7 +71,7 @@ public class RegisterFragment extends PassportFragment<RegisterViewAgent, Regist
 
     @Override
     public void startWaitingCaptcha() {
-        captchaBtn.startCountDown(true);
+        agent.gainBtn.startCountDown(true);
     }
 
     @Override

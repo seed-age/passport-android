@@ -13,7 +13,7 @@ import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.template.ResetPasswordViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
-import cc.seedland.inf.passport.widget.PasswordEditText;
+import cc.seedland.inf.passport.widget.PasswordOEditText;
 import cc.seedland.inf.passport.widget.RatioImageView;
 
 /**
@@ -23,13 +23,9 @@ import cc.seedland.inf.passport.widget.RatioImageView;
  * 描述 ：
  **/
 public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAgent, ResetPasswordPresenter> implements ICaptchaView, View.OnClickListener {
-    private CountDownButton captchaBtn;
-    private EditText phoneEdt;
-    private EditText captchaEdt;
-    private PasswordEditText passwordEdt;
-    private PasswordEditText confirmEdt;
+
+    private EditText confirmEdt;
     private RatioImageView imgCaptchaImv;
-    private EditText imgCaptchaEdt;
 
     private String imgCaptchaId;
 
@@ -37,19 +33,15 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
     protected void initViews(View v) {
         super.initViews(v);
 
-        phoneEdt = v.findViewById(R.id.password_reset_phone_edt);
-        captchaBtn = v.findViewById(R.id.password_reset_captcha_txv);
-        captchaBtn.setOnClickListener(this);
-        captchaEdt = v.findViewById(R.id.password_reset_captcha_edt);
-        passwordEdt = v.findViewById(R.id.password_reset_password_edt);
+
+        agent.captchaBtn.setOnClickListener(this);
         confirmEdt = v.findViewById(R.id.password_reset_confirm_edt);
-        v.findViewById(R.id.password_reset_perform_btn).setOnClickListener(this);
-        imgCaptchaEdt = v.findViewById(R.id.password_reset_captcha_image_edt);
-        imgCaptchaImv = v.findViewById(R.id.password_reset_captcha_image_imv);
+        agent.performBtn.setOnClickListener(this);
+        imgCaptchaImv = v.findViewById(R.id.captcha_image_imv);
         imgCaptchaImv.setOnClickListener(this);
 
         String phone = RuntimeCache.getPhone();
-        phoneEdt.setText(phone);
+        agent.phoneEdt.setText(phone);
     }
 
     @Override
@@ -66,14 +58,14 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        String phone = phoneEdt.getText().toString();
+        String phone = agent.phoneEdt.getText().toString();
         if(id == R.id.password_reset_captcha_txv) {
-            String imgCaptcha = imgCaptchaEdt.getText().toString();
+            String imgCaptcha = agent.imgCaptchaEdt.getText().toString();
             presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
         }else if(id == R.id.password_reset_perform_btn) {
-            String password = passwordEdt.getText().toString();
-            String confirm = confirmEdt.getText().toString();
-            String captcha = captchaEdt.getText().toString();
+            String password = agent.passwordEdt.getText().toString();
+            String confirm = confirmEdt != null ? confirmEdt.getText().toString() : null;
+            String captcha = agent.captchaEdt.getText().toString();
             presenter.performReset(phone, password, confirm, captcha);
         }else if(id == R.id.password_reset_captcha_image_imv) {
             presenter.performImageCaptcha();
@@ -82,7 +74,7 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
 
     @Override
     public void startWaitingCaptcha() {
-        captchaBtn.startCountDown(true);
+        agent.captchaBtn.startCountDown(true);
     }
 
     @Override

@@ -63,7 +63,7 @@
             app:endText="@string/text_captcha_retrieve"/>
     </LinearLayout>
 
-    <cc.seedland.inf.passport.widget.PasswordEditText
+    <cc.seedland.inf.passport.widget.PasswordOEditText
         android:id="@+id/register_password_edt"
         style="@style/PasswordEdit"
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
         app:button="@drawable/password_show_selector"
         app:hint="@string/hint_password"/>
 
-    <cc.seedland.inf.passport.widget.PasswordEditText
+    <cc.seedland.inf.passport.widget.PasswordOEditText
         android:id="@+id/register_password_confirm_edt"
         style="@style/PasswordEdit"
         android:layout_width="match_parent"

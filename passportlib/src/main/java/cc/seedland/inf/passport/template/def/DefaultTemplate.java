@@ -1,4 +1,4 @@
-package cc.seedland.inf.passport.template.seedblue;
+package cc.seedland.inf.passport.template.def;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,34 +29,34 @@ import cc.seedland.inf.passport.template.IViewAgent;
  * 时间 ： 2018/06/21 10:38
  * 描述 ：
  **/
-public class SeedBlueTemplate implements ITemplate {
+public class DefaultTemplate implements ITemplate {
 
     @Override
     public <T extends IViewAgent> T createAgent(String clzName) {
         if(LoginPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueLoginMainAgent();
+            return (T)new DefaultLoginMainAgent();
         }else if(LoginCaptchaFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueLoginCaptchaAgent();
+            return (T)new DefaultLoginCaptchaAgent();
         }else if(RegisterFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueRegisterAgent();
+            return (T)new DefaultRegisterAgent();
         }else if(ResetPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueResetPasswordAgent();
+            return (T)new DefaultResetPasswordAgent();
         }else if(ModifyPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
-            return (T)new SeedBlueModifyPasswordAgent();
+            return (T)new DefaultModifyPasswordAgent();
         }
         return null;
     }
 
     @Override
     public int createLayout(String clzName) {
-        return R.layout.template_seedblue;
+        return R.layout.template_toolbar;
     }
 
     @Override
     public void initView(final AppCompatActivity activity) {
 
         // 初始化标题栏
-        Toolbar toolbar = activity.findViewById(R.id.template_toolbar);
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         activity.setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -67,7 +67,7 @@ public class SeedBlueTemplate implements ITemplate {
                 activity.finish();
             }
         });
-        TextView titleTxv = activity.findViewById(R.id.template_title_txv);
+        TextView titleTxv = activity.findViewById(R.id.title_txv);
 
         // 加载界面
         Fragment fragment = null;

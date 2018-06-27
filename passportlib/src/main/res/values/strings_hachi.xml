@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 通用 -->
+    <string name="hint_captcha_counting_hachi">%1$ds后重试</string>
+    <string name="do_save">保存</string>
+
+    <!-- 登录界面 -->
+    <string name="login_title_hachi">登录</string>
+    <string name="login_do_hachi">立即登录</string>
+    <string name="login_register_hachi">注册</string>
+    <string name="login_tab_password">账号密码登录</string>
+    <string name="login_tab_captcha">手机号快捷登录</string>
+
+    <!-- 注册 -->
+    <string name="register_title_hachi">注册</string>
+    <string name="register_do_hachi">提交注册</string>
+
+    <!-- 重置密码 -->
+    <string name="reset_password_title_hachi">设置新密码</string>
+
+</resources>

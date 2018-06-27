@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cc.seedland.inf.passport.widget.DividerLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PassportDividerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/include_toolbar" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/template_tab"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="@dimen/size_common_15"
+        app:tabIndicatorHeight="0dp"
+        app:tabBackground="@drawable/bg_tab_selector"   >
+    </android.support.design.widget.TabLayout>
+    <FrameLayout
+        android:id="@+id/template_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="divider:0"/>
+</cc.seedland.inf.passport.widget.DividerLinearLayout>

@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.network.RuntimeCache;
@@ -16,7 +15,6 @@ import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.template.LoginMainViewAgent;
 import cc.seedland.inf.passport.util.Constant;
-import cc.seedland.inf.passport.widget.PasswordEditText;
 
 /**
  * 作者 ： 徐春蕾
@@ -30,8 +28,7 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
     private static final int REQUEST_CODE_LOGIN_CAPTCHA = 2;
     private static final int REQUEST_CODE_RESET_PASSWORD = 3;
 
-    private EditText phoneEdt;
-    private PasswordEditText passwordEdt;
+
 
     @Override
     protected LoginPasswordPresenter createPresenter() {
@@ -44,11 +41,7 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
 
         v.findViewById(R.id.login_register_txv).setOnClickListener(this);
         v.findViewById(R.id.login_forget_password_txv).setOnClickListener(this);
-        v.findViewById(R.id.login_password_captcha_txv).setOnClickListener(this);
-        v.findViewById(R.id.login_password_perform_btn).setOnClickListener(this);
-
-        phoneEdt = v.findViewById(R.id.login_password_phone_edt);
-        passwordEdt = v.findViewById(R.id.login_password_password_edt);
+        agent.performBtn.setOnClickListener(this);
 
         // 来自修改密码界面的手机号
         String phone = getActivity().getIntent().getStringExtra(Constant.EXTRA_KEY_PHONE);
@@ -61,7 +54,7 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
 
     @Override
     public void loadPhone(String phone) {
-        phoneEdt.setText(phone);
+        agent.phoneEdt.setText(phone);
     }
 
     @Override
@@ -75,8 +68,8 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
             }else if(id == R.id.login_password_captcha_txv) {
                 startActivityForResult(createIntent(LoginCaptchaActivity.class.getName()), REQUEST_CODE_LOGIN_CAPTCHA);
             }else if(id == R.id.login_password_perform_btn) {
-                String phone = phoneEdt.getText().toString();
-                String password = passwordEdt.getText().toString();
+                String phone = agent.phoneEdt.getText().toString();
+                String password = agent.passwordEdt.getText().toString();
                 presenter.perform(phone, password);
             }
         }

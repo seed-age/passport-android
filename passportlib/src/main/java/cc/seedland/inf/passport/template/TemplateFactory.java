@@ -1,11 +1,8 @@
 package cc.seedland.inf.passport.template;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.template.hachired.HachiRedTemplate;
-import cc.seedland.inf.passport.template.seedblue.SeedBlueTemplate;
+import cc.seedland.inf.passport.template.def.DefaultTemplate;
+import cc.seedland.inf.passport.template.hachi.HachiTemplate;
 import cc.seedland.inf.passport.util.Constant;
 
 /**
@@ -16,25 +13,26 @@ import cc.seedland.inf.passport.util.Constant;
  **/
 public class TemplateFactory {
 
-    private static final Set<String> SUPPORTED_TEMPLATES = new HashSet<>();
-    private static final String TEMPLATE_SEED_BLUE = "seedblue";
-    private static final String TEMPLATE_HACHI_RED = "hachired";
+//    private static final Set<String> SUPPORTED_TEMPLATES = new HashSet<>();
+    private static final String TEMPLATE_DEFAULT = "default";
+    private static final String TEMPLATE_HACHI = "hachi";
     private static ITemplate sTemplate;
 
     static {
-        SUPPORTED_TEMPLATES.add(TEMPLATE_SEED_BLUE); // 实地蓝
-        SUPPORTED_TEMPLATES.add(TEMPLATE_HACHI_RED); // 哈奇红
+//        SUPPORTED_TEMPLATES.add(TEMPLATE_SEED_BLUE); // 实地蓝
+//        SUPPORTED_TEMPLATES.add(TEMPLATE_HACHI_RED); // 哈奇红
     }
 
     public static ITemplate getTemplate() {
         if(sTemplate == null) {
             String name = Constant.getString(R.string.template);
-            if(TEMPLATE_SEED_BLUE.equalsIgnoreCase(name)) {
-                sTemplate = new SeedBlueTemplate();
-            }else if(TEMPLATE_HACHI_RED.equalsIgnoreCase(name)) {
-                sTemplate = new HachiRedTemplate();
+            if(TEMPLATE_DEFAULT.equalsIgnoreCase(name)) {
+                sTemplate = new DefaultTemplate();
+            }else if(TEMPLATE_HACHI.equalsIgnoreCase(name)) {
+                sTemplate = new HachiTemplate();
+            }else {
+                sTemplate = new DefaultTemplate();
             }
-            sTemplate = new SeedBlueTemplate();
         }
         return sTemplate;
     }

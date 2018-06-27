@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cc.seedland.inf.passport.widget.DividerLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/PassportDividerLayout">
+    <cc.seedland.inf.passport.widget.ClearEditText
+        android:id="@+id/login_captcha_phone_edt"
+        style="@style/HachiPhoneEdit"
+        android:layout_width="match_parent"
+        android:hint="@string/hint_phone"/>
+    <include layout="@layout/include_image_captcha_edit_hachi" />
+    <include layout="@layout/include_captcha_edit_hachi" />
+    <Button
+        android:id="@+id/login_captcha_perform_btn"
+        style="@style/HachiPerformBtn"
+        android:text="@string/login_do_hachi"/>
+</cc.seedland.inf.passport.widget.DividerLinearLayout>

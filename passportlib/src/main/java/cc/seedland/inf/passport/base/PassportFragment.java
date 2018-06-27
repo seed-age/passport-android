@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import cc.seedland.inf.corework.mvp.BaseFragment;
 import cc.seedland.inf.corework.mvp.BasePresenter;
+import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.template.TemplateFactory;
 import cc.seedland.inf.passport.util.Constant;
@@ -31,7 +32,15 @@ public abstract class PassportFragment<A extends IViewAgent, P extends BasePrese
 
     @Override
     protected void initViews(View v) {
-//        agent.initViews(v);
+        agent.initViews(v);
+    }
+
+    @Override
+    public void showToast(String message) {
+        super.showToast(message);
+        if(isAdded()) {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

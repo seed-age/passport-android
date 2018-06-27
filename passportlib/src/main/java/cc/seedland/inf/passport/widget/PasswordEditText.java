@@ -1,88 +1,89 @@
 package cc.seedland.inf.passport.widget;
 
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.text.Editable;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.view.MotionEvent;
 
 import cc.seedland.inf.passport.R;
 
 /**
- * Created by xuchunlei on 2017/11/17.
- */
+ * 作者 ： 徐春蕾
+ * 联系方式 ： xuchunlei@seedland.cc / QQ:22003950
+ * 时间 ： 2018/06/12 14:52
+ * 描述 ：
+ **/
 
-public class PasswordEditText extends LinearLayoutCompat {
+public class PasswordEditText extends AppCompatEditText {
 
-    private EditText edit;
-    private CheckBox check;
+    private Drawable mShowDrawable;
+    private Drawable mHideDrawable;
+
+    private boolean showFlag;
 
     public PasswordEditText(Context context) {
         this(context, null);
     }
 
-    public PasswordEditText(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+    public PasswordEditText(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context, attrs);
     }
 
-    public PasswordEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        setOrientation(HORIZONTAL);
-        setFocusable(true);
+    public PasswordEditText(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
-        ContextThemeWrapper wrapper = new ContextThemeWrapper(context, R.style.PasswordEdit);
-        edit = new EditText(wrapper);
-        edit.setBackground(null);
-        edit.setPadding(0, 0, 0, 0);
-        check = new CheckBox(context);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PasswordEditText);
-        if(a.hasValue(R.styleable.PasswordEditText_hint)) {
-            final String hint = a.getString(R.styleable.PasswordEditText_hint);
-            edit.setHint(hint);
+        if(a.hasValue(R.styleable.PasswordEditText_showDrawable)) {
+            mShowDrawable = a.getDrawable(R.styleable.PasswordEditText_showDrawable);
         }
-        if(a.hasValue(R.styleable.PasswordEditText_button)) {
-            final Drawable buttonDrawable = a.getDrawable(R.styleable.PasswordEditText_button);
-            check.setButtonDrawable(buttonDrawable);
+        if(a.hasValue(R.styleable.PasswordEditText_hideDrawable)) {
+            mHideDrawable = a.getDrawable(R.styleable.PasswordEditText_hideDrawable);
         }
         a.recycle();
 
-        LayoutParams paramsEdit = new LayoutParams(0, LayoutParams.WRAP_CONTENT);
-        paramsEdit.gravity = Gravity.BOTTOM;
-        paramsEdit.weight = 1;
-        addView(edit, paramsEdit);
+        mShowDrawable.setBounds(0, 0, mShowDrawable.getIntrinsicWidth(), mShowDrawable.getIntrinsicHeight());
+        mHideDrawable.setBounds(0, 0, mHideDrawable.getIntrinsicWidth(), mHideDrawable.getIntrinsicHeight());
+        changeDrawable(false);
+    }
 
-        LayoutParams paramsCheck = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        paramsCheck.gravity = Gravity.BOTTOM;
-        addView(check, paramsCheck);
-
-        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    edit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
-                    edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    /**
+     * 我们无法直接给EditText设置点击事件，只能通过按下的位置来模拟clear点击事件
+     * 当我们按下的位置在图标包括图标到控件右边的间距范围内均算有效
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (getCompoundDrawables()[2] != null) {
+                int start = getWidth() - getTotalPaddingRight() - getPaddingRight(); // 起始位置
+                int end = getWidth(); // 结束位置
+                boolean available = (event.getX() > start) && (event.getX() < end);
+                if (available) {
+                    if(showFlag) {
+                        setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }else {
+                        setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                    showFlag = !showFlag;
+                    changeDrawable(showFlag);
                 }
             }
-        });
-
+        }
+        return super.onTouchEvent(event);
     }
 
-    public Editable getText() {
-        return edit.getText();
+    protected void changeDrawable(boolean onoff) {
+        Drawable right = onoff ? mShowDrawable : mHideDrawable;
+        setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], right, getCompoundDrawables()[3]);
     }
+
 }

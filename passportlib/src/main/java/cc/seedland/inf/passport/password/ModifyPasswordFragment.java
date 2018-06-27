@@ -5,7 +5,7 @@ import android.view.View;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.template.ModifyPasswordViewAgent;
-import cc.seedland.inf.passport.widget.PasswordEditText;
+import cc.seedland.inf.passport.widget.PasswordOEditText;
 
 /**
  * 作者 ： 徐春蕾
@@ -15,9 +15,9 @@ import cc.seedland.inf.passport.widget.PasswordEditText;
  **/
 public class ModifyPasswordFragment extends PassportFragment<ModifyPasswordViewAgent, ModifyPasswordPresenter> implements View.OnClickListener  {
 
-    private PasswordEditText originEdt;
-    private PasswordEditText currentEdt;
-    private PasswordEditText confirmEdt;
+    private PasswordOEditText originEdt;
+    private PasswordOEditText currentEdt;
+    private PasswordOEditText confirmEdt;
 
     @Override
     protected void initViews(View v) {

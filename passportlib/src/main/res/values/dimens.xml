@@ -19,4 +19,6 @@
     <dimen name="text_size_large">21sp</dimen>
 
     <dimen name="dialog_loading_size">50dp</dimen>
+
+    <dimen name="bar_height">42dp</dimen>
 </resources>

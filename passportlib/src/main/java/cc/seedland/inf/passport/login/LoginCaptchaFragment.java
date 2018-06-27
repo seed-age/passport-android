@@ -23,10 +23,6 @@ import cc.seedland.inf.passport.widget.CountDownButton;
  **/
 public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent, LoginCaptchaPresenter> implements ICaptchaView, View.OnClickListener {
 
-    private CountDownButton gainTxv;
-    private EditText phoneEdt;
-    private EditText captchaEdt;
-    private EditText imgCaptchaEdt;
     private ImageView captchaImv;
 
     private String imgCaptchaId;
@@ -39,17 +35,14 @@ public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent
     @Override
     protected void initViews(View v) {
         super.initViews(v);
-        phoneEdt = v.findViewById(R.id.login_captcha_phone_edt);
-        imgCaptchaEdt = v.findViewById(R.id.login_captcha_image_edt);
-        captchaEdt = v.findViewById(R.id.login_captcha_captcha_edt);
-        gainTxv = v.findViewById(R.id.login_captcha_gain_txv);
-        gainTxv.setOnClickListener(this);
-        v.findViewById(R.id.login_captcha_perform_btn).setOnClickListener(this);
-        captchaImv = v.findViewById(R.id.login_captcha_image_imv);
+
+        agent.gainTxv.setOnClickListener(this);
+        captchaImv = v.findViewById(R.id.captcha_image_imv);
         captchaImv.setOnClickListener(this);
+        agent.performBtn.setOnClickListener(this);
 
         String phone = RuntimeCache.getPhone();
-        phoneEdt.setText(phone);
+        agent.phoneEdt.setText(phone);
     }
 
     @Override
@@ -60,7 +53,7 @@ public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent
 
     @Override
     public void startWaitingCaptcha() {
-        gainTxv.startCountDown(true);
+        agent.gainTxv.startCountDown(true);
     }
 
     @Override
@@ -73,14 +66,14 @@ public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent
     public void onClick(View v) {
         if(isAdded()) {
             int id = v.getId();
-            String phone = phoneEdt.getText().toString();
-            if(id == R.id.login_captcha_gain_txv) {
-                String imgCaptcha = imgCaptchaEdt.getText().toString();
+            String phone = agent.phoneEdt.getText().toString();
+            if(id == R.id.captcha_gain_txv) {
+                String imgCaptcha = agent.imgCaptchaEdt.getText().toString();
                 presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
             }else if(id == R.id.login_captcha_perform_btn) {
-                String captcha = captchaEdt.getText().toString();
+                String captcha = agent.captchaEdt.getText().toString();
                 presenter.perform(phone, captcha);
-            }else if(id == R.id.login_captcha_image_imv) {
+            }else if(id == R.id.captcha_image_imv) {
                 presenter.performImageCaptcha();
             }
         }

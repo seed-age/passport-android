@@ -22,11 +22,19 @@
     </declare-styleable>
 
     <!-- PasswordEditText属性 -->
-    <declare-styleable name="PasswordEditText">
+    <declare-styleable name="PasswordOEditText">
         <!-- 提示文本内容 -->
         <attr name="hint" format="string" />
         <!-- 密码可视开关图标 -->
         <attr name="button" format="reference" />
+    </declare-styleable>
+
+    <!-- PasswordEditText属性 -->
+    <declare-styleable name="PasswordEditText">
+        <!-- 提示文本内容 -->
+        <attr name="showDrawable" format="reference" />
+        <!-- 密码可视开关图标 -->
+        <attr name="hideDrawable" format="reference" />
     </declare-styleable>
 
     <!-- RatioImageView -->

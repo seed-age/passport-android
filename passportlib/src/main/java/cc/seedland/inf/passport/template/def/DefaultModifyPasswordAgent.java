@@ -1,4 +1,4 @@
-package cc.seedland.inf.passport.template.seedblue;
+package cc.seedland.inf.passport.template.def;
 
 import android.view.View;
 
@@ -11,11 +11,11 @@ import cc.seedland.inf.passport.template.ModifyPasswordViewAgent;
  * 时间 ： 2018/06/22 17:18
  * 描述 ：
  **/
-public class SeedBlueModifyPasswordAgent extends ModifyPasswordViewAgent {
+public class DefaultModifyPasswordAgent extends ModifyPasswordViewAgent {
 
     @Override
     public int layout() {
-        return R.layout.fragment_password_modify_seedblue;
+        return R.layout.fragment_password_modify_default;
     }
 
     @Override

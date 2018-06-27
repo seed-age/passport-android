@@ -1,5 +1,11 @@
 package cc.seedland.inf.passport.template;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import cc.seedland.inf.passport.R;
+
 /**
  * 作者 ： 徐春蕾
  * 联系方式 ： xuchunlei@seedland.cc / QQ:22003950
@@ -8,6 +14,14 @@ package cc.seedland.inf.passport.template;
  **/
 public abstract class LoginMainViewAgent implements IViewAgent {
 
+    public EditText phoneEdt;
+    public EditText passwordEdt;
+    public Button performBtn;
 
-
+    @Override
+    public void initViews(View v) {
+        phoneEdt = v.findViewById(R.id.login_password_phone_edt);
+        passwordEdt = v.findViewById(R.id.login_password_password_edt);
+        performBtn = v.findViewById(R.id.login_password_perform_btn);
+    }
 }
