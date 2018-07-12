@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 哈奇执行操作按钮的样式 -->
+    <style name="HachiPerformBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_perform_hachi</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:layout_marginTop">@dimen/size_common_35</item>
+        <item name="android:layout_marginLeft">@dimen/size_common_15</item>
+        <item name="android:layout_marginRight">@dimen/size_common_15</item>
+    </style>
+
+    <!-- 哈奇入口文本样式 -->
+    <style name="HachiPassportEntry">
+        <item name="android:textColor">@color/red_hachi</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="HachiPassportEdit">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/size_common_10</item>
+        <item name="android:paddingBottom">@dimen/size_common_10</item>
+        <item name="android:paddingLeft">@dimen/size_common_10</item>
+        <item name="android:paddingRight">@dimen/size_common_10</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <!-- 哈奇电话号码输入框样式 -->
+    <style name="HachiPhoneEdit" parent="HachiPassportEdit">
+        <item name="android:inputType">phone</item>
+        <item name="android:digits">0123456789</item>
+        <item name="android:maxLength">11</item>
+        <item name="android:hint">@string/hint_phone</item>
+        <item name="android:textColor">@drawable/text_color_edit_selector</item>
+        <item name="android:background">@drawable/bg_edit_phone_selector_hachi</item>
+    </style>
+
+    <!-- 哈奇密码输入框样式 -->
+    <style name="HachiPasswordEdit" parent="HachiPassportEdit">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxLength">20</item>
+        <item name="showDrawable">@drawable/ic_password_show_hachi</item>
+        <item name="hideDrawable">@drawable/ic_password_hide_hachi</item>
+        <item name="filters">emoji|character</item>
+    </style>
+
+    <!-- 验证码输入框样式 -->
+    <style name="HachiCaptchaEdit" parent="HachiPassportEdit">
+        <item name="android:inputType">textVisiblePassword</item>
+        <item name="android:digits">abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ</item>
+        <item name="android:maxLength">8</item>
+    </style>
+
+    <!-- 哈奇带有边框的执行操作按钮样式 -->
+    <style name="HachiPerformBorderBtn">
+        <item name="android:background">@drawable/bg_border_perform_hachi</item>
+        <item name="android:textColor">@color/red_hachi</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <!-- 哈奇提示文本样式 -->
+    <style name="HachiPassportTip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/size_common_10</item>
+        <item name="android:layout_marginTop">@dimen/size_common_15</item>
+        <item name="android:layout_marginRight">@dimen/size_common_10</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/gray_hachi_text_tip</item>
+    </style>
+
+    <!-- 哈奇不可编辑行文本样式 -->
+    <style name="HachiText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/size_common_10</item>
+        <item name="android:background">@color/gray_hachi</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- 哈奇内含编辑框的布局 -->
+    <style name="HachiDividerLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="divider">@drawable/divider_hachi</item>
+        <item name="showDividers">middle|beginning</item>
+    </style>
+
+    <!-- 哈奇内含编辑框的布局-Tab -->
+    <style name="HachiTabDividerLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="divider">@drawable/divider_hachi</item>
+        <item name="showDividers">middle</item>
+    </style>
+
+    <!-- 哈奇的分割线样式 -->
+    <style name="HachiDivider">
+        <item name="android:layout_height">@dimen/border_width_small</item>
+        <item name="android:background">@color/border_hachi</item>
+    </style>
+</resources>

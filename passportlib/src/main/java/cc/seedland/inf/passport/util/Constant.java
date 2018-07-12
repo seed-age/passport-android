@@ -41,6 +41,8 @@ public class Constant {
     public static final String API_URL_PASSWORD_MODIFY = "/passport/api/rest/1.0/password/modify";
     /** 请求Url-图形验证码 */
     public static final String API_URL_IMAGE_CAPTCHA = "/passport/api/rest/1.0/captcha";
+    /** 请求Url-渠道信息*/
+    public static final String API_URL_CHANNEL_INFO = "/passport/api/rest/1.0/channel/info";
 
     /** 请求返回码-成功 */
     public static final int RESPONSE_CODE_SUCCESS = 0;
@@ -74,6 +76,9 @@ public class Constant {
     public static final int ERROR_CODE_PASSWORD_CONFIRM = R.string.error_password_confirm;
     /** 错误码-原密码与旧密码相同 */
     public static final int ERROR_CODE_PASSWORD_SAME = R.string.error_password_same;
+
+    // 提示
+    public static final int TIP_CAPTCHA_SEND = R.string.tip_captcha_send;
 
     /** 默认的整型值，用于判断非法数据 */
     public static final int NO_INTEGER = -1;

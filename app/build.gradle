@@ -24,6 +24,7 @@ android {
         debug {
             resValue "string", "channel", "test"         // PassportSDK的渠道号
             resValue "string", "key", "hay8qwz"          // PassportSDK的开发者Key
+            resValue "string", "template", "hachi"       // 模版：default-实地；hachi-哈奇
 
 //            minifyEnabled true
 //            shrinkResources true
@@ -34,7 +35,8 @@ android {
         }
         release {
             resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
-            resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"          // PassportSDK的开发者Key
+            resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
+            resValue "string", "template", "default"       // 模版：default-实地；hachi-哈奇
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true

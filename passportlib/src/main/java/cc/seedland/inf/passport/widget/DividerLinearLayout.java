@@ -54,7 +54,6 @@ public class DividerLinearLayout extends LinearLayoutCompat {
             String value = tag.toString();
 
             int flagIndex = value.indexOf("divider:") + 8;
-            boolean f = Integer.valueOf(value.substring(flagIndex, flagIndex + 1)) != 0;
             return Integer.valueOf(value.substring(flagIndex, flagIndex + 1)) != 0;
 
         }

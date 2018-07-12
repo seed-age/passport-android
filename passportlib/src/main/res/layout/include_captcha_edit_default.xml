@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/captcha_edt"
+        style="@style/PasswordEdit"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:hint="@string/hint_captcha"/>
+    <cc.seedland.inf.passport.widget.CountDownButton
+        android:id="@+id/captcha_gain_txv"
+        style="@style/PerformBorderBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_common_15"
+        android:padding="@dimen/size_common_5"
+        android:text="@string/register_obtain_captcha"
+        app:countingText="@string/hint_captcha_counting"
+        app:countingColor="@color/default_gray"
+        app:normalColor="@color/default_blue"
+        app:endText="@string/text_captcha_retrieve"/>
+</LinearLayout>

@@ -3,6 +3,7 @@ package cc.seedland.inf.passport.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -60,9 +61,12 @@ public final class CountDownButton extends AppCompatTextView {
     // 静态文本颜色
     @ColorInt
     private int mEndTextColor;
-    // 计时文本颜色
+    // 计时状态颜色
     @ColorInt
-    private int mCountingTextColor;
+    private int mCountingColor;
+    // 普通状态颜色
+    @ColorInt
+    private int mNormalColor;
     // 静止状态下的背景，倒计时结束时还原
     private Drawable mBackground;
     
@@ -78,7 +82,8 @@ public final class CountDownButton extends AppCompatTextView {
         mLaunchFlag = a.getInt(R.styleable.CountDownButton_launchEvent, ATTACHED);
         final String countingText = a.getString(R.styleable.CountDownButton_countingText);
         final String endText = a.getString(R.styleable.CountDownButton_endText);
-        mCountingTextColor = a.getColor(R.styleable.CountDownButton_countingTextColor, Color.GRAY);
+        mCountingColor = a.getColor(R.styleable.CountDownButton_countingColor, Color.GRAY);
+        mNormalColor = a.getColor(R.styleable.CountDownButton_normalColor, Color.BLACK);
         a.recycle();
 
         mEndTextColor = getCurrentTextColor();
@@ -98,9 +103,7 @@ public final class CountDownButton extends AppCompatTextView {
                         }
                         break;
                     case MESSAGE_COUNTED:
-                        setEnabled(true);
-                        setTextColor(mEndTextColor);
-                        setBackground(mBackground);
+                        enable(true);
                         setText(endText);
                         break;
                     default:
@@ -142,13 +145,11 @@ public final class CountDownButton extends AppCompatTextView {
      * created at: 2015年5月12日 上午9:40:31
      */
     public void startCountDown(boolean clearFlag) {
-        if(mCountDownTask == null || mCountDownTask.isShutdown() || mCountDownTask.isTerminated()) {
+        if(!isCounting()) {
             mCountDownTask = generateCountDownTask();
         }
         
-        setEnabled(false);
-        setTextColor(mCountingTextColor);
-        setBackground(null);
+        enable(false);
         mCountDownTask.scheduleAtFixedRate(new Runnable() {
             
             @Override
@@ -165,7 +166,11 @@ public final class CountDownButton extends AppCompatTextView {
             }
         }, 0, mStep, TimeUnit.SECONDS);
     }
-    
+
+    public boolean isCounting() {
+        return mCountDownTask != null && !mCountDownTask.isShutdown() && !mCountDownTask.isTerminated();
+    }
+
     /**
      * 结束倒计时
      * 
@@ -186,6 +191,19 @@ public final class CountDownButton extends AppCompatTextView {
      */
     private ScheduledExecutorService generateCountDownTask() {
         return Executors.newScheduledThreadPool(2);
+    }
+
+    private void enable(boolean enabled){
+        if(isEnabled() != enabled) {
+            setEnabled(enabled);
+            if(enabled) {
+                mBackground.setColorFilter(mNormalColor, PorterDuff.Mode.SRC_ATOP);
+                setTextColor(mNormalColor);
+            }else {
+                mBackground.setColorFilter(mCountingColor, PorterDuff.Mode.SRC_ATOP);
+                setTextColor(mCountingColor);
+            }
+        }
     }
     
 }

@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/size_common_10"
+    android:padding="@dimen/size_common_20"
     android:background="@drawable/bg_dialog_loading">
     <ProgressBar
         android:layout_width="wrap_content"

@@ -10,5 +10,7 @@ public class LoginBean extends SimpleBean {
 
     /** 登录token */
     @SerializedName("sso_tk") public String token;
+    /** 登录类型 */
+    @SerializedName("login_type") public int type;
 
 }

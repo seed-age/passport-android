@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 填充颜色 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/border_hachi"/>
+        </shape>
+    </item>
+
+    <!-- 显示上边界 -->
+    <item android:top="1px" android:bottom="0px">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+</layer-list>

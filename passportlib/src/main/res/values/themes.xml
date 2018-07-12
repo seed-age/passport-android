@@ -9,4 +9,20 @@
         <item name="colorControlActivated">@color/default_gray</item>
         <item name="android:screenOrientation">portrait</item>
     </style>
+
+    <style name="HachiTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/red_hachi</item>
+        <item name="colorPrimaryDark">@color/red_hachi</item>
+        <item name="colorAccent">@color/red_hachi</item>
+        <item name="colorControlNormal">@color/gray_deep_hachi</item>
+        <item name="colorControlActivated">@color/red_hachi</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="toolbarNavigationButtonStyle">@style/HachiToolbarNavigationButtonStyle</item>
+    </style>
+
+    <style name="HachiToolbarNavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:padding">@dimen/size_common_10</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
 </resources>

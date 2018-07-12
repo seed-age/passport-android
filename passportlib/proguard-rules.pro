@@ -87,8 +87,12 @@
 ##---------------End: proguard configuration for Gson  ----------
 
 # passport
+-keepattributes InnerClasses
 -keepparameternames
 -keep class cc.seedland.inf.passport.PassportHome{*;}
+-keepparameternames
+-keep class cc.seedland.inf.passport.stat.**{*;}
+-keep class cc.seedland.inf.passport.stat.PassportStatAgent$Builder{*;}
 -keep public class * extends cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BeanWrapper{*;}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cc.seedland.inf.passport.widget.DividerLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/PassportDividerLayout"
+    android:padding="@dimen/size_common_15">
+    <EditText
+        android:id="@+id/login_captcha_phone_edt"
+        style="@style/PassportEdit"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="@dimen/size_common_10"
+        android:inputType="phone"
+        android:maxLength="20"
+        android:hint="@string/hint_phone"/>
+    <include layout="@layout/include_image_captcha_edit_default" />
+    <include layout="@layout/include_captcha_edit_default" />
+    <Button
+        android:id="@+id/login_captcha_perform_btn"
+        style="@style/PerformBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_common_30"
+        android:text="@string/text_finish"/>
+</cc.seedland.inf.passport.widget.DividerLinearLayout>

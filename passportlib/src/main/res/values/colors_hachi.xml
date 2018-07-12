@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="red_hachi">#df2d1f</color>
+    <color name="gray_hachi_text_tip">#909090</color>
+    <color name="gray_hachi_text">#b2b2b2</color>
+    <color name="gray_hachi_text_tab">#808080</color>
+    <color name="border_hachi">#ececec</color>
+    <color name="gray_deep_hachi">#bfbfbf</color>
+    <color name="gray_hachi">#f7f7f7</color>
+</resources>

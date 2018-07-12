@@ -2,6 +2,7 @@ package cc.seedland.inf.passport.register;
 
 import android.graphics.Bitmap;
 
+import com.google.gson.JsonObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.network.Networkit;
+import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -44,9 +46,9 @@ class RegisterModel {
      * @param captcha
      * @param callback
      */
-    public void performPhone(String phone, String password, String captcha, BizCallback<RegisterBean> callback) {
+    public void performPhone(String phone, String password, String captcha, BizCallback<LoginBean> callback) {
 
-        OkGo.<RegisterBean>post(Networkit.generateFullUrl(Constant.API_URL_REGISTER_PHONE))
+        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_REGISTER_PHONE))
                 .params("mobile", phone)
                 .params("password", password)
                 .params("code", captcha)
