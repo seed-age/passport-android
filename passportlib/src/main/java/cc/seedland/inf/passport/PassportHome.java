@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.lzy.okgo.OkGo;
+
 import cc.seedland.inf.network.Networkit;
+import cc.seedland.inf.passport.config.Config;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
 import cc.seedland.inf.passport.login.LoginPasswordActivity;
 import cc.seedland.inf.passport.network.ApiUtil;
@@ -43,6 +46,7 @@ public final class PassportHome {
     public void init(Application app, String channel, String key) {
         Constant.APP = app;
         Networkit.init(app, channel, key);
+        Config.update();
     }
 
     public static void init(Application app) {
@@ -50,6 +54,7 @@ public final class PassportHome {
         String channel = app.getString(R.string.channel);
         String key = app.getString(R.string.key);
         Networkit.init(app, channel, key);
+        Config.update();
     }
 
     public final static PassportHome getInstance() {
@@ -78,39 +83,15 @@ public final class PassportHome {
      * @param context
      */
     public void startRegister(Context context, int requestCode) {
-        Intent i = createIntent(RegisterActivity.class.getName());
-        if(context instanceof Activity) {
-            ((Activity) context).startActivityForResult(i, requestCode);
-        }else {
-            context.startActivity(i);
-        }
+        start(context, RegisterActivity.class.getName(), requestCode);
     }
 
     /**
      * 打开密码登录界面
      * @param context
      */
-    public void startLoginByPassword(Context context, int requestCode) {
-        startLoginByPassword(context, requestCode, null);
-    }
-
-    /**
-     * 打开密码登录界面
-     * @param context
-     * @param requestCode
-     * @param defPhone 默认电话号码
-     */
-    public void startLoginByPassword(Context context, int requestCode, String defPhone) {
-        Intent i = createIntent(LoginPasswordActivity.class.getName());
-        if(!TextUtils.isEmpty(defPhone)) {
-            i.putExtra(Constant.EXTRA_KEY_PHONE, defPhone);
-        }
-
-        if(context instanceof Activity) {
-            ((Activity) context).startActivityForResult(i, requestCode);
-        }else {
-            context.startActivity(i);
-        }
+    public void startLoginByPassword(final Context context, final int requestCode) {
+        start(context, LoginPasswordActivity.class.getName(), requestCode);
     }
 
     /**
@@ -118,12 +99,7 @@ public final class PassportHome {
      * @param context
      */
     public void startLoginByCaptcha(Context context, int requestCode) {
-        Intent i = createIntent(LoginCaptchaActivity.class.getName());
-        if(context instanceof Activity) {
-            ((Activity) context).startActivityForResult(i, requestCode);
-        }else {
-            context.startActivity(i);
-        }
+        start(context, LoginCaptchaActivity.class.getName(), requestCode);
     }
 
     /**
@@ -131,12 +107,7 @@ public final class PassportHome {
      * @param context
      */
     public void startResetPassword(Context context, int requestCode) {
-        Intent i = createIntent(ResetPasswordActivity.class.getName());
-        if(context instanceof Activity) {
-            ((Activity) context).startActivityForResult(i, requestCode);
-        }else {
-            context.startActivity(i);
-        }
+        start(context, ResetPasswordActivity.class.getName(), requestCode);
     }
 
     /**
@@ -144,13 +115,7 @@ public final class PassportHome {
      * @param context
      */
     public void startModifyPassword(Context context, int requestCode) {
-        Intent i = createIntent(ModifyPasswordActivity.class.getName());
-        if(context instanceof Activity) {
-            i.putExtra(Constant.EXTRA_KEY_REQUEST_CODE, requestCode);
-            ((Activity) context).startActivityForResult(i, requestCode);
-        }else {
-            context.startActivity(i);
-        }
+        start(context, ModifyPasswordActivity.class.getName(), requestCode);
     }
 
     /**
@@ -166,17 +131,32 @@ public final class PassportHome {
      */
     public void logout() {
         RuntimeCache.saveToken("");
+
     }
 
     public void checkLogin(TokenCallback callback) {
         ApiUtil.refreshToken(callback);
     }
 
-    private Intent createIntent(String clzName) {
+    /**
+     * 是否在Passport内部调用
+     * @param context
+     * @return
+     */
+    private boolean isInner(Context context) {
+        return context != null
+                && context instanceof LoginPasswordActivity;
+    }
+
+    private void start(Context context, String clzName, int requestCode) {
         Intent i = new Intent();
         i.setClassName(Constant.APP.getPackageName(), clzName);
 
-        return i;
+        if(context instanceof Activity) {
+            ((Activity) context).startActivityForResult(i, requestCode);
+        }else {
+            context.startActivity(i);
+        }
     }
 
 }

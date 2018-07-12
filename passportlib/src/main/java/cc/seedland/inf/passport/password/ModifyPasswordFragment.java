@@ -5,6 +5,7 @@ import android.view.View;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.template.ModifyPasswordViewAgent;
+import cc.seedland.inf.passport.widget.PasswordEditText;
 import cc.seedland.inf.passport.widget.PasswordOEditText;
 
 /**
@@ -15,9 +16,9 @@ import cc.seedland.inf.passport.widget.PasswordOEditText;
  **/
 public class ModifyPasswordFragment extends PassportFragment<ModifyPasswordViewAgent, ModifyPasswordPresenter> implements View.OnClickListener  {
 
-    private PasswordOEditText originEdt;
-    private PasswordOEditText currentEdt;
-    private PasswordOEditText confirmEdt;
+    private PasswordEditText originEdt;
+    private PasswordEditText currentEdt;
+    private PasswordEditText confirmEdt;
 
     @Override
     protected void initViews(View v) {
@@ -37,12 +38,14 @@ public class ModifyPasswordFragment extends PassportFragment<ModifyPasswordViewA
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if(id == R.id.password_modify_perform_btn) {
-            String origin = originEdt.getText().toString();
-            String current = currentEdt.getText().toString();
-            String confirm = confirmEdt.getText().toString();
-            presenter.performModify(origin, current, confirm);
+        if(isAdded()) {
+            int id = v.getId();
+            if(id == R.id.password_modify_perform_btn) {
+                String origin = originEdt.getText().toString();
+                String current = currentEdt.getText().toString();
+                String confirm = confirmEdt.getText().toString();
+                presenter.performModify(origin, current, confirm);
+            }
         }
     }
 }

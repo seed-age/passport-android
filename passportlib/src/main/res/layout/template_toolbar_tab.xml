@@ -9,7 +9,9 @@
         android:id="@+id/template_tab"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginTop="@dimen/size_common_15"
+        android:layout_marginTop="@dimen/size_common_10"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/gray_hachi_text_tab"
         app:tabIndicatorHeight="0dp"
         app:tabBackground="@drawable/bg_tab_selector"   >
     </android.support.design.widget.TabLayout>

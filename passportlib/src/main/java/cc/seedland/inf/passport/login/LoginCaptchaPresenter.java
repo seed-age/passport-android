@@ -41,6 +41,7 @@ class LoginCaptchaPresenter extends BasePresenter<ICaptchaView> {
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
                     if(view.get() != null) {
+                        view.get().showToast(Constant.getString(Constant.TIP_CAPTCHA_SEND));
                         view.get().startWaitingCaptcha();
                     }
                 }

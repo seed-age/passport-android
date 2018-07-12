@@ -4,6 +4,7 @@ import android.view.View;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.template.ModifyPasswordViewAgent;
+import cc.seedland.inf.passport.widget.PasswordEditText;
 
 /**
  * 作者 ： 徐春蕾
@@ -13,6 +14,7 @@ import cc.seedland.inf.passport.template.ModifyPasswordViewAgent;
  **/
 public class DefaultModifyPasswordAgent extends ModifyPasswordViewAgent {
 
+
     @Override
     public int layout() {
         return R.layout.fragment_password_modify_default;
@@ -20,6 +22,7 @@ public class DefaultModifyPasswordAgent extends ModifyPasswordViewAgent {
 
     @Override
     public void initViews(View v) {
+        super.initViews(v);
 
     }
 }

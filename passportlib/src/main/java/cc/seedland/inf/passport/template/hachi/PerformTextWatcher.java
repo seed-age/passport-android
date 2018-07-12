@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.widget.CountDownButton;
 
 /**
  * 作者 ： 徐春蕾
@@ -23,7 +24,7 @@ public class PerformTextWatcher implements TextWatcher {
     private @ColorInt int colorDisable;
     private @ColorInt int colorEnable;
     private Button perform;
-    private TextView send;
+    private CountDownButton send;
     private EditText[] edits;
 
     public PerformTextWatcher(Button perform, EditText... edits) {
@@ -37,7 +38,7 @@ public class PerformTextWatcher implements TextWatcher {
         perform.getBackground().setColorFilter(colorDisable, PorterDuff.Mode.SRC_ATOP);
     }
 
-    public PerformTextWatcher(Button perform, TextView send, EditText... edits) {
+    public PerformTextWatcher(Button perform, CountDownButton send, EditText... edits) {
         this(perform, edits);
         this.send = send;
         send.setEnabled(false);
@@ -102,7 +103,7 @@ public class PerformTextWatcher implements TextWatcher {
     }
 
     private boolean canSend() {
-        if(edits != null && edits.length >= 2) {
+        if(edits != null && edits.length >= 2 && !send.isCounting()) {
             return !TextUtils.isEmpty(edits[0].getText()) && !TextUtils.isEmpty(edits[1].getText());
         }
         return false;

@@ -7,12 +7,10 @@
     android:orientation="horizontal">
     <EditText
         android:id="@+id/captcha_edt"
-        style="@style/HachiPassportEdit"
+        style="@style/HachiCaptchaEdit"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:paddingLeft="@dimen/size_common_10"
-        android:inputType="number"
-        android:maxLength="10"
         android:hint="@string/hint_captcha"/>
     <cc.seedland.inf.passport.widget.CountDownButton
         android:id="@+id/captcha_gain_txv"
@@ -24,6 +22,7 @@
         android:padding="@dimen/size_common_5"
         android:text="@string/register_obtain_captcha"
         app:countingText="@string/hint_captcha_counting_hachi"
-        app:countingTextColor="@color/default_gray"
+        app:countingColor="@color/gray_hachi_text"
+        app:normalColor="@color/red_hachi"
         app:endText="@string/text_captcha_retrieve"/>
 </LinearLayout>

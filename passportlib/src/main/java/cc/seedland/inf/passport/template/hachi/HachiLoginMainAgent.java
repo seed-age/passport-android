@@ -1,12 +1,9 @@
 package cc.seedland.inf.passport.template.hachi;
 
-import android.graphics.PorterDuff;
-import android.support.annotation.ColorInt;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.LoginMainViewAgent;
 
 /**
@@ -33,4 +30,9 @@ public class HachiLoginMainAgent extends LoginMainViewAgent {
         passwordEdt.addTextChangedListener(watcher);
     }
 
+    @Override
+    public void onShow() {
+        super.onShow();
+        PassportStatAgent.get().onLoginPasswordPage();
+    }
 }

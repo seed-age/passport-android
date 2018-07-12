@@ -13,15 +13,9 @@ import cc.seedland.inf.passport.util.Constant;
  **/
 public class TemplateFactory {
 
-//    private static final Set<String> SUPPORTED_TEMPLATES = new HashSet<>();
     private static final String TEMPLATE_DEFAULT = "default";
     private static final String TEMPLATE_HACHI = "hachi";
     private static ITemplate sTemplate;
-
-    static {
-//        SUPPORTED_TEMPLATES.add(TEMPLATE_SEED_BLUE); // 实地蓝
-//        SUPPORTED_TEMPLATES.add(TEMPLATE_HACHI_RED); // 哈奇红
-    }
 
     public static ITemplate getTemplate() {
         if(sTemplate == null) {

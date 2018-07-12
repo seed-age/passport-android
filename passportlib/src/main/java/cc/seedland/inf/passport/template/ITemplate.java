@@ -1,6 +1,7 @@
 package cc.seedland.inf.passport.template;
 
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StyleRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import java.util.Set;
  **/
 public interface ITemplate {
 
+    @StyleRes int createTheme();
     /**
      * 创建界面代理
      * @param clzName

@@ -19,7 +19,7 @@ import cc.seedland.inf.passport.R;
  * 描述 ：
  **/
 
-public class PasswordEditText extends AppCompatEditText {
+public class PasswordEditText extends PassportEditText {
 
     private Drawable mShowDrawable;
     private Drawable mHideDrawable;

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -20,7 +22,7 @@ import cc.seedland.inf.passport.R;
  * 描述 ：
  **/
 
-public class ClearEditText extends AppCompatEditText implements View.OnFocusChangeListener, TextWatcher {
+public class ClearEditText extends PassportEditText implements View.OnFocusChangeListener, TextWatcher {
 
     private Drawable mClearDrawable;
     private boolean hasFocus;
@@ -99,7 +101,7 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
     }
 
     protected void setDrawableVisible(boolean visible) {
-        Drawable right = visible ? mClearDrawable : null;
+        Drawable right = visible && isEnabled() ? mClearDrawable : null;
         setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], right, getCompoundDrawables()[3]);
     }
 

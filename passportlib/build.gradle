@@ -12,7 +12,7 @@ android {
 
         resValue "string", "channel", "test"         // SDK的渠道号
         resValue "string", "key", "hay8qwz"          // SDK的开发者Key
-        resValue "string", "template", "hachi"    // 模版：default-实地；hachi-哈奇
+        resValue "string", "template", "default"       // 模版：default-实地；hachi-哈奇
 
         buildConfigField("boolean", "API_ENV", "true")
 
@@ -69,7 +69,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "com.android.support:appcompat-v7:$support_version"
-    implementation('cc.seedland.inf:network:1.0.0@aar') {
+    implementation('cc.seedland.inf:network:1.0.1@aar') {
         transitive = true
         changing = true
     }

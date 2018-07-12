@@ -19,6 +19,6 @@ public class DefaultResetPasswordAgent extends ResetPasswordViewAgent {
 
     @Override
     public void initViews(View v) {
-
+        super.initViews(v);
     }
 }

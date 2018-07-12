@@ -1,6 +1,7 @@
 package cc.seedland.inf.passport.template;
 
 import android.support.annotation.LayoutRes;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 /**
@@ -13,4 +14,6 @@ public interface IViewAgent {
 
     @LayoutRes int layout();
     void initViews(View v);
+
+    void onShow();
 }

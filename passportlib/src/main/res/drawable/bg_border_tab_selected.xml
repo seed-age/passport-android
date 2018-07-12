@@ -7,8 +7,8 @@
         </shape>
     </item>
 
-    <!-- 显示上、下边界 -->
-    <item android:top="1dp">
+    <!-- 显示上边界 -->
+    <item android:top="1px" android:bottom="0px">
         <shape android:shape="rectangle">
             <solid android:color="@color/white"/>
         </shape>

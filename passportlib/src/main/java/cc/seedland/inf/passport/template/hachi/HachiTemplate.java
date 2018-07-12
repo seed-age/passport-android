@@ -1,18 +1,16 @@
 package cc.seedland.inf.passport.template.hachi;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.TabItem;
+import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
@@ -21,9 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.login.LoginCaptchaActivity;
@@ -36,12 +31,11 @@ import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.password.ResetPasswordFragment;
 import cc.seedland.inf.passport.register.RegisterActivity;
 import cc.seedland.inf.passport.register.RegisterFragment;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.ITemplate;
 import cc.seedland.inf.passport.template.IViewAgent;
-import cc.seedland.inf.passport.template.def.DefaultLoginCaptchaAgent;
 import cc.seedland.inf.passport.template.def.DefaultModifyPasswordAgent;
-import cc.seedland.inf.passport.template.def.DefaultRegisterAgent;
-import cc.seedland.inf.passport.template.def.DefaultResetPasswordAgent;
+import cc.seedland.inf.passport.util.StatusBarUtil;
 
 /**
  * 作者 ： 徐春蕾
@@ -50,6 +44,11 @@ import cc.seedland.inf.passport.template.def.DefaultResetPasswordAgent;
  * 描述 ：
  **/
 public class HachiTemplate implements ITemplate {
+
+    @Override
+    public int createTheme() {
+        return R.style.HachiTheme;
+    }
 
     @Override
     public <T extends IViewAgent> T createAgent(String clzName) {
@@ -80,6 +79,16 @@ public class HachiTemplate implements ITemplate {
     @Override
     public void initView(final AppCompatActivity activity) {
         Resources resources = activity.getResources();
+        @ColorInt int colorBg = activity.getResources().getColor(R.color.gray_hachi);
+        // 初始化状态栏
+        int alpha = 0;
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            alpha = 66;
+        }
+        StatusBarUtil.setColor(activity, colorBg, alpha);
+        StatusBarUtil.setLightMode(activity);
+
+
         // 初始化标题栏
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -106,7 +115,9 @@ public class HachiTemplate implements ITemplate {
 
         // 内容区域背景色
         View v = activity.findViewById(R.id.template_content);
-        v.setBackgroundColor(activity.getResources().getColor(R.color.gray_hachi));
+        if(v != null) {
+            v.setBackgroundColor(colorBg);
+        }
 
         // 分割线样式
         LinearLayoutCompat parent = (LinearLayoutCompat) toolbar.getParent();
@@ -162,6 +173,7 @@ public class HachiTemplate implements ITemplate {
     }
 
     private void initLogin(final AppCompatActivity activity, final String clzName, int height) {
+        // tab
         TabLayout tab = activity.findViewById(R.id.template_tab);
 
         // 高度
@@ -171,10 +183,11 @@ public class HachiTemplate implements ITemplate {
         // 添加分隔符
         LinearLayout linearLayout = (LinearLayout) tab.getChildAt(0);
         linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-        int[] attrs = { android.R.attr.listDivider };
-        TypedArray a = activity.getApplicationContext().obtainStyledAttributes(attrs);
-        Drawable divider = a.getDrawable(0);
-        a.recycle();
+//        int[] attrs = { android.R.attr.listDivider };
+//        TypedArray a = activity.getApplicationContext().obtainStyledAttributes(attrs);
+//        Drawable divider = a.getDrawable(0);
+//        a.recycle();
+        Drawable divider = activity.getResources().getDrawable(R.drawable.divider_hachi);
         linearLayout.setDividerDrawable(divider);
 
         // 设置点击监听

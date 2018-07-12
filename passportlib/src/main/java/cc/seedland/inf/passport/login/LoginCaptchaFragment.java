@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
-import cc.seedland.inf.passport.widget.CountDownButton;
 
 /**
  * 作者 ： 徐春蕾
@@ -53,13 +52,17 @@ public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent
 
     @Override
     public void startWaitingCaptcha() {
-        agent.gainTxv.startCountDown(true);
+        if(isAdded()) {
+            agent.gainTxv.startCountDown(true);
+        }
     }
 
     @Override
     public void updateImageCaptcha(Bitmap code, String captchaId) {
-        captchaImv.setImageBitmap(code);
-        this.imgCaptchaId = captchaId;
+        if(isAdded()) {
+            captchaImv.setImageBitmap(code);
+            this.imgCaptchaId = captchaId;
+        }
     }
 
     @Override
@@ -73,6 +76,7 @@ public class LoginCaptchaFragment extends PassportFragment<LoginCaptchaViewAgent
             }else if(id == R.id.login_captcha_perform_btn) {
                 String captcha = agent.captchaEdt.getText().toString();
                 presenter.perform(phone, captcha);
+                PassportStatAgent.get().onLoginCaptchaEvent();
             }else if(id == R.id.captcha_image_imv) {
                 presenter.performImageCaptcha();
             }

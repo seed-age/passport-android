@@ -20,6 +20,7 @@ public class RuntimeCache {
     private static final String CACHE_NAME = "passport_cache";
     private static final String KEY_TOKEN = "token";
     private static final String KEY_PHONE = "phone";
+    private static final String KEY_CONFIG = "config";
 
     private RuntimeCache() {
 
@@ -57,6 +58,14 @@ public class RuntimeCache {
      */
     public static String getPhone() {
         return obtain(KEY_PHONE, "");
+    }
+
+    public static void saveConfig(String config) {
+        save(KEY_CONFIG, config);
+    }
+
+    public static String getConfig() {
+        return obtain(KEY_CONFIG, "");
     }
 
     private static void save(String key, String value) {

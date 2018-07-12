@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/captcha_image_edt"
+        style="@style/CaptchaEdit"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
+        android:hint="@string/hint_image_captcha" />
+
+    <cc.seedland.inf.passport.widget.RatioImageView
+        android:id="@+id/captcha_image_imv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_common_5"
+        android:layout_weight="0.2"
+        app:ratio="1.33" />
+</LinearLayout>

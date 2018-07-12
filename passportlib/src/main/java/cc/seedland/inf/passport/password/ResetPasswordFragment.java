@@ -4,13 +4,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import cc.seedland.inf.passport.PassportHome;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.ResetPasswordViewAgent;
 import cc.seedland.inf.passport.widget.CountDownButton;
 import cc.seedland.inf.passport.widget.PasswordOEditText;
@@ -32,7 +35,6 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
     @Override
     protected void initViews(View v) {
         super.initViews(v);
-
 
         agent.captchaBtn.setOnClickListener(this);
         confirmEdt = v.findViewById(R.id.password_reset_confirm_edt);
@@ -57,29 +59,38 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        String phone = agent.phoneEdt.getText().toString();
-        if(id == R.id.password_reset_captcha_txv) {
-            String imgCaptcha = agent.imgCaptchaEdt.getText().toString();
-            presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
-        }else if(id == R.id.password_reset_perform_btn) {
-            String password = agent.passwordEdt.getText().toString();
-            String confirm = confirmEdt != null ? confirmEdt.getText().toString() : null;
-            String captcha = agent.captchaEdt.getText().toString();
-            presenter.performReset(phone, password, confirm, captcha);
-        }else if(id == R.id.password_reset_captcha_image_imv) {
-            presenter.performImageCaptcha();
+        if(isAdded()) {
+            int id = v.getId();
+            String phone = agent.phoneEdt.getText().toString();
+            if(id == R.id.captcha_gain_txv) {
+                String imgCaptcha = agent.imgCaptchaEdt.getText().toString();
+                presenter.performCaptcha(phone, imgCaptcha, imgCaptchaId);
+            }else if(id == R.id.password_reset_perform_btn) {
+                String password = agent.passwordEdt.getText().toString();
+                String confirm = confirmEdt != null ? confirmEdt.getText().toString() : null;
+                String captcha = agent.captchaEdt.getText().toString();
+                presenter.performReset(phone, password, confirm, captcha);
+                if(!TextUtils.isEmpty(RuntimeCache.getToken())) {
+                    PassportStatAgent.get().onPasswordModifyPerformEvent();
+                }
+            }else if(id == R.id.captcha_image_imv) {
+                presenter.performImageCaptcha();
+            }
         }
     }
 
     @Override
     public void startWaitingCaptcha() {
-        agent.captchaBtn.startCountDown(true);
+        if(isAdded()) {
+            agent.captchaBtn.startCountDown(true);
+        }
     }
 
     @Override
     public void updateImageCaptcha(Bitmap code, String captchaId) {
-        this.imgCaptchaId = captchaId;
-        imgCaptchaImv.setImageBitmap(code);
+        if(isAdded()) {
+            this.imgCaptchaId = captchaId;
+            imgCaptchaImv.setImageBitmap(code);
+        }
     }
 }

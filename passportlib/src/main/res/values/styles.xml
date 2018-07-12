@@ -65,7 +65,6 @@
         <item name="android:drawablePadding">@dimen/size_common_10</item>
         <item name="android:inputType">phone</item>
         <item name="android:digits">0123456789</item>
-        <item name="android:maxLines">1</item>
         <item name="android:maxLength">11</item>
         <item name="android:hint">@string/hint_phone</item>
     </style>
@@ -75,8 +74,9 @@
         <item name="android:drawableLeft">@drawable/ic_password</item>
         <item name="android:drawablePadding">@dimen/size_common_10</item>
         <item name="android:inputType">textPassword</item>
-        <item name="android:maxLines">1</item>
         <item name="android:maxLength">18</item>
+        <item name="showDrawable">@drawable/ic_password_show</item>
+        <item name="hideDrawable">@drawable/ic_password_hide</item>
     </style>
 
     <!-- 内含编辑框的布局 -->
@@ -85,4 +85,12 @@
         <item name="divider">?android:attr/dividerHorizontal</item>
         <item name="showDividers">middle</item>
     </style>
+
+    <!-- 验证码输入框样式 -->
+    <style name="CaptchaEdit" parent="PassportEdit">
+
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxLength">8</item>
+    </style>
+
 </resources>

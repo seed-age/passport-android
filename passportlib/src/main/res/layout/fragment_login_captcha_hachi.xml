@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/PassportDividerLayout">
+    style="@style/HachiTabDividerLayout">
     <cc.seedland.inf.passport.widget.ClearEditText
         android:id="@+id/login_captcha_phone_edt"
         style="@style/HachiPhoneEdit"
@@ -11,8 +11,14 @@
         android:hint="@string/hint_phone"/>
     <include layout="@layout/include_image_captcha_edit_hachi" />
     <include layout="@layout/include_captcha_edit_hachi" />
+    <TextView
+        style="@style/HachiPassportTip"
+        android:drawableLeft="@drawable/ic_tip"
+        android:drawablePadding="@dimen/size_common_5"
+        android:text="@string/login_captcha_tip"/>
     <Button
         android:id="@+id/login_captcha_perform_btn"
         style="@style/HachiPerformBtn"
+        android:tag="divider:0"
         android:text="@string/login_do_hachi"/>
 </cc.seedland.inf.passport.widget.DividerLinearLayout>

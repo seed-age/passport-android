@@ -3,6 +3,7 @@ package cc.seedland.inf.passport.template.hachi;
 import android.view.View;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.LoginCaptchaViewAgent;
 
 /**
@@ -29,4 +30,9 @@ public class HachiLoginCaptchaAgent extends LoginCaptchaViewAgent {
 
     }
 
+    @Override
+    public void onShow() {
+        super.onShow();
+        PassportStatAgent.get().onLoginCaptchaPage();
+    }
 }

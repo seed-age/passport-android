@@ -32,6 +32,11 @@ import cc.seedland.inf.passport.template.IViewAgent;
 public class DefaultTemplate implements ITemplate {
 
     @Override
+    public int createTheme() {
+        return R.style.SeedLandTheme;
+    }
+
+    @Override
     public <T extends IViewAgent> T createAgent(String clzName) {
         if(LoginPasswordFragment.class.getName().equalsIgnoreCase(clzName)) {
             return (T)new DefaultLoginMainAgent();

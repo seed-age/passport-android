@@ -1,9 +1,9 @@
 package cc.seedland.inf.passport.template.hachi;
 
 import android.view.View;
-import android.widget.EditText;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.RegisterViewAgent;
 
 /**
@@ -29,5 +29,11 @@ public class HachiRegisterAgent extends RegisterViewAgent {
         passwordEdt.addTextChangedListener(watcher);
         imgCaptchaEdt.addTextChangedListener(watcher);
         captchaEdt.addTextChangedListener(watcher);
+    }
+
+    @Override
+    public void onShow() {
+        super.onShow();
+        PassportStatAgent.get().onRegisterPage();
     }
 }

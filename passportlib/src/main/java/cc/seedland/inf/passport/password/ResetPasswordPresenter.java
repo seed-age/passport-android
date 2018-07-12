@@ -38,6 +38,7 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
                 @Override
                 public void onSuccess(Response<BaseBean> response) {
                     if(view.get() != null) {
+                        view.get().showToast(Constant.getString(Constant.TIP_CAPTCHA_SEND));
                         view.get().startWaitingCaptcha();
                     }
                 }
@@ -70,7 +71,9 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
             BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;
         }
-        errCode = ValidateUtil.checkPasswordConfirm(password, confirm);
+        if(confirm != null) {
+            errCode = ValidateUtil.checkPasswordConfirm(password, confirm);
+        }
         if(errCode != Constant.ERROR_CODE_NONE) {
             BaseViewGuard.callShowToastSafely(view, Constant.getString(errCode));
             return;

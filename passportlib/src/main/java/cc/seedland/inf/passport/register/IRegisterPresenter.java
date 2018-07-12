@@ -26,4 +26,9 @@ interface IRegisterPresenter {
      */
     void performImageCaptcha();
 
+    /**
+     * 执行获取用户协议的接口
+     */
+    void performAgreement();
+
 }

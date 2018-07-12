@@ -17,11 +17,18 @@ public abstract class LoginMainViewAgent implements IViewAgent {
     public EditText phoneEdt;
     public EditText passwordEdt;
     public Button performBtn;
+    public View captchaTxv;
 
     @Override
     public void initViews(View v) {
         phoneEdt = v.findViewById(R.id.login_password_phone_edt);
         passwordEdt = v.findViewById(R.id.login_password_password_edt);
         performBtn = v.findViewById(R.id.login_password_perform_btn);
+        captchaTxv = v.findViewById(R.id.login_password_captcha_txv);
+    }
+
+    @Override
+    public void onShow() {
+
     }
 }

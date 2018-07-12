@@ -1,8 +1,11 @@
 package cc.seedland.inf.passport.template.hachi;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.network.RuntimeCache;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.ResetPasswordViewAgent;
 
 /**
@@ -27,5 +30,21 @@ public class HachiResetPasswordAgent extends ResetPasswordViewAgent {
         imgCaptchaEdt.addTextChangedListener(watcher);
         captchaEdt.addTextChangedListener(watcher);
         passwordEdt.addTextChangedListener(watcher);
+
+        if(!TextUtils.isEmpty(RuntimeCache.getToken())) { // 登录状态
+            phoneEdt.setEnabled(false);
+        }else {
+            phoneEdt.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void onShow() {
+        super.onShow();
+        if(TextUtils.isEmpty(RuntimeCache.getToken())) { // 未登录状态
+            PassportStatAgent.get().onPasswordResetPage();
+        }else {
+            PassportStatAgent.get().onPasswordModifyPage();
+        }
     }
 }

@@ -5,10 +5,12 @@
     <dimen name="size_common_10">10dp</dimen>
     <dimen name="size_common_15">15dp</dimen>
     <dimen name="size_common_20">20dp</dimen>
+    <dimen name="size_common_25">25dp</dimen>
     <dimen name="size_common_30">30dp</dimen>
+    <dimen name="size_common_35">35dp</dimen>
 
     <dimen name="radius_size_small">2dp</dimen>
-    <dimen name="radius_size_normal">5dp</dimen>
+    <dimen name="radius_size_normal">4dp</dimen>
 
     <dimen name="border_width_small">1px</dimen>
     <dimen name="border_width_normal">1dp</dimen>
@@ -20,5 +22,5 @@
 
     <dimen name="dialog_loading_size">50dp</dimen>
 
-    <dimen name="bar_height">42dp</dimen>
+    <dimen name="bar_height">44dp</dimen>
 </resources>

@@ -1,10 +1,12 @@
 package cc.seedland.inf.passport.template;
 
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import cc.seedland.inf.passport.R;
+import cc.seedland.inf.passport.config.Config;
 import cc.seedland.inf.passport.widget.CountDownButton;
 
 /**
@@ -30,5 +32,12 @@ public abstract class ResetPasswordViewAgent implements IViewAgent {
         passwordEdt = v.findViewById(R.id.password_reset_password_edt);
         performBtn = v.findViewById(R.id.password_reset_perform_btn);
         captchaBtn = v.findViewById(R.id.captcha_gain_txv);
+
+        Config.get().configEdit(imgCaptchaEdt, captchaEdt);
+    }
+
+    @Override
+    public void onShow() {
+
     }
 }

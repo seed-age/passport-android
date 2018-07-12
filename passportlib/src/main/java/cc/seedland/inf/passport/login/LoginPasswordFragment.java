@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.PassportFragment;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.password.ResetPasswordActivity;
 import cc.seedland.inf.passport.register.RegisterActivity;
+import cc.seedland.inf.passport.stat.PassportStatAgent;
 import cc.seedland.inf.passport.template.LoginMainViewAgent;
 import cc.seedland.inf.passport.util.Constant;
 
@@ -41,11 +41,13 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
 
         v.findViewById(R.id.login_register_txv).setOnClickListener(this);
         v.findViewById(R.id.login_forget_password_txv).setOnClickListener(this);
+        if(agent.captchaTxv != null) {
+            agent.captchaTxv.setOnClickListener(this);
+        }
         agent.performBtn.setOnClickListener(this);
 
         // 来自修改密码界面的手机号
         String phone = getActivity().getIntent().getStringExtra(Constant.EXTRA_KEY_PHONE);
-//        String phone = getIntent().getStringExtra(Constant.EXTRA_KEY_PHONE);
         if(TextUtils.isEmpty(phone)) {
             phone = RuntimeCache.getPhone();
         }
@@ -54,7 +56,9 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
 
     @Override
     public void loadPhone(String phone) {
-        agent.phoneEdt.setText(phone);
+        if(isAdded()) {
+            agent.phoneEdt.setText(phone);
+        }
     }
 
     @Override
@@ -62,8 +66,10 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
         if(isAdded()) {
             int id = v.getId();
             if(id == R.id.login_register_txv) {
+                PassportStatAgent.get().onRegisterEvent();
                 startActivityForResult(createIntent(RegisterActivity.class.getName()), REQUEST_CODE_REGISTER);
             }else if(id == R.id.login_forget_password_txv) {
+                PassportStatAgent.get().onPasswordResetEvent();
                 startActivityForResult(createIntent(ResetPasswordActivity.class.getName()), REQUEST_CODE_RESET_PASSWORD);
             }else if(id == R.id.login_password_captcha_txv) {
                 startActivityForResult(createIntent(LoginCaptchaActivity.class.getName()), REQUEST_CODE_LOGIN_CAPTCHA);
@@ -71,6 +77,7 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
                 String phone = agent.phoneEdt.getText().toString();
                 String password = agent.passwordEdt.getText().toString();
                 presenter.perform(phone, password);
+                PassportStatAgent.get().onLoginPasswordEvent();
             }
         }
     }
@@ -79,18 +86,20 @@ public class LoginPasswordFragment extends PassportFragment<LoginMainViewAgent, 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK) {
-            Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
-            switch (requestCode) {
-                case REQUEST_CODE_REGISTER:
-                    presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.register_success_tip));
-                    break;
-                case REQUEST_CODE_LOGIN_CAPTCHA:
-                    close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
-                    break;
-                case REQUEST_CODE_RESET_PASSWORD:
-                    presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.reset_passpord_success_tip));
-                    break;
+        if(isAdded()) {
+            if(resultCode == Activity.RESULT_OK) {
+                Bundle args = data.getBundleExtra(Constant.EXTRA_KEY_RESULT);
+                switch (requestCode) {
+                    case REQUEST_CODE_REGISTER:
+//                        presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.register_success_tip));
+//                        break;
+                    case REQUEST_CODE_LOGIN_CAPTCHA:
+                        close(data.getBundleExtra(Constant.EXTRA_KEY_RESULT), data.getStringExtra(Constant.EXTRA_KEY_RAW_RESULT));
+                        break;
+                    case REQUEST_CODE_RESET_PASSWORD:
+                        presenter.refreshPhone(args.getString(Constant.EXTRA_KEY_PHONE), getString(R.string.reset_passpord_success_tip));
+                        break;
+                }
             }
         }
     }

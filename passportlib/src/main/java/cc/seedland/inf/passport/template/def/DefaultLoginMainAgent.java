@@ -1,6 +1,5 @@
 package cc.seedland.inf.passport.template.def;
 
-import android.content.Context;
 import android.view.View;
 
 import cc.seedland.inf.passport.R;
@@ -22,10 +21,5 @@ public class DefaultLoginMainAgent extends LoginMainViewAgent {
     @Override
     public void initViews(View v) {
         super.initViews(v);
-        final Context context = v.getContext();
-        if(context instanceof View.OnClickListener) {
-            v.findViewById(R.id.login_password_captcha_txv).setOnClickListener((View.OnClickListener) context);
-        }
-
     }
 }

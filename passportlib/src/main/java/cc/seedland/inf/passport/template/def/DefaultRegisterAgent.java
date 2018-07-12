@@ -19,6 +19,6 @@ public class DefaultRegisterAgent extends RegisterViewAgent {
 
     @Override
     public void initViews(View v) {
-
+        super.initViews(v);
     }
 }

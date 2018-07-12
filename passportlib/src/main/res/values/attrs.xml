@@ -10,8 +10,10 @@
         <attr name="countingText" format="string" />
         <!-- 计时结束后显示的文本格式 -->
         <attr name="endText" format="string" />
-        <!-- 计时显示的文本颜色 -->
-        <attr name="countingTextColor" format="color" />
+        <!-- 计时显示的颜色 -->
+        <attr name="countingColor" format="color" />
+        <!-- -->
+        <attr name="normalColor" format="color" />
         <!-- 触发倒计时的事件 -->
         <attr name="launchEvent">
             <!-- 可见时触发 -->
@@ -41,6 +43,24 @@
     <declare-styleable name="RatioImageView">
         <!-- 宽高比 -->
         <attr name="ratio" format="float" />
+    </declare-styleable>
+
+    <!-- WebView的进度条 -->
+    <declare-styleable name="ProgressStripView">
+        <!-- 前置颜色 用于显示进度 -->
+        <attr name="frontColor" format="color|reference" />
+        <!-- 后置颜色 用于背景-->
+        <attr name="backColor" format="color|reference" />
+    </declare-styleable>
+
+    <!-- passport编辑框 -->
+    <declare-styleable name="PassportEditText">
+        <!-- 是否支持表情 -->
+        <attr name="filters">
+            <flag name="emoji" value="0x01" />
+            <flag name="character" value="0x02" />
+        </attr>
+
     </declare-styleable>
 
 </resources>

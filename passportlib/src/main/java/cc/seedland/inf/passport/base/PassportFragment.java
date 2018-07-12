@@ -3,6 +3,7 @@ package cc.seedland.inf.passport.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -11,7 +12,9 @@ import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.template.TemplateFactory;
+import cc.seedland.inf.passport.util.CompatUtil;
 import cc.seedland.inf.passport.util.Constant;
+import cc.seedland.inf.passport.util.ToastUtil;
 import cc.seedland.inf.passport.widget.LoadingDialog;
 
 /**
@@ -36,17 +39,34 @@ public abstract class PassportFragment<A extends IViewAgent, P extends BasePrese
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(!isHidden()) {
+            agent.onShow();
+        }
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden) {
+            agent.onShow();
+        }
+    }
+
+    @Override
     public void showToast(String message) {
         super.showToast(message);
         if(isAdded()) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            ToastUtil.show(message, Toast.LENGTH_SHORT);
         }
     }
 
     @Override
     public void showTip(String tip) {
         if(isAdded()) {
-            Toast.makeText(getContext(), tip, Toast.LENGTH_LONG).show();
+            ToastUtil.show(tip, Toast.LENGTH_LONG);
         }
     }
 

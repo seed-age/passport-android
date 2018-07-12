@@ -10,14 +10,16 @@
     <application>
 
         <activity android:name=".login.LoginPasswordActivity"
-            android:theme="@style/SeedLandTheme"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".login.LoginCaptchaActivity"
-            android:theme="@style/SeedLandTheme"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".register.RegisterActivity"
-            android:theme="@style/SeedLandTheme" />
+            android:screenOrientation="portrait"/>
         <activity android:name=".password.ResetPasswordActivity"
-            android:theme="@style/SeedLandTheme" />
+            android:screenOrientation="portrait" />
         <activity android:name=".password.ModifyPasswordActivity"
-            android:theme="@style/SeedLandTheme" />
+            android:screenOrientation="portrait" />
+        <activity android:name=".web.WebActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

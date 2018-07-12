@@ -20,10 +20,8 @@ public class DefaultLoginCaptchaAgent extends LoginCaptchaViewAgent {
 
     @Override
     public void initViews(View v) {
-//        DefaultTemplate.initToolbar(v);
-//        TextView titleTxv = v.findViewById(R.id.template_title_txv);
-//        DefaultTemplate.initContent(v, R.layout.activity_login_captcha);
-//        titleTxv.setText(R.string.login_captcha_title);
+        super.initViews(v);
+
     }
 
 }

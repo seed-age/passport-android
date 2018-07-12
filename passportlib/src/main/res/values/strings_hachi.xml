@@ -3,17 +3,24 @@
     <!-- 通用 -->
     <string name="hint_captcha_counting_hachi">%1$ds后重试</string>
     <string name="do_save">保存</string>
+    <string name="password_tip">密码支持大小写字母、数字或特殊字符，不支持表情／空格／全角符号</string>
+    <string name="hint_password_hachi">请设置8~20位密码</string>
 
-    <!-- 登录界面 -->
+    <!-- 密码登录界面 -->
     <string name="login_title_hachi">登录</string>
     <string name="login_do_hachi">立即登录</string>
     <string name="login_register_hachi">注册</string>
     <string name="login_tab_password">账号密码登录</string>
+    <string name="login_hint_password_hachi">请输入8~20位密码</string>
+
+    <!-- 验证码登录界面 -->
     <string name="login_tab_captcha">手机号快捷登录</string>
+    <string name="login_captcha_tip">未注册的手机号将自动保存为Hachi账号</string>
 
     <!-- 注册 -->
     <string name="register_title_hachi">注册</string>
     <string name="register_do_hachi">提交注册</string>
+
 
     <!-- 重置密码 -->
     <string name="reset_password_title_hachi">设置新密码</string>
