@@ -5,10 +5,11 @@ import android.graphics.Bitmap;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 
-import cc.seedland.inf.network.BaseBean;
+import org.json.JSONObject;
+
+import cc.seedland.inf.network.JsonCallback;
 import cc.seedland.inf.network.Networkit;
-import cc.seedland.inf.passport.common.LoginBean;
-import cc.seedland.inf.passport.network.ApiUtil;
+import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
 
@@ -24,9 +25,9 @@ class LoginModel {
      * @param password
      * @param callback
      */
-    public void loginByPassword(String phone, String password, BizCallback<LoginBean> callback) {
+    public void loginByPassword(String phone, String password, BizCallback<ILoginMainView> callback) {
 
-        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_PASSWORD))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_PASSWORD))
                 .params("mobile", phone)
                 .params("password", password)
                 .execute(callback);
@@ -37,9 +38,9 @@ class LoginModel {
      * @param phone
      * @param captcha
      */
-    public void loginByCaptcha(String phone, String captcha, BizCallback<LoginBean> callback) {
+    public void loginByCaptcha(String phone, String captcha, BizCallback<ICaptchaView> callback) {
 
-        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_CAPTCHA))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_LOGIN_CAPTCHA))
                 .params("mobile", phone)
                 .params("code", captcha)
                 .execute(callback);
@@ -50,9 +51,9 @@ class LoginModel {
      * @param phone
      * @param callback
      */
-    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
+    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, JsonCallback callback) {
 
-        OkGo.<BaseBean>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
                 .params("mobile", phone)
                 .params("captcha_id", imgCaptchaId)
                 .params("captcha_text", imgCaptcha)

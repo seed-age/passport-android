@@ -1,12 +1,10 @@
 package cc.seedland.inf.passport.password;
 
-import com.lzy.okgo.model.Response;
+import org.json.JSONObject;
 
 import cc.seedland.inf.corework.mvp.BasePresenter;
-import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.common.ICaptchaView;
-import cc.seedland.inf.passport.common.SimpleBean;
 import cc.seedland.inf.passport.network.BizBitmapCallback;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.util.Constant;
@@ -34,9 +32,9 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
             errCode = ValidateUtil.checkCaptcha(imgCaptcha);
         }
         if(errCode == Constant.ERROR_CODE_NONE) {
-            model.obtainCaptcha(phone.trim(), imgCaptcha.trim(), imgCaptchaId.trim(), new BizCallback<BaseBean>(BaseBean.class, view) {
+            model.obtainCaptcha(phone.trim(), imgCaptcha.trim(), imgCaptchaId.trim(), new BizCallback<ICaptchaView>(view) {
                 @Override
-                public void onSuccess(Response<BaseBean> response) {
+                protected void doSuccess(JSONObject data) throws Throwable {
                     if(view.get() != null) {
                         view.get().showToast(Constant.getString(Constant.TIP_CAPTCHA_SEND));
                         view.get().startWaitingCaptcha();
@@ -79,11 +77,10 @@ class ResetPasswordPresenter extends BasePresenter<ICaptchaView> {
             return;
         }
 
-        model.reset(phone.trim(), password.trim(), captcha.trim(), new BizCallback<SimpleBean>(SimpleBean.class, view) {
+        model.reset(phone.trim(), password.trim(), captcha.trim(), new BizCallback<ICaptchaView>(view) {
             @Override
-            public void onSuccess(Response<SimpleBean> response) {
-                SimpleBean bean = response.body();
-                BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.toString());
+            protected void doSuccess(JSONObject data) throws Throwable {
+                BaseViewGuard.callCloseSafely(view, toArgs(data), data.getString("raw"));
             }
         });
 

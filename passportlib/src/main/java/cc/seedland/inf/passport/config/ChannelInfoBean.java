@@ -1,6 +1,6 @@
 package cc.seedland.inf.passport.config;
 
-import com.google.gson.annotations.SerializedName;
+import org.json.JSONObject;
 
 import cc.seedland.inf.network.BaseBean;
 
@@ -13,18 +13,28 @@ import cc.seedland.inf.network.BaseBean;
 public class ChannelInfoBean extends BaseBean {
 
     /** 渠道号 */
-    @SerializedName("channel")
     public String channel;
 
     /** 渠道名 */
-    @SerializedName("channel_name")
     public String channelName;
 
     /** 用户协议 */
-    @SerializedName("channel_protocol")
     public String channelProtocol;
 
     /** 渠道使用的验证码长度 */
-    @SerializedName("sms_code_length")
     public int captchaLength;
+
+    public static ChannelInfoBean fromString(String json) {
+        ChannelInfoBean info = new ChannelInfoBean();
+        try {
+            JSONObject data = new JSONObject(json);
+            info.channel = data.getString("channel");
+            info.channelName = data.getString("channel_name");
+            info.channelProtocol = data.getString("channel_protocol");
+            info.captchaLength = data.getInt("sms_code_length");
+        }catch (Exception e) {
+
+        }
+        return info;
+    }
 }

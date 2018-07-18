@@ -10,9 +10,9 @@ ext {
     version_name = '1.0.0'
 
     // 库构建版本
-    passport_version_code = 1
+    passport_version_code = 3
 //    passport_version_name = '1.1.0-SNAPSHOT'
-    passport_version_name = '2.0.0'
+    passport_version_name = '2.1.0'
 
     // 依赖第三方库版本
     support_version = '27.1.1'

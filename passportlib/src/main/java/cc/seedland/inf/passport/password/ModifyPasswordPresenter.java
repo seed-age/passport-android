@@ -1,12 +1,12 @@
 package cc.seedland.inf.passport.password;
 
-import com.lzy.okgo.model.Response;
+
+import org.json.JSONObject;
 
 import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.base.BaseViewGuard;
 import cc.seedland.inf.passport.base.IPassportView;
-import cc.seedland.inf.passport.common.LoginBean;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
@@ -48,13 +48,13 @@ class ModifyPasswordPresenter extends BasePresenter<IPassportView> {
             return;
         }
 
-        model.modify(origin.trim(), current.trim(), new BizCallback<LoginBean>(LoginBean.class, view) {
+        model.modify(origin.trim(), current.trim(), new BizCallback<IPassportView>(view) {
             @Override
-            public void onSuccess(Response<LoginBean> response) {
-                LoginBean bean = response.body();
-                RuntimeCache.saveToken(bean.token);
-                BaseViewGuard.callCloseSafely(view, bean.toArgs(), bean.raw);
+            protected void doSuccess(JSONObject data) throws Throwable {
+                RuntimeCache.saveToken(data.getString("sso_tk"));
+                BaseViewGuard.callCloseSafely(view, toArgs(data), data.getString("raw"));
             }
+
         });
 
     }

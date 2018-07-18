@@ -76,15 +76,8 @@
 -dontwarn okio.**
 -keep class okio.**{*;}
 
-##---------------Begin: proguard configuration for Gson  ----------
 -keepattributes Signature
 -keepattributes *Annotation*
--dontwarn sun.misc.**
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
-##---------------End: proguard configuration for Gson  ----------
 
 # passport
 -keepattributes InnerClasses
@@ -93,8 +86,5 @@
 -keepparameternames
 -keep class cc.seedland.inf.passport.stat.**{*;}
 -keep class cc.seedland.inf.passport.stat.PassportStatAgent$Builder{*;}
--keep public class * extends cc.seedland.inf.network.BaseBean{*;}
--keep class cc.seedland.inf.network.BaseBean{*;}
--keep class cc.seedland.inf.network.BeanWrapper{*;}
 -keepparameternames
 -keep interface cc.seedland.inf.passport.network.TokenCallback{*;}

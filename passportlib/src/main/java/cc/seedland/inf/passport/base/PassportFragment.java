@@ -12,7 +12,6 @@ import cc.seedland.inf.corework.mvp.BasePresenter;
 import cc.seedland.inf.passport.R;
 import cc.seedland.inf.passport.template.IViewAgent;
 import cc.seedland.inf.passport.template.TemplateFactory;
-import cc.seedland.inf.passport.util.CompatUtil;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.ToastUtil;
 import cc.seedland.inf.passport.widget.LoadingDialog;

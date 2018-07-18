@@ -6,13 +6,12 @@ import android.widget.Toast;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
-import java.util.regex.Pattern;
+import org.json.JSONObject;
 
+import cc.seedland.inf.network.JsonCallback;
 import cc.seedland.inf.network.Networkit;
-import cc.seedland.inf.network.SeedCallback;
 import cc.seedland.inf.passport.BuildConfig;
 import cc.seedland.inf.passport.R;
-import cc.seedland.inf.passport.common.TokenBean;
 import cc.seedland.inf.passport.util.Constant;
 import cc.seedland.inf.passport.util.ValidateUtil;
 
@@ -44,12 +43,16 @@ public class ApiUtil {
         final String cachedToken = RuntimeCache.getToken();
         if(!ValidateUtil.checkNull(cachedToken)) { // 缓存过Token，则进行刷新
             refreshing = true;
-            OkGo.<TokenBean>post(Networkit.generateFullUrl(Constant.API_URL_TOKEN))
+            OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_TOKEN))
                     .params("sso_tk", RuntimeCache.getToken())
-                    .execute(new SeedCallback<TokenBean>(TokenBean.class) {
+                    .execute(new JsonCallback() {
                         @Override
-                        public void onSuccess(Response<TokenBean> response) {
-                            RuntimeCache.saveToken(response.body().token);
+                        public void onSuccess(Response<JSONObject> response) {
+                            try {
+                                RuntimeCache.saveToken(response.body().getString("refresh_sso_tk"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
                             if(BuildConfig.API_ENV) {
                                 Toast.makeText(Constant.APP, RuntimeCache.getToken(), Toast.LENGTH_LONG).show();
@@ -61,7 +64,7 @@ public class ApiUtil {
                         }
 
                         @Override
-                        public void onError(Response<TokenBean> response) {
+                        public void onError(Response<JSONObject> response) {
                             super.onError(response);
                             String msg = response.getException().getMessage();
                             if(!TextUtils.isEmpty(msg)) {

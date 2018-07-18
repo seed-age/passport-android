@@ -5,14 +5,11 @@ import android.graphics.Bitmap;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONObject;
 
-import cc.seedland.inf.network.BaseBean;
 import cc.seedland.inf.network.Networkit;
-import cc.seedland.inf.passport.common.SimpleBean;
-import cc.seedland.inf.passport.common.LoginBean;
-import cc.seedland.inf.passport.network.ApiUtil;
+import cc.seedland.inf.passport.base.IPassportView;
+import cc.seedland.inf.passport.common.ICaptchaView;
 import cc.seedland.inf.passport.network.BizCallback;
 import cc.seedland.inf.passport.network.RuntimeCache;
 import cc.seedland.inf.passport.util.Constant;
@@ -28,9 +25,9 @@ class PasswordModel {
      * @param phone
      * @param callback
      */
-    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<BaseBean> callback) {
+    public void obtainCaptcha(String phone, String imgCaptcha, String imgCaptchaId, BizCallback<ICaptchaView> callback) {
 
-        OkGo.<BaseBean>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_CAPTCHA))
                 .params("mobile", phone)
                 .params("captcha_id", imgCaptchaId)
                 .params("captcha_text", imgCaptcha)
@@ -46,9 +43,9 @@ class PasswordModel {
      * @param captcha
      * @param callback
      */
-    public void reset(String phone, String password, String captcha, BizCallback<SimpleBean> callback) {
+    public void reset(String phone, String password, String captcha, BizCallback<ICaptchaView> callback) {
 
-        OkGo.<SimpleBean>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_RESET))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_RESET))
                 .params("mobile", phone)
                 .params("password", password)
                 .params("code", captcha)
@@ -64,9 +61,9 @@ class PasswordModel {
      * @param current
      * @param callback
      */
-    public void modify(String origin, String current, BizCallback<LoginBean> callback) {
+    public void modify(String origin, String current, BizCallback<IPassportView> callback) {
 
-        OkGo.<LoginBean>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_MODIFY))
+        OkGo.<JSONObject>post(Networkit.generateFullUrl(Constant.API_URL_PASSWORD_MODIFY))
                 .params("sso_tk", RuntimeCache.getToken())
                 .params("old_password", origin)
                 .params("new_password", current)
