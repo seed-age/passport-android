@@ -47,6 +47,10 @@ public class PassportStatAgent {
         clickEvent("click_password_modify_perform");
     }
 
+    public void onPasswordResetPerformEvent() {
+        clickEvent("click_password_reset_perform");
+    }
+
     public void onAgreementEvent(){
         clickEvent("click_agreement");
     }
@@ -152,6 +156,11 @@ public class PassportStatAgent {
 
         public Builder passwordModifyPerform(String eventId) {
             params.put("click_password_modify_perform", eventId);
+            return this;
+        }
+
+        public Builder passwordResetPerform(String eventId) {
+            params.put("click_password_reset_perform", eventId);
             return this;
         }
 

@@ -70,7 +70,9 @@ public class ResetPasswordFragment extends PassportFragment<ResetPasswordViewAge
                 String confirm = confirmEdt != null ? confirmEdt.getText().toString() : null;
                 String captcha = agent.captchaEdt.getText().toString();
                 presenter.performReset(phone, password, confirm, captcha);
-                if(!TextUtils.isEmpty(RuntimeCache.getToken())) {
+                if(TextUtils.isEmpty(RuntimeCache.getToken())) {
+                    PassportStatAgent.get().onPasswordResetPerformEvent();
+                }else {
                     PassportStatAgent.get().onPasswordModifyPerformEvent();
                 }
             }else if(id == R.id.captcha_image_imv) {

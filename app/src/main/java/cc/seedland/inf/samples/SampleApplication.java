@@ -43,6 +43,7 @@ public class SampleApplication extends Application {
                 .passwordReset("b050120")
                 .registerPerform("b050121")
                 .passwordModifyPerform("b050055")
+                .passwordResetPerform("b050055")
                 .agreement("b050132")
                 .loginPasswordPage("p020002")
                 .loginCaptchaPage("p020051")
